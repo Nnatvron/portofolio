@@ -9,7 +9,7 @@ function Contact () {
                 <div className={ContactCSS.contact}>
                     <div>
                         <h2 data-aos="fade-right" data-aos-duration="1500" data-aos-delay="100">Contact Me</h2>
-                        <p data-aos="fade-right" data-aos-duration="1500" data-aos-delay="800">lorem</p>
+                        <p data-aos="fade-right" data-aos-duration="1500" data-aos-delay="800">Contact For More.</p>
                     </div>
 
                     <form data-aos="fade-left" data-aos-duration="1500" data-aos-delay="1000">

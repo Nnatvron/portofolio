@@ -15,6 +15,7 @@
 
 body{
   bacground-color: rgb(18, 18, 19);
+  overflow-x: hidden;
 }
 
 button{

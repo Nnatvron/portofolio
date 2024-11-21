@@ -69,6 +69,7 @@
 
     .about_info {
         width: 100%;
+        flex-direction: column-reverse;
     }
 }
 
