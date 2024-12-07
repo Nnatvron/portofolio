@@ -76,6 +76,10 @@
 }
 
 @media (max-width:768px) {
+    html, body{
+        overflow-x: hidden;
+    }
+
     .header{
         position: relative;
         z-index: 999;
@@ -121,7 +125,7 @@
     }
 
     .navOpen {
-        height: 360px;
+        height: 250px;
         padding: 20px;
         opacity: 1;
         transform: translateY(0);
@@ -137,6 +141,6 @@
 
 @media (max-width:500px) {
     .logo h2{
-        font-size: 20px;
+        font-size: 30px;
     }
 }
