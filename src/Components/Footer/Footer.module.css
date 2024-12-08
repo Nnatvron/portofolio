@@ -1,64 +1,14 @@
-.footer{
-    display: grid;
-    grid-template-columns: 60% 20% 20%;
+.footer {
+    background-color: #333; /* Warna latar belakang */
+    color: #fff; /* Warna teks */
+    text-align: center; /* Pusatkan teks */
+    padding: 10px 0; /* Ruang vertikal */
+    font-size: 14px; /* Ukuran teks */
+    position: relative; /* Bisa diubah ke sticky jika ingin */
+    bottom: 0;
     width: 100%;
-    padding: 80px 8%;
-    background-color: black;
 }
 
-.footer .links{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.footer .links ul{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.footer .links ul a{
-    color: white;
-    transition: .6s;
-}
-
-.footer .links ul a:hover{
-    color: red;
-    filter: drop-shadow(0 8px 4px var(--main-color));
-    transform: translateY(-5px);
-}
-
-.footer .links social{
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.footer .social i{
-    font-size: 1.2rem;
-    transition: .8s;
-    color: white;
-}
-
-.footer .social i:hover{
-    filter: drop-shadow(0 8px 16px var(--main-color));
-    transform: translateY(-5px) scale(1.05);
-    color: red;
-}
-
-@media (max-width:768) {
-    .footer {
-        grid-template-columns: 50% 25% 25%;
-    }
-}
-
-@media (max-width:500px) {
-    .footer .links{
-        margin: 35px 0;
-    }
-
-    .footer{
-        grid-template-colummns: repeat(1,1fr);
-    }
+.footer p {
+    margin: 0; /* Hilangkan margin default */
 }

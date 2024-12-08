@@ -22,6 +22,10 @@ radial-gradient(at 4% 0%, hsla(359,34%,39%,1) 0px, transparent 50%);
     font-size: 13px;
 }
 
+.hero_btns a{
+    color: black;
+}
+
 .hero_info{
     width: 55%;
 }
@@ -59,6 +63,10 @@ radial-gradient(at 4% 0%, hsla(359,34%,39%,1) 0px, transparent 50%);
     display: flex;
     gap: 20px;
     align-items: center;
+}
+
+.social_icons a{
+    color: black;
 }
 
 .social_icons i{

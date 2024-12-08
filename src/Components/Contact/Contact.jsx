@@ -1,31 +1,66 @@
-import React from "react";
-import ContactCSS from './../Contact/Contact.module.css'
+import React, { useState } from "react";
+import ContactCSS from "./../Contact/Contact.module.css";
+import axios from "axios";
 
-function Contact () {
-    AOS.init();
-    return(
-        <>
-            <section id="contact">
-                <div className={ContactCSS.contact}>
-                    <div>
-                        <h2 data-aos="fade-right" data-aos-duration="1500" data-aos-delay="100">Contact Me</h2>
-                        <p data-aos="fade-right" data-aos-duration="1500" data-aos-delay="800">Contact For More.</p>
-                    </div>
+function Contact() {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        message: "",
+    });
 
-                    <form data-aos="fade-left" data-aos-duration="1500" data-aos-delay="1000">
-                        <label>Name :</label>
-                        <input type="text" placeholder="Enter Name" id="name" required/>
-                        <label>Email</label>
-                        <input type="email" placeholder="Enter Email" id="email" required/>
-                        <label>Phone</label>
-                        <input type="phone" placeholder="Enter Phone" id="phone" required/>
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData({ ...formData, [id]: value });
+    };
 
-                        <button>Contact</button>
-                    </form>
-                </div>
-            </section>
-        </>
-    )
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post("http://localhost:5000/send-email", formData);
+            alert("Email sent successfully!");
+        } catch (error) {
+            console.error("Error sending email:", error);
+            alert("Failed to send email. Please try again.");
+        }
+    };
+
+    return (
+        <section id="contact">
+            <div className={ContactCSS.contact}>
+                <h2>Contact Me</h2>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="name">Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter Name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter Email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label htmlFor="message">Message:</label>
+                    <textarea
+                        id="message"
+                        placeholder="Enter Your Message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                    ></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </section>
+    );
 }
 
-export default Contact
+export default Contact;

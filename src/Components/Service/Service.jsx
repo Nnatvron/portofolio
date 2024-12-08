@@ -5,7 +5,7 @@ function Service () {
     AOS.init();
     return(
         <>
-            <section id="service">
+            <section id="project">
                 <div className={ServiceCSS.service}>
                     <h2 data-aos="fade-right" data-aos-duration="1500" data-aos-delay="100">Project</h2>
                     <p data-aos="fade-right" data-aos-duration="1500" data-aos-delay="500">MY ALL PROJECT</p>

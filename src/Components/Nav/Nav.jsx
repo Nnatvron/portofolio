@@ -24,7 +24,7 @@ function Nav() {
                     >
                         <a href="#home">Home</a>
                         <a href="#about">About Me</a>
-                        <a href="#service">Service</a>
+                        <a href="#project">Project</a>
                         <a href="#contact">Contact</a>
                     </nav>
                     <div className={NavCSS.bars} onClick={toggleNav}>
