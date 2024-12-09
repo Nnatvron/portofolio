@@ -4,10 +4,14 @@
     align-items: center;
     justify-content: space-between;
     padding: 8px 8%;
-    position: relative;
-    z-index: 999;
-    background-color: black;
-    box-shadow: none;
+    position: fixed;
+    z-index: 300;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(30px);
+    box-shadow: 0px 0px 30px rgba(227, 228, 237, 0.37);
+    border: 2px solid rgba(255, 255, 255, 0.18);
 }
 
 .logo{
@@ -29,7 +33,7 @@
     gap: 30px;
     align-items: space-beetwen;
     position: absolute;
-    left: 60%;
+    left: 57%;
 }
 
 .nav a {
@@ -81,8 +85,14 @@
     }
 
     .header{
-        position: relative;
-        z-index: 999;
+        position: fixed;
+        z-index: 300;
+        background-color: transparent;
+        top: 0;
+        left: 0;
+        backdrop-filter: blur(30px);
+        box-shadow: 0px 0px 30px black;
+        border: 2px solid rgba(255, 255, 255, 0.18);
     }
 
     .bars{
