@@ -4,8 +4,8 @@ import { useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Service from './../Service/Service';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -17,12 +17,13 @@ function TabPanel(props) {
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
+      style={{
+        height: '100%', // Pastikan TabPanel mengisi layar penuh
+        display: value === index ? 'flex' : 'none',
+        flexDirection: 'column',
+      }}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {children}
     </div>
   );
 }
@@ -49,30 +50,86 @@ export default function FullWidthTabs() {
   };
 
   return (
-    <Box sx={{ bgcolor: 'background.paper', width: 500 }}>
-      <AppBar position="static">
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh', // Full viewport height
+        width: '100%',
+        margin: 0,
+        padding: 0,
+      }}
+    >
+      <AppBar
+        position="static"
+        sx={{
+          width: '100%', // Full width untuk AppBar
+          backgroundColor: 'transparent', // Set background jadi transparan
+          boxShadow: 'none', // Hapus shadow agar menyatu
+          margin: 0,
+          padding: 0,
+        }}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
           indicatorColor="secondary"
           textColor="inherit"
-          variant="fullWidth"
+          centered
           aria-label="full width tabs example"
+          sx={{
+            margin: 0,
+            padding: 0,
+          }}
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Projects" {...a11yProps(0)} />
+          <Tab label="Sertificate" {...a11yProps(1)} />
+          <Tab label="Skills" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} dir={theme.direction}>
-        
-      </TabPanel>
-      <TabPanel value={value} index={1} dir={theme.direction}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2} dir={theme.direction}>
-        Item Three
-      </TabPanel>
+      <Box
+        sx={{
+          flexGrow: 1, // Isi ruang tersisa
+          width: '100%',
+          height: 'calc(100% - 48px)', // Pastikan konten tepat di bawah tab (48px adalah tinggi tab)
+          overflow: 'hidden', // Hilangkan scroll artefak
+        }}
+      >
+        <TabPanel value={value} index={0}>
+          <Box
+            sx={{
+              height: '100%', // Full height untuk konten
+              width: '100%', // Full width
+            }}
+          >
+            <Service />
+          </Box>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100%', // Full height
+            }}
+          >
+            Sertificate Content
+          </Box>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100%', // Full height
+            }}
+          >
+            Skills Content
+          </Box>
+        </TabPanel>
+      </Box>
     </Box>
   );
 }
