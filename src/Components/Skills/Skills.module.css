@@ -1,0 +1,70 @@
+.tech-container {
+  min-height: 100vh;
+  background-color: #111827;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stats Section */
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stats-card {
+  background-color: rgba(31, 41, 55, 0.5);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.stats-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stats-label {
+  color: #9CA3AF;
+  font-size: 0.875rem;
+}
+
+/* Stats Colors */
+.stats-emerald { color: #34D399; }
+.stats-cyan { color: #22D3EE; }
+.stats-red { color: #F87171; }
+
+/* Tech Grid */
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 42rem;
+}
+
+.tech-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tech-name {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Tech Badge Colors */
+.tech-blue { background-color: #3B82F6; }
+.tech-gray { background-color: #1F2937; }
+.tech-red { background-color: #EF4444; }
+.tech-emerald { background-color: #10B981; }
+.tech-cyan { background-color: #06B6D4; }
+.tech-orange { background-color: #F97316; }
