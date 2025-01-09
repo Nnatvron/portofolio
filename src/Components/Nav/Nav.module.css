@@ -98,7 +98,7 @@
     .bars{
         display: flex;
         position: fixed;
-        left: 63%;
+        left: 77%;
         flex-direction: column;
         gap: 5px;
         width: 50px;

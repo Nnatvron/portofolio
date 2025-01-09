@@ -7,7 +7,7 @@
   padding: border-box;
   list-style: none;
   text-decoration: none;
-  font-family: 'poppins';
+  font-family: 'poppins' !important;
 }
 
 :root{
