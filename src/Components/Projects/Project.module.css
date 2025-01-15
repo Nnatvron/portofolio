@@ -85,12 +85,14 @@
 @media (max-width:1200px) {
     .project_card {
         width: 80%;
+        font-family: 'poppins';
     }
 }
 
 @media (max-width:768px) {
     .project_card{
         width: 100%;
+        font-family: 'poppins';
     }
 
     .project_card div{

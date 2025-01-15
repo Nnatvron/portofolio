@@ -55,6 +55,7 @@ button{
 @media (max-width:1000px) {
     .contact{
         flex-direction: column;
+        font-family: 'poppins';
     }
 
     .contact div{

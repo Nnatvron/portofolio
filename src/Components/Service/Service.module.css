@@ -102,11 +102,13 @@
 @media (max-width:1300px) {
     .service_cards{
         grid-template-columns: repeat(2,1fr);
+        font-family: 'poppins';
     }
 }
 
 @media (max-width:900px) {
     .service_cards{
         grid-template-columns: repeat(1,1fr);
+        font-family: 'poppins';
     }
 }

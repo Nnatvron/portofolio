@@ -30,6 +30,16 @@ function Service () {
                                 Read More <i className="fa-solid fa-arrow-right-long"></i>
                             </a>
                         </div>
+
+                        <div className={ServiceCSS.Service_card} data-aos="fade" data-aos-duration="1500" data-aos-delay="500">
+                        <i className="fa-solid fa-chart-line" id={ServiceCSS.icon}></i>
+                            <h1>UBUNTU SERVER</h1>
+                            <p>Website Ubuntu Server adalah tutorial atau langkah-langkah untuk membuat ubuntu server menggunakan linux pada virtual box.</p>
+
+                            <a href="https://ubuntu-natar.vercel.app/" >
+                                Read More <i className="fa-solid fa-arrow-right-long"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

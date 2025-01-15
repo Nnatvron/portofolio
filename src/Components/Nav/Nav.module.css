@@ -89,6 +89,7 @@
         position: fixed;
         z-index: 300;
         background-color: transparent;
+        font-family: 'poppins';
         top: 0;
         left: 0;
         backdrop-filter: blur(30px);

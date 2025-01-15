@@ -125,6 +125,7 @@ radial-gradient(at 4% 0%, hsla(359,34%,39%,1) 0px, transparent 50%);
 @media (max-width:950px) {
     .hero {
         flex-direction: column-reverse;
+        font-family: 'poppins';
     }
 
     .hero_info{
