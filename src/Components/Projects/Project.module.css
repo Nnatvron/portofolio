@@ -1,6 +1,7 @@
 .project{
     width: 1500px;
     padding: 80px 8%;
+    font-family: 'poppins';
     display: flex;
     flex-direction: column;
     align-items: center;

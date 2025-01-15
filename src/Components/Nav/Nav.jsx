@@ -23,7 +23,7 @@ function Nav() {
                         }`}
                     >
                         <a href="#home">Home</a>
-                        <a href="#about">About Me</a>
+                        <a href="#about">About</a>
                         <a href="#project">Project</a>
                         <a href="#contact">Contact</a>
                     </nav>
