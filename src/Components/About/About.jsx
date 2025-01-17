@@ -7,7 +7,8 @@ function About() {
     return(
         <>
         <section id="about">
-            <div className={AboutCSS.about} >
+            <div claasName={AboutCSS.glass}>
+            <div className={AboutCSS.about}>
             <div className={AboutCSS.about_img} data-aos="fade-right" data-aos-duration="1500" data-aos-delay="200">
                 <img src={About_img} alt="" />
             </div>
@@ -19,6 +20,7 @@ function About() {
                 <p data-aos="fade-left" data-aos-duration="1500" data-aos-delay="1000">Saya adalah Natravell Sitra, seorang siswa yang menekuni bidang Teknik Komputer dan Jaringan dengan fokus pada pengembangan Front-End dan Design Web. Saya memiliki tekad yang kuat untuk terus belajar dan mengasah keterampilan saya demi mencapai kesempurnaan. Selalu berusaha untuk menemukan solusi terbaik dalam setiap projek yang saya kerjakan dan memiliki minat besar di bidang Front-End dan Design Web.</p>
                 <button data-aos="fade-left" data-aos-duration="1500" data-aos-delay="1200">Download CV</button>
                 </div>
+            </div>
             </div>
         </section>
         </>
