@@ -81,9 +81,27 @@ radial-gradient(at 4% 100%, hsla(359,34%,39%,1) 0px, transparent 50%);
 @media (max-width:550px) {
     .about{
         font-family: 'poppins';
+        flex-direction: column;
+        padding: 40px 4%;
     }
 
     .about_img{
         width: 80%;
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 20px;
     }
+
+.about_info {
+  width: 100%;
+  text-align: center;
+}
+
+.about_info h2, .about_info h3, .about_info p {
+  margin: 0 0 15px;
+}
+
+.about_info button {
+  margin: 20px auto;
+}
 }
