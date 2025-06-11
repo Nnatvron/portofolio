@@ -1,68 +1,222 @@
-.contact{
+.contact {
     width: 1500px;
+    max-width: 100%; /* Tambahkan untuk responsive */
     padding: 80px 8%;
-    font-family: 'poppins';
+    font-family: 'Poppins', sans-serif; /* Tambahkan fallback */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
     color: #fff;
-    background-color:hsla(0,3%,12%,0.9);
-background-image:
-radial-gradient(at 100% 0%, hsla(359,74%,36%,0.93) 0px, transparent 50%),
-radial-gradient(at 4% 100%, hsla(359,34%,39%,1) 0px, transparent 50%);
+    background-color: hsla(0, 3%, 12%, 0.9);
+    background-image:
+        radial-gradient(at 100% 0%, hsla(359, 74%, 36%, 0.93) 0px, transparent 50%),
+        radial-gradient(at 4% 100%, hsla(359, 34%, 39%, 1) 0px, transparent 50%);
 }
 
-.contact h2{
+/* Hapus duplikasi - gunakan yang camelCase untuk CSS modules */
+.errorMessage {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.1);
+}
+
+.successMessage {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(21, 87, 36, 0.1);
+}
+
+.contact h2 {
     font-size: 40px;
-    font-weight: 400;
-    border-bottom: 2px solid var(--main-color);
-    display: inline;
+    font-weight: 600; /* Lebih bold untuk heading */
+    border-bottom: 3px solid var(--main-color);
+    display: inline-block; /* Lebih baik dari inline */
+    margin-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 .contact p {
     width: 90%;
     margin-top: 22px;
+    line-height: 1.6; /* Tambahkan line-height untuk readability */
 }
 
-form{
+form {
     width: 45%;
     display: flex;
     flex-direction: column;
-    border: 2px solid red;
-    padding: 60px 30px;
-    box-shadow: 0 6px 16px var(--main-color);
+    border: 2px solid var(--main-color); /* Gunakan CSS variable */
+    border-radius: 12px; /* Tambahkan border radius */
+    padding: 40px 30px; /* Kurangi padding top/bottom */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle background */
+    backdrop-filter: blur(10px); /* Modern glass effect */
 }
 
-form input {
-    height: 40px;
+form label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 14px;
+}
+
+form input,
+form textarea {
+    height: 45px; /* Sedikit lebih tinggi */
     width: 100%;
     margin-bottom: 20px;
-    padding: 0 8px;
+    padding: 0 12px;
     outline: none;
-    border: 1px solid;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: inherit;
+    transition: all 0.3s ease; /* Smooth transition */
 }
 
-form input:hover , form input:focus{
-    box-shadow: 0 8px 16px var(--main-color);
-    border-color: (--main-color);
+form textarea {
+    height: 120px; /* Khusus untuk textarea */
+    padding: 12px;
+    resize: vertical; /* Allow vertical resize only */
 }
 
-button{
+form input::placeholder,
+form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+form input:hover,
+form input:focus,
+form textarea:hover,
+form textarea:focus {
+    box-shadow: 0 4px 12px var(--main-color);
+    border-color: var(--main-color);
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
+button {
     margin-top: 20px;
+    padding: 12px 24px;
+    background-color: var(--main-color);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
 }
 
-@media (max-width:1000px) {
-    .contact{
+button:hover:not(:disabled) {
+    background-color: var(--main-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loading state untuk form */
+form.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* Animasi untuk message muncul */
+.errorMessage,
+.successMessage {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+    .errorMessage {
+        background-color: rgba(248, 215, 218, 0.15);
+        border-color: rgba(245, 198, 203, 0.3);
+    }
+    
+    .successMessage {
+        background-color: rgba(212, 237, 218, 0.15);
+        border-color: rgba(195, 230, 203, 0.3);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .contact {
+        width: 100%;
+        padding: 60px 5%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .contact {
         flex-direction: column;
-        font-family: 'poppins';
+        padding: 40px 5%;
+        gap: 40px;
     }
 
-    .contact div{
-        width: 100%;
+    .contact h2 {
+        font-size: 32px;
     }
 
     form {
         width: 100%;
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact {
+        padding: 30px 4%;
+    }
+    
+    .contact h2 {
+        font-size: 28px;
+    }
+    
+    form {
+        padding: 25px 15px;
+    }
+    
+    form input,
+    form textarea {
+        height: 40px;
+        padding: 0 10px;
+    }
+    
+    form textarea {
+        height: 100px;
+        padding: 10px;
     }
 }
