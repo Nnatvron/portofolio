@@ -14,7 +14,7 @@
 }
 
 .stat-card {
-  background-color: #1f2937;
+  background-color:rgb(80, 69, 44); /* Changed from #1f2937 to a deeper blue-grey */
   border-radius: 0.5rem;
   padding: 1rem;
   text-align: center;
@@ -61,10 +61,11 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  background-color: #34495e; /* New background color for tech badges */
 }
 
 .popular-badge {
-  background-color: #ef4444;
+  background-color: #e74c3c; /* Changed from #ef4444 to a slightly different red */
   color: white;
   padding: 0.25rem 1rem;
   border-radius: 9999px;
