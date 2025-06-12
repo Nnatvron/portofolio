@@ -9,32 +9,33 @@ function Nav() {
     };
 
     return (
-        <>
-            <section>
-                <header className={NavCSS.header}>
-                    <div className={NavCSS.logo}>
-                        <h2>
-                            Natrxx<span></span>
-                        </h2>
-                    </div>
-                    <nav
-                        className={`${NavCSS.nav} ${
-                            isNavOpen ? NavCSS.navOpen : NavCSS.navClosed
-                        }`}
-                    >
-                        <a href="#home">Home</a>
-                        <a href="#about">About</a>
-                        <a href="#project">Project</a>
-                        <a href="#contact">Contact</a>
-                    </nav>
-                    <div className={NavCSS.bars} onClick={toggleNav}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </header>
-            </section>
-        </>
+        <header className={NavCSS.header}>
+            <div className={NavCSS.logo}>
+                <h2>
+                    Natrxx.<span></span>
+                </h2>
+            </div>
+            <nav
+                className={`${NavCSS.nav} ${
+                    isNavOpen ? NavCSS.navOpen : ""
+                }`}
+            >
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#project">Project</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div 
+                className={`${NavCSS.bars} ${
+                    isNavOpen ? NavCSS.active : ""
+                }`} 
+                onClick={toggleNav}
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </header>
     );
 }
 
