@@ -21,7 +21,7 @@ function Header() {
                     <h1 data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000">
                         Hi, I am 
                         <span>
-                        Natravell Sitra<img src={element1} alt="decoration" />
+                        Natravell Sitra
                         </span>
                     </h1>
                     <h2 data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1050">
