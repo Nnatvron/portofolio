@@ -1,134 +1,185 @@
-.service{
-    width: 1500px;
-    padding: 80px 8%;
-    font-family: 'poppins';
-    color: #ffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color:hsla(0,3%,12%,0.9);
-    background-image:
-    radial-gradient(at 100% 100%, hsla(359,74%,36%,0.93) 0px, transparent 50%),
-    radial-gradient(at 4% 0%, hsla(359,34%,39%,1) 0px, transparent 50%);
+/* ================================
+   SERVICE SECTION
+================================= */
+.service {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 80px 8%;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: hsla(0, 3%, 12%, 0.9);
+  background-image:
+    radial-gradient(at 100% 100%, hsla(359, 74%, 36%, 0.93) 0px, transparent 50%),
+    radial-gradient(at 4% 0%, hsla(359, 34%, 39%, 1) 0px, transparent 50%);
+  box-sizing: border-box;
 }
 
-.service p , .service h2{
-    text-align: center;
+/* Text alignment */
+.service h2,
+.service p {
+  text-align: center;
 }
 
-.service h2{
-    font-size: 40px;
-    font-weight: 400;
-    border-bottom: 2px solid var(--main-color);
-    margin-bottom: 10px;
+.service h2 {
+  font-size: 40px;
+  font-weight: 400;
+  border-bottom: 2px solid var(--main-color);
+  margin-bottom: 10px;
 }
 
-.service_cards{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 50px;
-    margin-top: 50px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
+/* ================================
+   SERVICE CARDS
+================================= */
+.service_cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  margin-top: 50px;
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  padding: 40px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+}
+
+/* Single Card */
+.Service_card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  border: 2px solid rgba(128, 128, 128, 0.5);
+  padding: 30px;
+  transition: 0.6s;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Hover glow */
+.Service_card:hover {
+  border-color: var(--main-color);
+  box-shadow: 0 10px 20px rgba(255, 49, 49, 0.3);
+  transform: translateY(-8px);
+}
+
+/* Light effect line */
+.Service_card::after {
+  content: '';
+  position: absolute;
+  left: -80%;
+  top: -80%;
+  height: 210%;
+  width: 20px;
+  background-color: rgba(255, 0, 0, 1);
+  filter: blur(50px);
+  transition: 0.8s;
+  transform: rotate(30deg);
+}
+
+.Service_card:hover::after {
+  left: 200%;
+}
+
+/* Icon + Text */
+.Service_card #icon {
+  font-size: 2.3rem;
+  transition: 0.6s;
+}
+
+.Service_card h3 {
+  letter-spacing: 0.9px;
+  color: #ddd;
+  font-size: 1.4rem;
+  transition: 0.6s;
+}
+
+.Service_card:hover h3,
+.Service_card:hover #icon {
+  color: var(--main-color);
+}
+
+.Service_card p {
+  text-align: start;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* Button */
+.Service_card a {
+  color: #ddd;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid var(--main-color);
+  border-radius: 6px;
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.Service_card a:hover {
+  background-color: var(--main-color);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+================================= */
+@media (max-width: 1300px) {
+  .service_cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
     padding: 30px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
 }
 
-.Service_card:hover{
-    border-color: var(--main-color);
-    box-shadow: 0 12px 16px var(--main-color);
-    transform: translateY(-8px);
+@media (max-width: 900px) {
+  .service_cards {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 25px;
+  }
+
+  .Service_card {
+    padding: 25px;
+  }
+
+  .service h2 {
+    font-size: 32px;
+  }
 }
 
-.Service_card #icon{
-    font-size: 2.3rem;
-    transition: .6s;
-}
+@media (max-width: 500px) {
+  .service {
+    padding: 60px 5%;
+  }
 
-.Service_card{
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    border: 2px solid rgba(128, 128, 128, 0.5);
-    padding: 30px;
-    transition: .6s;
-    position: relative;
-    overflow: hidden;
-}
+  .service h2 {
+    font-size: 28px;
+  }
 
-.Service_card:after{
-    content: '';
-    position: absolute;
-    left: -80%;
-    top: -80%;
-    height: 210%;
-    width: 20px;
-    background-color: rgba(255, 0, 0, 1);
-    filter: blur(50px);
-    transition: .8s;
-    transform: rotate(30deg);
-}
+  .service_cards {
+    border-radius: 20px;
+    gap: 20px;
+  }
 
-.Service_card:hover:after{
-    left: 200%;
-}
+  .Service_card h3 {
+    font-size: 1.2rem;
+  }
 
-.Service_card p{
-    text-align: start;
-}
-
-.Service_card h3{
-    letter-spacing: 0.9;
-    color: #ddd;
-    font-size: 1.4rem;
-    transition: .6s;
-}
-
-.Service_card:hover h3 , .Service_card:hover #icon{
-    color: var(--main-color);
-}
-
-.Service_card p{
-    text-align: start;
-}
-
-.Service_card a{
-    color: #ddd;
-    display: flex;
-    gap: 7px;
-    align-items: center;
-    padding: 8px;
-    color: red;
-    border: 1px solid var(--main-color);
-    width: 130px;
-}
-
-@media (max-width:1300px) {
-    .service{
-        font-family: 'poppins';
-    }
-
-    .service_cards{
-        grid-template-columns: repeat(2,1fr);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        font-family: 'poppins';
-    }
-}
-
-@media (max-width:900px) {
-    .service{
-        font-family: 'poppins';
-    }
-
-    .service_cards{
-        grid-template-columns: repeat(1,1fr);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        font-family: 'poppins';
-    }
+  .Service_card p {
+    font-size: 14px;
+  }
 }

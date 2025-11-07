@@ -1,110 +1,108 @@
-.about{
-    max-width: 1500px;
-    width: 100%;
-    display: flex;
-    font-family: 'poppins';
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-    padding: 80px 8%;
-    background-color:hsla(0,3%,12%,0.9);
-    background-image:
-    radial-gradient(at 100% 0%, hsla(359,74%,36%,0.93) 0px, transparent 50%),
-    radial-gradient(at 4% 100%, hsla(359,34%,39%,1) 0px, transparent 50%);
+.about_section {
+  display: flex;
+  justify-content: center;
+  background: hsla(0, 3%, 12%, 0.9);
+  background-image: 
+    radial-gradient(at 100% 0%, hsla(359, 74%, 36%, 0.93) 0px, transparent 50%),
+    radial-gradient(at 4% 100%, hsla(359, 34%, 39%, 1) 0px, transparent 50%);
 }
 
-.about_img{
-    width: 400px;
-    position: relative;
+.about {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 80px 8%;
+  font-family: "Poppins", sans-serif;
 }
 
-.about_img img{
-    transition: transform 0.3s ease;
-    width: 100%;
-    border: 2px solid var(--main-color);
-    position: relative;
+.about_img {
+  width: 400px;
+  position: relative;
+}
+
+.about_img img {
+  width: 100%;
+  border: 2px solid var(--main-color);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .about_img img:hover {
-    transform: scale(1.05) translateY(-2px);
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-.about_img::after{
-    content: '';
-    position: absolute;
+.about_info {
+  width: 45%;
+  text-align: left;
+  color: white;
+}
+
+.about_info h2 {
+  font-size: 50px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+.about_info h3 {
+  margin-bottom: 25px;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.about_info h3 span {
+  border-bottom: 2px solid var(--main-color);
+}
+
+.about_info p {
+  line-height: 1.7;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.about_info button {
+  background: var(--main-color);
+  color: white;
+  padding: 10px 20px;
+  font-size: 11px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.about_info button:hover {
+  background: #ff5656;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 950px) {
+  .about {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .about_info {
     width: 100%;
-    height: 100%;
-    top: 20px;
-    left: 20px;
-    border: 2px solid var(--main-color);
-    z-index: -1;
+  }
+
+  .about_img {
+    width: 80%;
+    max-width: 300px;
+  }
 }
 
-.about_info{
-    width: 45%;
-    text-align: center; /* Added to center text */
-}
+@media (max-width: 550px) {
+  .about_info h2 {
+    font-size: 35px;
+  }
 
-.about_info p{
-    color: white;
-}
-
-.about_info h3{
-    margin-bottom: 30px;
-    font-size: 22px;
-    font-weight: 400;
-    color: white;
-}
-
-.about_info h3 span{
-    border-bottom: 2px solid var(--main-color);
-}
-
-.about_info h2{
-    font-size: 55px;
-    margin-bottom: 0px;
-    font-weight: 600;
-    color: var(--main-color);
-}
-
-.about_info button{
-    margin: 30px auto;
-    font-size: 11px;
-    display: block; /* Ensure button is centered */
-}
-
-@media (max-width:950px) {
-    .about{
-        flex-direction: column-reverse;
-        align-items: center;
-        font-family: 'poppins';
-    }
-
-    .about_info {
-        width: 100%;
-        flex-direction: column;
-        text-align: center; /* Ensure center alignment in mobile */
-    }
-}
-
-@media (max-width:550px) {
-    .about{
-        font-family: 'poppins';
-        flex-direction: column;
-        padding: 40px 4%;
-    }
-
-    .about_img{
-        width: 100%;
-        max-width: 300px;
-        margin-bottom: 20px;
-    }
-
-    .about_info h2 {
-        font-size: 35px; /* Reduced font size for smaller screens */
-    }
-
-    .about_info p {
-        font-size: 14px; /* Adjusted paragraph font size */
-    }
+  .about_info p {
+    font-size: 14px;
+  }
 }

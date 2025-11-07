@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import FooterCSS from './../Footer/Footer.module.css'
 
