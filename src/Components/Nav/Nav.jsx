@@ -1,42 +1,51 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import NavCSS from "./../Nav/Nav.module.css";
 
 function Nav() {
-    const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
-    const toggleNav = () => {
-        setIsNavOpen((prevState) => !prevState);
-    };
+  const toggleNav = () => {
+    setIsNavOpen((prevState) => !prevState);
+  };
 
-    return (
-        <header className={NavCSS.header}>
-            <div className={NavCSS.logo}>
-                <h2>
-                    Natrxx.<span></span>
-                </h2>
-            </div>
-            <nav
-                className={`${NavCSS.nav} ${
-                    isNavOpen ? NavCSS.navOpen : ""
-                }`}
-            >
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#project">Project</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <div 
-                className={`${NavCSS.bars} ${
-                    isNavOpen ? NavCSS.active : ""
-                }`} 
-                onClick={toggleNav}
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </header>
-    );
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
+
+  return (
+    <header className={NavCSS.header}>
+      {/* Logo */}
+      <div className={NavCSS.logo}>
+        <h2>
+          Natrxx<span>.</span>
+        </h2>
+      </div>
+
+      {/* Navigation Menu */}
+      <nav
+        className={`${NavCSS.nav} ${isNavOpen ? NavCSS.navOpen : ""}`}
+      >
+        <a href="#home" onClick={closeNav}>Home</a>
+        <a href="#about" onClick={closeNav}>About</a>
+        <a href="#project" onClick={closeNav}>Project</a>
+        <a href="#contact" onClick={closeNav}>Contact</a>
+      </nav>
+
+      {/* Hamburger Button */}
+      <div
+        className={`${NavCSS.bars} ${isNavOpen ? NavCSS.active : ""}`}
+        onClick={toggleNav}
+        aria-label="Toggle navigation"
+        role="button"
+        tabIndex={0}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+  );
 }
 
 export default Nav;

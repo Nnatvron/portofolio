@@ -1,11 +1,10 @@
 /* ===============================
-   HERO SECTION (Modern Version)
+   HERO SECTION (Prismatic Aurora Burst + Grid Background)
 ================================= */
 .hero {
   width: 100%;
   margin: 0;
-  padding: 100px 8%;
-  padding-top: 120px;
+  padding: 120px 8%;
   font-family: "Poppins", sans-serif;
   color: #fff;
   display: flex;
@@ -13,31 +12,64 @@
   align-items: center;
   min-height: 100vh;
   box-sizing: border-box;
-
-  /* FULL BACKGROUND */
-  background: hsla(0, 3%, 12%, 0.9);
-  background-image:
-    radial-gradient(at 100% 100%, hsla(359, 74%, 36%, 0.93) 0px, transparent 50%),
-    radial-gradient(at 4% 0%, hsla(359, 34%, 39%, 1) 0px, transparent 50%);
-  background-size: cover;
-  background-position: center;
   position: relative;
+  overflow: hidden;
+
+  /* 🌌 Prismatic Aurora Burst gradient base */
+  background:
+    radial-gradient(ellipse 120% 80% at 70% 20%, rgba(255, 20, 1, 0.15), transparent 85%),
+    radial-gradient(ellipse 100% 60% at 30% 10%, rgba(255, 60, 60, 0.35), transparent 85%),
+    radial-gradient(ellipse 90% 70% at 50% 0%, rgba(138, 43, 226, 0.18), transparent 85%),
+    radial-gradient(ellipse 110% 50% at 80% 30%, rgba(255, 215, 0, 0.08), transparent 85%),
+    #000000;
+
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: moveInferno 22s ease-in-out infinite alternate;
 }
 
-/* Inner container agar konten tetap rapi */
+/* 🌈 Animasi background bergerak kanan-kiri */
+@keyframes moveInferno {
+  0% { background-position: 0% 50%; filter: brightness(1); }
+  50% { background-position: 100% 50%; filter: brightness(1.1); }
+  100% { background-position: 0% 50%; filter: brightness(1); }
+}
+
+/* 🌐 Grid pattern overlay di atas */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    linear-gradient(45deg, transparent 49%, rgba(229, 231, 235, 0.25) 49%, rgba(229, 231, 235, 0.25) 51%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, rgba(229, 231, 235, 0.25) 49%, rgba(229, 231, 235, 0.25) 51%, transparent 51%);
+  background-size: 40px 40px;
+  opacity: 0.25;
+  mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 50%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 50%, transparent 90%);
+  pointer-events: none;
+}
+
+/* ===============================
+   HERO CONTAINER
+================================= */
 .hero_container {
   width: 100%;
-  max-width: 1500px;
+  max-width: 1300px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 40px;
+  gap: 60px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ===============================
-   LEFT INFO SECTION
+   LEFT TEXT INFO
 ================================= */
 .hero_info {
   width: 55%;
@@ -49,34 +81,42 @@
   line-height: 1.1;
   font-weight: 700;
   margin-bottom: 25px;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .hero_info h1 span {
   color: var(--main-color);
-  text-shadow: 0 0 10px var(--main-color);
-  position: relative;
-  display: inline-block;
+  text-shadow: 0 0 14px rgba(255, 49, 49, 0.7);
 }
 
 .hero_info h2 {
-  font-size: 25px;
-  margin-bottom: 18px;
+  font-size: 22px;
+  margin-bottom: 16px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .hero_info p {
   margin-bottom: 28px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 16px;
   font-weight: 300;
   letter-spacing: 0.3px;
+  max-width: 90%;
 }
 
 /* ===============================
    SOCIAL ICONS
 ================================= */
+.social_icons a,
+.social_icons i {
+  text-decoration: none !important;
+  border: none;
+  outline: none;
+}
+
 .social_icons {
   display: flex;
   align-items: center;
@@ -103,8 +143,8 @@
 .social_icons i:hover {
   background-color: var(--main-color);
   color: #fff;
-  box-shadow: 0 5px 15px rgba(255, 49, 49, 0.4);
-  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(255, 49, 49, 0.5);
+  transform: translateY(-5px) scale(1.05);
 }
 
 /* ===============================
@@ -122,11 +162,12 @@
   padding: 12px 26px;
   border: 1px solid var(--main-color);
   border-radius: 8px;
-  background-color: rgba(255, 49, 49, 0.1);
+  background-color: rgba(255, 49, 49, 0.08);
   color: var(--main-color);
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
+  letter-spacing: 0.3px;
 }
 
 .hero_btns button:hover {
@@ -144,6 +185,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  position: relative;
 }
 
 .hero_img img {
@@ -156,13 +198,13 @@
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--main-color);
-  background-color: rgba(98, 98, 255, 0.1);
-  box-shadow: 0 0 20px rgba(255, 49, 49, 0.3);
+  background-color: rgba(255, 49, 49, 0.05);
+  box-shadow: 0 0 30px rgba(255, 49, 49, 0.3);
   transition: all 0.5s ease;
 }
 
 .hero_img img:hover {
-  box-shadow: 0 0 70px rgba(255, 49, 49, 0.6);
+  box-shadow: 0 0 80px rgba(255, 49, 49, 0.6);
   transform: translateY(-10px) scale(1.05);
 }
 
@@ -173,25 +215,32 @@
   .hero_container {
     flex-direction: column-reverse;
     text-align: center;
+    gap: 40px;
   }
 
   .hero_info {
     width: 100%;
-    margin-top: 40px;
   }
 
   .hero_info h1 {
-    font-size: 2.6rem;
+    font-size: 2.5rem;
+  }
+
+  .hero_info h2 {
+    font-size: 20px;
+  }
+
+  .hero_info p {
+    max-width: 100%;
   }
 
   .hero_img {
     justify-content: center;
-    margin-bottom: 30px;
   }
 
   .hero_img img {
-    width: 340px;
-    height: 340px;
+    width: 320px;
+    height: 320px;
   }
 
   .social_icons,
@@ -201,6 +250,10 @@
 }
 
 @media (max-width: 600px) {
+  .hero {
+    padding: 100px 6%;
+  }
+
   .hero_info h1 {
     font-size: 2rem;
   }
@@ -214,8 +267,8 @@
   }
 
   .hero_img img {
-    width: 250px;
-    height: 250px;
+    width: 240px;
+    height: 240px;
   }
 
   .hero_btns button {
@@ -224,15 +277,15 @@
   }
 
   .social_icons i {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     font-size: 18px;
   }
 }
 
 @media (max-width: 400px) {
   .hero_info h1 {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
 
   .hero_img img {

@@ -1,87 +1,110 @@
 /* ================================
-   SERVICE SECTION
+   SERVICE SECTION (Unified Design)
 ================================= */
 .service {
   width: 100%;
-  max-width: 1500px;
   margin: 0 auto;
-  padding: 80px 8%;
-  font-family: 'Poppins', sans-serif;
+  padding: 100px 8%;
+  font-family: "Poppins", sans-serif;
   color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: hsla(0, 3%, 12%, 0.9);
-  background-image:
-    radial-gradient(at 100% 100%, hsla(359, 74%, 36%, 0.93) 0px, transparent 50%),
-    radial-gradient(at 4% 0%, hsla(359, 34%, 39%, 1) 0px, transparent 50%);
+  justify-content: center;
   box-sizing: border-box;
-}
-
-/* Text alignment */
-.service h2,
-.service p {
   text-align: center;
-}
 
-.service h2 {
-  font-size: 40px;
-  font-weight: 400;
-  border-bottom: 2px solid var(--main-color);
-  margin-bottom: 10px;
+  /* Background gabungan:
+     1. Kotak-kotak (paling atas)
+     2. Radial merah (atas)
+     3. Background hitam dasar
+  */
+  background:
+    /* Kotak-kotak */
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    /* Radial merah dari atas */
+    radial-gradient(125% 125% at 50% -20%, #ff0000 1%, #000000 70%),
+    #000000;
+
+  background-size:
+    40px 40px, /* kotak-kotak vertical */
+    40px 40px, /* kotak-kotak horizontal */
+    100% 100%, /* radial */
+    cover;      /* base */
+  background-repeat: repeat;
+  background-position: center;
 }
 
 /* ================================
-   SERVICE CARDS
+   HEADING
+================================= */
+.service h2 {
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(255, 49, 49, 0.4);
+}
+
+.service p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+/* ================================
+   SERVICE CARDS WRAPPER
 ================================= */
 .service_cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
-  margin-top: 50px;
+  gap: 40px;
   width: 100%;
   max-width: 1200px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 40px;
+  border-radius: 30px;
   padding: 40px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
 }
 
-/* Single Card */
+/* ================================
+   INDIVIDUAL CARD
+================================= */
 .Service_card {
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  border: 2px solid rgba(128, 128, 128, 0.5);
+  gap: 18px;
   padding: 30px;
-  transition: 0.6s;
+  border-radius: 18px;
+  border: 2px solid rgba(128, 128, 128, 0.4);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.02);
+  text-align: left;
 }
 
-/* Hover glow */
+/* Hover animation & glow */
 .Service_card:hover {
   border-color: var(--main-color);
-  box-shadow: 0 10px 20px rgba(255, 49, 49, 0.3);
+  box-shadow: 0 10px 25px rgba(255, 49, 49, 0.3);
   transform: translateY(-8px);
 }
 
-/* Light effect line */
 .Service_card::after {
-  content: '';
+  content: "";
   position: absolute;
   left: -80%;
   top: -80%;
   height: 210%;
   width: 20px;
-  background-color: rgba(255, 0, 0, 1);
+  background-color: rgba(255, 0, 0, 0.9);
   filter: blur(50px);
   transition: 0.8s;
   transform: rotate(30deg);
@@ -91,17 +114,20 @@
   left: 200%;
 }
 
-/* Icon + Text */
+/* ================================
+   ICON & TEXT
+================================= */
 .Service_card #icon {
-  font-size: 2.3rem;
-  transition: 0.6s;
+  font-size: 2.6rem;
+  color: var(--main-color);
+  transition: 0.4s ease;
 }
 
 .Service_card h3 {
-  letter-spacing: 0.9px;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #ddd;
-  font-size: 1.4rem;
-  transition: 0.6s;
+  transition: 0.4s ease;
 }
 
 .Service_card:hover h3,
@@ -110,76 +136,88 @@
 }
 
 .Service_card p {
-  text-align: start;
   color: #ccc;
+  font-size: 0.95rem;
   line-height: 1.6;
+  margin-bottom: 10px;
 }
 
-/* Button */
+/* ================================
+   BUTTON
+================================= */
 .Service_card a {
-  color: #ddd;
-  display: flex;
-  gap: 7px;
+  display: inline-flex;
   align-items: center;
-  padding: 8px 14px;
+  gap: 8px;
+  color: var(--main-color);
+  font-weight: 500;
+  font-size: 14px;
   border: 1px solid var(--main-color);
   border-radius: 6px;
-  width: fit-content;
+  padding: 8px 14px;
   transition: all 0.3s ease;
+  width: fit-content;
+  position: relative;
 }
 
 .Service_card a:hover {
   background-color: var(--main-color);
   color: #fff;
+  box-shadow: 0 0 15px var(--main-color);
   transform: translateY(-2px);
 }
 
 /* ================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ================================= */
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
   .service_cards {
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    padding: 30px;
+    gap: 35px;
+    padding: 35px;
   }
 }
 
 @media (max-width: 900px) {
   .service_cards {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
     padding: 25px;
   }
 
   .Service_card {
-    padding: 25px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .Service_card p {
+    text-align: center;
   }
 
   .service h2 {
-    font-size: 32px;
+    font-size: 34px;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .service {
-    padding: 60px 5%;
-  }
-
-  .service h2 {
-    font-size: 28px;
+    padding: 70px 6%;
   }
 
   .service_cards {
-    border-radius: 20px;
     gap: 20px;
+    border-radius: 20px;
   }
 
   .Service_card h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
   .Service_card p {
     font-size: 14px;
+  }
+
+  .Service_card #icon {
+    font-size: 2rem;
   }
 }

@@ -1,10 +1,11 @@
 /* ===============================
-   CONTACT SECTION (Modern Full Width)
+   CONTACT SECTION (Unified Glass Theme)
 ================================= */
+
 .contact {
   width: 100%;
   margin: 0;
-  padding: 80px 8%;
+  padding: 100px 8%;
   font-family: "Poppins", sans-serif;
   color: #fff;
   display: flex;
@@ -12,24 +13,32 @@
   align-items: center;
   box-sizing: border-box;
 
-  /* Full background sama kayak section lain */
-  background: hsla(0, 3%, 12%, 0.9);
-  background-image:
-    radial-gradient(at 100% 0%, hsla(359, 74%, 36%, 0.93) 0px, transparent 50%),
-    radial-gradient(at 4% 100%, hsla(359, 34%, 39%, 1) 0px, transparent 50%);
+  /* 🔥 Background Hitam + Merah Pekat (Glow di bawah) */
+  background:
+    radial-gradient(ellipse 120% 70% at 50% 50%, rgba(200, 20, 20, 0.32), transparent 55%),
+    radial-gradient(ellipse 140% 50% at 30% 85%, rgba(180, 0, 0, 0.25), transparent 60%),
+    #020101;
+
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Inner container biar isi tetap center dan rapi */
+/* ===============================
+   CONTAINER
+================================= */
 .contact_container {
   width: 100%;
-  max-width: 1500px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ===============================
@@ -44,10 +53,11 @@
   margin-bottom: 20px;
   letter-spacing: 1px;
   text-align: center;
+  text-shadow: 0 0 10px rgba(255, 49, 49, 0.4);
 }
 
 /* ===============================
-   MESSAGE STYLES
+   MESSAGES
 ================================= */
 .errorMessage,
 .successMessage {
@@ -59,6 +69,7 @@
   font-size: 14px;
   font-weight: 500;
   animation: fadeSlide 0.4s ease-out;
+  backdrop-filter: blur(12px);
 }
 
 .errorMessage {
@@ -85,32 +96,35 @@
 }
 
 /* ===============================
-   FORM STYLES
+   FORM STYLING
 ================================= */
 form {
   width: 100%;
   max-width: 550px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 40px 30px;
+  border-radius: 16px;
+  padding: 45px 35px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   transition: all 0.3s ease;
 }
 
 form.loading {
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 form label {
   font-weight: 500;
   font-size: 14px;
   color: #ddd;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 form input,
@@ -119,16 +133,16 @@ form textarea {
   border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: rgba(255, 255, 255, 0.08);
   color: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 12px 14px;
-  font-size: 14px;
+  font-size: 15px;
   font-family: inherit;
   transition: all 0.3s ease;
 }
 
 form textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 110px;
 }
 
 form input::placeholder,
@@ -139,23 +153,23 @@ form textarea::placeholder {
 form input:focus,
 form textarea:focus {
   border-color: var(--main-color);
-  box-shadow: 0 0 10px rgba(255, 85, 85, 0.4);
+  box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
   background-color: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
 /* ===============================
-   BUTTON
+   BUTTON STYLING
 ================================= */
 button {
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 12px 24px;
   background-color: var(--main-color);
   color: #fff;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   letter-spacing: 0.5px;
@@ -164,11 +178,11 @@ button {
 button:hover:not(:disabled) {
   transform: translateY(-3px);
   background-color: #ff4b4b;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 15px rgba(255, 49, 49, 0.3);
 }
 
 button:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -177,7 +191,7 @@ button:disabled {
 ================================= */
 @media (max-width: 950px) {
   .contact {
-    padding: 60px 5%;
+    padding: 80px 6%;
   }
 
   .contact h2 {
@@ -185,14 +199,13 @@ button:disabled {
   }
 
   form {
-    width: 100%;
-    padding: 30px 20px;
+    padding: 35px 25px;
   }
 }
 
 @media (max-width: 600px) {
   .contact {
-    padding: 40px 4%;
+    padding: 60px 5%;
   }
 
   .contact h2 {
@@ -200,7 +213,8 @@ button:disabled {
   }
 
   form {
-    padding: 25px 15px;
+    padding: 25px 18px;
+    gap: 14px;
   }
 
   form input,

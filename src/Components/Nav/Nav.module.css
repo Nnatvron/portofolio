@@ -1,290 +1,229 @@
-/* CSS Variables untuk konsistensi */
+/* ===============================
+   NAVIGATION BAR (Modern Glass Style)
+================================= */
 :root {
-    --main-color: #ff3131;
-    --text-color: #333;
-    --bg-blur: rgba(255, 255, 255, 0.1);
-    --border-color: rgba(255, 255, 255, 0.18);
-    --shadow-light: rgba(227, 228, 237, 0.37);
-    --shadow-dark: rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.4s;
-    --border-radius: 8px;
+  --main-color: #ff3131;
+  --text-color: #fff;
+  --bg-blur: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.15);
+  --shadow-light: rgba(255, 255, 255, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.4);
+  --transition-speed: 0.4s;
+  --border-radius: 10px;
+  --font-family: "Poppins", sans-serif;
 }
 
-/* Reset untuk mencegah overflow horizontal */
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-family: 'Poppins', sans-serif;
+/* Prevent overflow and maintain smooth look */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  scroll-behavior: smooth;
 }
 
-/* Header utama */
+/* Header wrapper (sticky navbar) */
 .header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 8%;
-    position: fixed;
-    z-index: 1000;
-    background-color: var(--bg-blur);
-    top: 0;
-    left: 0;
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    box-shadow: 0 4px 30px var(--shadow-light);
-    border-bottom: 1px solid var(--border-color);
-    transition: all var(--transition-speed) ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 8%;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-speed) ease;
+  animation: slideDown 0.6s ease-out;
 }
 
-/* Logo styling */
-.logo {
-    font-size: 28px;
-    user-select: none;
+/* Scroll shadow effect */
+.header.scrolled {
+  background: rgba(10, 10, 10, 0.85);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
 }
 
+/* Logo */
 .logo h2 {
-    color: var(--text-color);
-    font-weight: 600;
-    filter: drop-shadow(0 0 14px var(--main-color));
-    margin: 0;
-    letter-spacing: -0.5px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 10px rgba(255, 49, 49, 0.5);
 }
 
 .logo span {
-    color: var(--main-color);
-    font-weight: 700;
+  color: var(--main-color);
 }
 
-/* Navigation default */
+/* Navigation menu */
 .nav {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  list-style: none;
+  transition: all var(--transition-speed) ease;
 }
 
 .nav a {
-    color: var(--text-color);
-    font-size: 16px;
-    font-weight: 500;
-    padding: 8px 16px;
-    background-color: rgba(255, 49, 49, 0.08);
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    transition: all var(--transition-speed) ease;
-    border: 1px solid rgba(255, 49, 49, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.nav a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.nav a:hover::before {
-    left: 100%;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  padding: 8px 18px;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed) ease;
+  border: 1px solid transparent;
 }
 
 .nav a:hover {
-    box-shadow: 0 6px 20px rgba(255, 49, 49, 0.4);
-    background-color: var(--main-color);
-    color: #ffffff;
-    transform: translateY(-3px);
-    border-color: var(--main-color);
+  color: #fff;
+  background: var(--main-color);
+  border-color: var(--main-color);
+  box-shadow: 0 0 15px rgba(255, 49, 49, 0.5);
+  transform: translateY(-3px);
 }
 
-.nav a:active {
-    transform: translateY(-1px);
-}
-
-/* Hamburger menu button */
+/* Hamburger button */
 .bars {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 49, 49, 0.08);
-    border-radius: var(--border-radius);
-    transition: all var(--transition-speed) ease;
-    padding: 8px;
-    border: 1px solid rgba(255, 49, 49, 0.2);
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 49, 49, 0.1);
+  border: 1px solid rgba(255, 49, 49, 0.25);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
 }
 
 .bars:hover {
-    box-shadow: 0 6px 20px rgba(255, 49, 49, 0.4);
-    background-color: var(--main-color);
-    transform: translateY(-2px);
-    border-color: var(--main-color);
+  background: var(--main-color);
+  box-shadow: 0 0 15px rgba(255, 49, 49, 0.5);
+  transform: translateY(-2px);
 }
 
 .bars span {
-    width: 24px;
-    height: 3px;
-    border-radius: 2px;
-    background-color: var(--text-color);
-    transition: all var(--transition-speed) ease;
-    transform-origin: center;
+  width: 22px;
+  height: 2.5px;
+  border-radius: 2px;
+  background-color: #fff;
+  transition: all var(--transition-speed) ease;
 }
 
-.bars:hover span {
-    background-color: #ffffff;
-}
-
-/* Animasi hamburger saat aktif */
+/* Animation when menu active */
 .bars.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(5px, 6px);
 }
-
 .bars.active span:nth-child(2) {
-    opacity: 0;
-    transform: scale(0);
+  opacity: 0;
+  transform: scale(0);
 }
-
 .bars.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
+  transform: rotate(-45deg) translate(5px, -6px);
 }
 
-/* Media queries untuk responsive */
-@media (max-width: 768px) {
-    .header {
-        padding: 12px 5%;
-        box-shadow: 0 2px 20px var(--shadow-dark);
-    }
+/* ===============================
+   RESPONSIVE DESIGN
+================================= */
+@media (max-width: 900px) {
+  .header {
+    padding: 14px 5%;
+  }
 
-    .logo {
-        font-size: 24px;
-    }
-    
-    .bars {
-        display: flex;
-    }
+  .bars {
+    display: flex;
+  }
 
-    .nav {
-        position: fixed;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        height: 0;
-        padding: 0;
-        z-index: 999;
-        flex-direction: column;
-        background-color: var(--bg-blur);
-        backdrop-filter: blur(50px);
-        -webkit-backdrop-filter: blur(50px);
-        box-shadow: 0 8px 32px var(--shadow-dark);
-        border-top: 1px solid var(--border-color);
-        align-items: center;
-        justify-content: flex-start;
-        transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
-        opacity: 0;
-        visibility: hidden;
-        overflow: hidden;
-    }
+  .nav {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-top: 1px solid var(--border-color);
+    padding: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all var(--transition-speed) ease;
+  }
 
-    .nav.navOpen {
-        height: auto;
-        min-height: 280px;
-        padding: 30px 20px;
-        opacity: 1;
-        visibility: visible;
-        top: 100%;
-    }
+  .nav.navOpen {
+    height: auto;
+    padding: 25px 0;
+    opacity: 1;
+    visibility: visible;
+  }
 
-    .nav a {
-        width: 100%;
-        max-width: 300px;
-        text-align: center;
-        margin: 8px 0;
-        padding: 15px 20px;
-        font-size: 18px;
-        background-color: rgba(255, 49, 49, 0.1);
-        border: 1px solid rgba(255, 49, 49, 0.3);
-    }
+  .nav a {
+    width: 80%;
+    text-align: center;
+    padding: 14px 0;
+    border: 1px solid rgba(255, 49, 49, 0.25);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 6px 0;
+    font-size: 17px;
+    transition: all 0.3s ease;
+  }
 
-    .nav a:hover {
-        transform: translateY(-2px) scale(1.02);
-    }
+  .nav a:hover {
+    background: var(--main-color);
+    color: #fff;
+    transform: translateY(-2px);
+  }
 }
 
 @media (max-width: 480px) {
-    .header {
-        padding: 10px 4%;
-    }
-    
-    .logo {
-        font-size: 20px;
-    }
-    
-    .logo h2 {
-        font-size: 20px;
-    }
-    
-    .bars {
-        width: 36px;
-        height: 36px;
-    }
-    
-    .bars span {
-        width: 20px;
-        height: 2px;
-    }
-    
-    .nav a {
-        font-size: 16px;
-        padding: 12px 18px;
-    }
+  .header {
+    padding: 12px 4%;
+  }
+
+  .logo h2 {
+    font-size: 22px;
+  }
+
+  .bars {
+    width: 36px;
+    height: 36px;
+  }
+
+  .bars span {
+    width: 20px;
+  }
+
+  .nav a {
+    font-size: 16px;
+    padding: 12px 0;
+  }
 }
 
-/* Animasi untuk smooth scroll */
-@media (prefers-reduced-motion: no-preference) {
-    .nav a {
-        transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
-    }
-}
-
-/* Focus states untuk aksesibilitas */
-.nav a:focus,
-.bars:focus {
-    outline: 2px solid var(--main-color);
-    outline-offset: 2px;
-}
-
-/* Hover effect yang lebih halus untuk desktop */
-@media (hover: hover) {
-    .nav a:hover {
-        box-shadow: 
-            0 6px 20px rgba(255, 49, 49, 0.4),
-            0 0 0 1px rgba(255, 49, 49, 0.1);
-    }
-}
-
-/* Loading animation untuk navbar */
+/* ===============================
+   ANIMATIONS
+================================= */
 @keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.header {
-    animation: slideDown 0.6s ease-out;
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
