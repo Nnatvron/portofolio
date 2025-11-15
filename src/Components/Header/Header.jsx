@@ -8,9 +8,10 @@ import HeroImg from "./../../../public/hero2.jpg";
 function Header() {
   useEffect(() => {
     AOS.init({
-      duration: 1500,
-      once: true,
-      easing: "ease-out-cubic",
+      duration: 100,
+      once: false,
+      mirror: true,
+      offset: 0,
     });
   }, []);
 
@@ -20,15 +21,15 @@ function Header() {
       <div className={HeaderCSS.hero_container}>
         {/* Info Section */}
         <div className={HeaderCSS.hero_info}>
-          <h1 data-aos="fade-right" data-aos-delay="400">
+          <h1 data-aos="fade-down" data-aos-delay="550"  data-aos-offset="0" >
             Hi, I am <span>Natravell Sitra</span>
           </h1>
 
-          <h2 data-aos="fade-right" data-aos-delay="600">
+          <h2 data-aos="fade-down" data-aos-delay="650"  data-aos-offset="0" >
             Front-End Web Developer
           </h2>
 
-          <p data-aos="fade-right" data-aos-delay="800">
+          <p data-aos="fade-up" data-aos-delay="700"  data-aos-offset="0" >
             “The sky is the limit for those who are not afraid to fly.”
           </p>
 
@@ -39,8 +40,9 @@ function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              data-aos="fade-up"
-              data-aos-delay="900"
+              data-aos="fade-right"
+              data-aos-delay="750"
+              data-aos-offset="0"
             >
               <i className="fa-brands fa-instagram"></i>
             </a>
@@ -50,8 +52,9 @@ function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              data-aos="fade-up"
-              data-aos-delay="1000"
+              data-aos="fade-right"
+              data-aos-delay="800"
+              data-aos-offset="0"
             >
               <i className="fa-brands fa-facebook"></i>
             </a>
@@ -61,8 +64,9 @@ function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              data-aos="fade-up"
-              data-aos-delay="1100"
+              data-aos="fade-left"
+              data-aos-delay="900"
+              data-aos-offset="0"
             >
               <i className="fa-brands fa-linkedin"></i>
             </a>
@@ -72,8 +76,9 @@ function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              data-aos="fade-up"
-              data-aos-delay="1200"
+              data-aos="fade-left"
+              data-aos-delay="850"
+              data-aos-offset="0"
             >
               <i className="fa-brands fa-github"></i>
             </a>
@@ -85,13 +90,14 @@ function Header() {
               href="https://wa.me/6285882494679"
               target="_blank"
               rel="noopener noreferrer"
-              data-aos="fade-right"
-              data-aos-delay="1300"
+              data-aos="fade-up"
+              data-aos-delay="900"
+              data-aos-offset="0"
             >
               <button>Hire Me</button>
             </a>
 
-            <a href="#contact" data-aos="fade-right" data-aos-delay="1400">
+            <a href="#contact" data-aos="fade-up" data-aos-delay="900" data-aos-offset="0">
               <button>Contact</button>
             </a>
           </div>
@@ -100,8 +106,9 @@ function Header() {
         {/* Hero Image */}
         <div
           className={HeaderCSS.hero_img}
-          data-aos="fade-left"
-          data-aos-delay="800"
+          data-aos="fade-down"
+          data-aos-delay="400"
+          data-aos-offset="0"
         >
           <img
             src={HeroImg}

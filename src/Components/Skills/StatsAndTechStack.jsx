@@ -50,22 +50,20 @@ function StatsAndTechStack() {
   ];
 
   const techStack = [
-    { name: "HTML5", color: "#E34F26", level: 5 },
-    { name: "CSS3", color: "#1572B6", level: 5 },
+    { name: "HTML", color: "#E34F26", level: 5 },
+    { name: "CSS", color: "#1572B6", level: 5 },
     { name: "JavaScript", color: "#F7DF1E", level: 4 },
     { name: "React.js", color: "#61DAFB", level: 4 },
-    { name: "TypeScript", color: "#3178C6", level: 3 },
     { name: "Node.js", color: "#339933", level: 4 },
-    { name: "Python", color: "#3776AB", level: 3 },
+    { name: "Python", color: "#3776AB", level: 4 },
     { name: "Tailwind CSS", color: "#06B6D4", level: 4 },
     { name: "Material UI", color: "#007FFF", level: 4 },
     { name: "Vite", color: "#646CFF", level: 4 },
     { name: "Git", color: "#F05032", level: 4 },
-    { name: "GitHub", color: "#181717", level: 4 },
-    { name: "Vercel", color: "#000000", level: 4 },
+    { name: "GitHub", color: "#181717", level: 5 },
+    { name: "Vercel", color: "#000000", level: 5 },
     { name: "Firebase", color: "#FFCA28", level: 3 },
-    { name: "MongoDB", color: "#47A248", level: 3 },
-    { name: "Figma", color: "#F24E1E", level: 4 },
+    { name: "MongoDB", color: "#47A248", level: 2 },
   ];
 
   const techGroup1 = techStack.slice(0, 9);
@@ -75,9 +73,9 @@ function StatsAndTechStack() {
     <div className="fullscreen-container">
       <div className="enhanced-wrapper">
         {/* Section Header */}
-        <section className="section-header" data-aos="fade-down">
-          <h1 className="section-title">My Journey In Numbers</h1>
-          <p className="section-subtitle">
+        <section className="section-header">
+          <h1 className="section-title" data-aos="fade-down" data-aos-delay="200">My Journey In Numbers</h1>
+          <p className="section-subtitle" data-aos="fade-down" data-aos-delay="250">
             Passionate developer with growing expertise in modern web
             technologies.
           </p>
@@ -99,9 +97,9 @@ function StatsAndTechStack() {
         </section>
 
         {/* Technical Skills Title */}
-        <section className="technical-skill-section" data-aos="fade-up">
-          <h3 className="technical-skill-title">Technical Skills</h3>
-          <p className="tech-subtitle">Technologies I work with</p>
+        <section className="technical-skill-section">
+          <h3 className="technical-skill-title" data-aos="fade-down" data-aos-delay="300">Technical Skills</h3>
+          <p className="tech-subtitle" data-aos="fade-down" data-aos-delay="350">Technologies I work with</p>
         </section>
 
         {/* Tech Slider */}

@@ -14,22 +14,20 @@ function About() {
       <div className={AboutCSS.about}>
         <div
           className={AboutCSS.about_img}
-          data-aos="fade-right"
+          data-aos="fade-down"
           data-aos-delay="200"
         >
-          <img src={About_img} alt="Natravell Sitra - Front End Developer" />
+          <img src={About_img}  alt="Natravell Sitra - Front End Developer" />
         </div>
 
         <div
           className={AboutCSS.about_info}
-          data-aos="fade-left"
-          data-aos-delay="400"
         >
-          <h2>Natravell Sitra</h2>
-          <h3>
+          <h2 data-aos="fade-down" data-aos-delay="250">Natravell Sitra</h2>
+          <h3 data-aos="fade-down" data-aos-delay="300">
             Hi, I am <span>Front-End Web</span> Developer
           </h3>
-          <p>
+          <p data-aos="fade-up" data-aos-delay="350">
             Saya adalah Natravell Sitra, seorang siswa yang menekuni bidang
             Teknik Komputer dan Jaringan dengan fokus pada pengembangan
             Front-End dan Design Web. Saya memiliki tekad yang kuat untuk terus
@@ -39,11 +37,12 @@ function About() {
             Design Web.
           </p>
           <a
+            data-aos="fade-up" data-aos-delay="400"
             href="/Natravell_Sitra_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button>Download CV</button>
+            <button data-aos="fade-up" data-aos-delay="450">Download CV</button>
           </a>
         </div>
       </div>

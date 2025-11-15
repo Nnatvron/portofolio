@@ -6,12 +6,31 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Natravell Sitra Portofolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Font Awesome (Fix: pakai versi stabil + integrity + no-referrer) -->
+<link 
+  rel="stylesheet" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE0xJmqDHWPGmk7VYwRA3v1U5IMk6FfYkF00YB0+H3Vit8fDw==" 
+  crossorigin="anonymous" 
+  referrerpolicy="no-referrer"
+/>
+
+
+    <!-- AOS CSS (sebenarnya tidak perlu kalau kamu import di React, tapi boleh tetap ada) -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" 
+    />
   </head>
+
   <body>
     <div id="root"></div>
+
+    <!-- Main React app -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- AOS JS (aman karena AOS.init() kamu panggil di komponen React) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   </body>
 </html>

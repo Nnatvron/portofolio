@@ -35,15 +35,21 @@ function Service() {
       link: "https://ubuntu-natar.vercel.app/",
       delay: 500,
     },
+    {
+      icon: "fa-solid fa-graduation-cap",
+      title: "UBSI ONE+",
+      desc: "UBSI One+ adalah platform layanan akademik terpusat yang saya kembangkan untuk membantu mahasiswa mengakses informasi kampus dengan lebih cepat dan efisien. Website ini menyatukan berbagai fitur penting dalam satu tempat sehingga pengalaman pengguna lebih mudah dan nyaman.",
+      link: "https://ubsioneplus.vercel.app//",
+      delay: 500,
+    },
   ];
 
   return (
     <section id="service" className={ServiceCSS.service}>
-      <h2 data-aos="fade-right" data-aos-delay="100">
+      <h2 data-aos="fade-down" data-aos-delay="200">
         My Projects
       </h2>
       <p data-aos="fade-right" data-aos-delay="300">
-        Koleksi proyek web yang saya buat dengan teknologi modern
       </p>
 
       <div className={ServiceCSS.service_cards}>
@@ -52,7 +58,7 @@ function Service() {
             key={index}
             className={ServiceCSS.Service_card}
             data-aos="fade-up"
-            data-aos-delay={service.delay}
+            data-aos-delay="350"
           >
             <i className={service.icon} id={ServiceCSS.icon}></i>
             <h3>{service.title}</h3>

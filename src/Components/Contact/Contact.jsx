@@ -67,7 +67,7 @@ function Contact() {
     <section id="contact" className={ContactCSS.contact}>
       {/* Container tengah */}
       <div className={ContactCSS.contact_container}>
-        <h2 data-aos="fade-up" data-aos-duration="1000">
+        <h2 data-aos="fade-down" data-aos-duration="1000">
           Contact Me
         </h2>
 
@@ -76,7 +76,7 @@ function Contact() {
           <div
             className={ContactCSS.errorMessage}
             data-aos="fade-down"
-            data-aos-duration="600"
+            data-aos-duration="1500"
           >
             {error}
           </div>
@@ -85,7 +85,7 @@ function Contact() {
           <div
             className={ContactCSS.successMessage}
             data-aos="fade-down"
-            data-aos-duration="600"
+            data-aos-duration="2000"
           >
             {success}
           </div>
@@ -96,7 +96,7 @@ function Contact() {
           onSubmit={handleSubmit}
           className={isLoading ? ContactCSS.loading : ""}
           data-aos="fade-up"
-          data-aos-duration="1200"
+          data-aos-duration="2500"
         >
           <label htmlFor="name">
             <User size={16} /> Name:
