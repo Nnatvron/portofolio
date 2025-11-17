@@ -27,8 +27,9 @@ function Nav() {
         className={`${NavCSS.nav} ${isNavOpen ? NavCSS.navOpen : ""}`}
       >
         <a href="#home" onClick={closeNav}>Home</a>
+        <a href="#skills" onClick={closeNav}>Skills</a>
         <a href="#about" onClick={closeNav}>About</a>
-        <a href="#project" onClick={closeNav}>Project</a>
+        <a href="#service" onClick={closeNav}>Project</a>
         <a href="#contact" onClick={closeNav}>Contact</a>
       </nav>
 

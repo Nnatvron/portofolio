@@ -11,6 +11,9 @@
   --transition-speed: 0.4s;
   --border-radius: 10px;
   --font-family: "Poppins", sans-serif;
+
+  --nav-shift: -150px;        /* Geser menu navbar (positif = kanan, negatif = kiri) */
+  --burger-shift: -60px;     /* Geser hamburger (positif = kanan, negatif = kiri) */
 }
 
 /* Prevent overflow and maintain smooth look */
@@ -70,6 +73,7 @@ body {
   align-items: center;
   list-style: none;
   transition: all var(--transition-speed) ease;
+  transform: translateX(var(--nav-shift)); /* SHIFT MENU */
 }
 
 .nav a {
@@ -78,7 +82,7 @@ body {
   font-size: 16px;
   font-weight: 500;
   position: relative;
-  padding: 8px 18px;
+  padding: 10px 30px;
   border-radius: var(--border-radius);
   transition: all var(--transition-speed) ease;
   border: 1px solid transparent;
@@ -106,12 +110,14 @@ body {
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: all var(--transition-speed) ease;
+
+  transform: translateX(var(--burger-shift)); /* SHIFT BURGER */
 }
 
 .bars:hover {
   background: var(--main-color);
   box-shadow: 0 0 15px rgba(255, 49, 49, 0.5);
-  transform: translateY(-2px);
+  transform: translateX(var(--burger-shift)) translateY(-2px);
 }
 
 .bars span {
@@ -134,12 +140,20 @@ body {
   transform: rotate(-45deg) translate(5px, -6px);
 }
 
-/* ===============================
-   RESPONSIVE DESIGN
-================================= */
+/* Responsive */
+@media (max-width: 992px) {
+  .header {
+  --nav-shift: -150px;        /* Geser menu navbar (positif = kanan, negatif = kiri) */
+  --burger-shift: -60px; 
+  }
+}
+
 @media (max-width: 900px) {
   .header {
     padding: 14px 5%;
+    
+  --nav-shift: -0px;        /* Geser menu navbar (positif = kanan, negatif = kiri) */
+  --burger-shift: -30px;     /* Geser hamburger (positif = kanan, negatif = kiri) */
   }
 
   .bars {
@@ -148,20 +162,18 @@ body {
 
   .nav {
     position: fixed;
-    top: 70px;
+    top: 60px;
     left: 0;
     width: 100%;
     flex-direction: column;
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
     border-top: 1px solid var(--border-color);
     padding: 0;
     height: 0;
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
-    transition: all var(--transition-speed) ease;
   }
 
   .nav.navOpen {
@@ -174,19 +186,10 @@ body {
   .nav a {
     width: 80%;
     text-align: center;
-    padding: 14px 0;
+    padding: 14px 10;
     border: 1px solid rgba(255, 49, 49, 0.25);
-    border-radius: 8px;
     background: rgba(255, 255, 255, 0.05);
-    margin: 6px 0;
-    font-size: 17px;
-    transition: all 0.3s ease;
-  }
-
-  .nav a:hover {
-    background: var(--main-color);
-    color: #fff;
-    transform: translateY(-2px);
+    margin: 3px 0;
   }
 }
 
@@ -214,9 +217,7 @@ body {
   }
 }
 
-/* ===============================
-   ANIMATIONS
-================================= */
+/* Animation */
 @keyframes slideDown {
   from {
     transform: translateY(-100%);

@@ -70,7 +70,7 @@ function StatsAndTechStack() {
   const techGroup2 = techStack.slice(9, 16);
 
   return (
-    <div className="fullscreen-container">
+    <div className="fullscreen-container" id="skills">
       <div className="enhanced-wrapper">
         {/* Section Header */}
         <section className="section-header">
