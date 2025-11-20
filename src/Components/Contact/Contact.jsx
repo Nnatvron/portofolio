@@ -46,10 +46,6 @@ function Contact() {
     }
   }, [pinnedMessage]);
 
-  // auto scroll
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chatMessages]);
 
   useEffect(() => {
     if (success) {
