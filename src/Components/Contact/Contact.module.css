@@ -13,7 +13,6 @@
   align-items: center;
   box-sizing: border-box;
 
-  /* 🔥 Background Hitam + Merah Pekat (Glow di bawah) */
   background:
     radial-gradient(ellipse 120% 70% at 50% 50%, rgba(200, 20, 20, 0.32), transparent 55%),
     radial-gradient(ellipse 140% 50% at 30% 85%, rgba(180, 0, 0, 0.25), transparent 60%),
@@ -24,6 +23,17 @@
   background-position: center;
   position: relative;
   overflow: hidden;
+}
+
+.chat_left {
+  align-self: flex-start;
+  background: #eaeaea;
+}
+
+.chat_right {
+  align-self: flex-end;
+  background: #4a8bff;
+  color: white;
 }
 
 /* ===============================
@@ -50,7 +60,7 @@
   color: var(--main-color);
   border-bottom: 3px solid var(--main-color);
   padding-bottom: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   letter-spacing: 1px;
   text-align: center;
   text-shadow: 0 0 10px rgba(255, 49, 49, 0.4);
@@ -187,7 +197,7 @@ button:disabled {
 }
 
 /* ===============================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ================================= */
 @media (max-width: 950px) {
   .contact {
@@ -225,5 +235,273 @@ button:disabled {
   button {
     font-size: 13px;
     padding: 10px 18px;
+  }
+}
+
+/* ===============================
+   LIVE CHAT SECTION (HEADING)
+================================= */
+
+.live_chat_section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 100px auto 0 auto;
+  text-align: center;        /* ✨ Biar h2 center */
+}
+
+.live_chat_section h2 {
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--main-color);
+  margin-bottom: 30px;       /* ✨ Jarak judul ke kotak */
+  border-bottom: none;       /* FIX: Biar ga ikut style h2 contact */
+  text-shadow: 0 0 10px rgba(255, 49, 49, 0.4);
+}
+
+.pinned_box {
+  background: #252525;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 4px solid #FF0000;
+}
+
+.pinned_title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.pinned_content {
+  font-size: 0.9rem;
+  color: #d5d5d5;
+}
+
+.unpin_btn {
+  margin-top: 6px;
+  background: transparent;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pin_btn {
+  position: absolute;
+  top: 5px;
+  right: -20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #FF0000;
+}
+
+.pin_btn:hover {
+  color: #fff;
+}
+
+
+/* ===============================
+   LIVE CHAT (FIXED & ALIGNED)
+================================= */
+
+.live_chat_wrapper {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;   /* <<< FIX SEJAJAR KIRI-KANAN */
+  align-items: center;          /* <<< RATA ATAS */
+  gap: 80px;                        /* <<< NORMAL, BUKAN 300PX */
+  margin-top: 60px;
+}
+
+/* Panel Chat */
+.live_chat_panel {
+  width: 100%;
+  max-width: 450px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+/* Header Chat */
+.live_chat_header {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--main-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 8px;
+}
+
+/* Body Chat */
+.live_chat_body {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Bubble User */
+.chat_bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #fff;
+  backdrop-filter: blur(5px);
+  animation: fadeSlide 0.4s ease-out;
+  align-self: flex-end;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+/* Scrollbar */
+.live_chat_body::-webkit-scrollbar {
+  width: 6px;
+}
+.live_chat_body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 950px) {
+  .live_chat_wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .live_chat_panel {
+    width: 100%;
+    max-width: 550px;
+    height: 420px;
+  }
+
+    .form_section form {
+    width: 100%;
+    max-width: 550px; /* sama kek panel chat */
+  }
+
+  .live_chat_panel {
+    width: 100%;
+    max-width: 550px;
+    height: 420px;
+  }
+}
+
+@media (max-width: 600px) {
+  .live_chat_panel {
+    height: 380px;
+  }
+
+    .form_section form {
+    width: 100%;
+    max-width: 100%;
+    padding: 18px 15px;
+    border-radius: 14px; /* sama seperti live_chat_panel */
+  }
+
+  .live_chat_panel {
+    width: 100%;
+    max-width: 100%;
+    height: 72vh;
+    padding: 15px;
+    border-radius: 14px;
+  }
+}
+
+/* ===============================
+   LIVE CHAT – MOBILE RESPONSIVE FIX
+================================= */
+
+@media (max-width: 600px) {
+
+  /* SECTION TITLE */
+  .live_chat_section {
+    margin-top: 60px;
+    padding: 0 6%;
+  }
+
+  .live_chat_section h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  /* WRAPPER */
+  .live_chat_wrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  /* PANEL CHAT */
+  .live_chat_panel {
+    width: 100%;
+    max-width: 100%;
+    height: 72vh;        /* lebih tinggi, nyaman dipake */
+    padding: 15px;
+    border-radius: 14px;
+  }
+
+  /* HEADER */
+  .live_chat_header {
+    font-size: 16px;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+
+  /* BODY */
+  .live_chat_body {
+    padding-right: 2px;
+    gap: 10px;
+  }
+
+  /* CHAT BUBBLE */
+  .chat_bubble {
+    max-width: 90%;
+    padding: 8px 11px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  /* INPUT AREA */
+  .live_chat_input_box {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .live_chat_input_box input {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .live_chat_input_box button {
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    white-space: nowrap;
   }
 }

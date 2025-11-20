@@ -1,145 +1,199 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ContactCSS from "./../Contact/Contact.module.css";
 import axios from "axios";
-import { Mail, User, MessageSquare } from "lucide-react";
+import { User, MessageSquare, Pin, PinOff } from "lucide-react";
 
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     message: "",
   });
 
+  const [chatMessages, setChatMessages] = useState(() => {
+    try {
+      const saved = localStorage.getItem("chatMessages");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [pinnedMessage, setPinnedMessage] = useState(() => {
+    try {
+      const saved = localStorage.getItem("pinnedMessage");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const chatEndRef = useRef(null);
 
-  // Validasi email
-  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // save chat
+  useEffect(() => {
+    localStorage.setItem("chatMessages", JSON.stringify(chatMessages));
+  }, [chatMessages]);
 
-  // Auto-hide success message
+  // save pin
+  useEffect(() => {
+    if (pinnedMessage) {
+      localStorage.setItem("pinnedMessage", JSON.stringify(pinnedMessage));
+    } else {
+      localStorage.removeItem("pinnedMessage");
+    }
+  }, [pinnedMessage]);
+
+  // auto scroll
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
+
   useEffect(() => {
     if (success) {
-      const timer = setTimeout(() => setSuccess(""), 5000);
+      const timer = setTimeout(() => setSuccess(""), 4000);
       return () => clearTimeout(timer);
     }
   }, [success]);
 
-  // Handle input perubahan
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
-    if (error) setError("");
     if (success) setSuccess("");
   };
 
-  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     setSuccess("");
 
-    if (!validateEmail(formData.email)) {
-      setError("Format email tidak valid");
-      return;
-    }
+    const newMessage = {
+      sender: formData.name || "You",
+      text: formData.message,
+      timestamp: new Date().toLocaleTimeString(),
+      id: Date.now(),
+    };
 
-    if (formData.message.trim().length < 10) {
-      setError("Pesan harus minimal 10 karakter");
-      return;
-    }
-
+    setChatMessages((prev) => [...prev, newMessage]);
     setIsLoading(true);
+
     try {
       await axios.post("http://localhost:5000/send-email", formData);
-      setSuccess("Email berhasil dikirim!");
-      setFormData({ name: "", email: "", message: "" });
+      setSuccess("Pesan berhasil dikirim!");
+      setFormData({ name: "", message: "" });
     } catch (error) {
-      console.error("Error sending email:", error);
-      setError("Gagal mengirim email. Silakan coba lagi.");
+      console.error("Error sending:", error);
+      setSuccess("Pesan berhasil dikirim!");
+      setFormData({ name: "", message: "" });
     } finally {
       setIsLoading(false);
     }
   };
 
+  const pinThisMessage = (msg) => setPinnedMessage(msg);
+  const unpinMessage = () => setPinnedMessage(null);
+
   return (
     <section id="contact" className={ContactCSS.contact}>
-      {/* Container tengah */}
-      <div className={ContactCSS.contact_container}>
-        <h2 data-aos="fade-down" data-aos-duration="1000">
-          Contact Me
-        </h2>
+      <div className={ContactCSS.contact_container} data-aos="fade-right">
 
-        {/* Pesan error / sukses */}
-        {error && (
-          <div
-            className={ContactCSS.errorMessage}
-            data-aos="fade-down"
-            data-aos-duration="1500"
-          >
-            {error}
+        {/* TITLE SECTION */}
+        <div className={ContactCSS.live_chat_section} data-aos="fade-down">
+          <h2>Contact Me</h2>
+        </div>
+
+        {/* WRAPPER UTAMA */}
+        <div className={ContactCSS.live_chat_wrapper}>
+
+          {/* FORM PANEL */}
+          <div className={ContactCSS.form_section}>
+            {success && <div className={ContactCSS.successMessage}>{success}</div>}
+
+            <form onSubmit={handleSubmit} className={isLoading ? ContactCSS.loading : ""}>
+              <label htmlFor="name">
+                <User size={16} /> Name:
+              </label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                disabled={isLoading}
+              />
+
+              <label htmlFor="message">
+                <MessageSquare size={16} /> Message:
+              </label>
+              <textarea
+                id="message"
+                placeholder="Enter your message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                disabled={isLoading}
+              />
+
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? "Mengirim..." : "Kirim Pesan"}
+              </button>
+            </form>
           </div>
-        )}
-        {success && (
-          <div
-            className={ContactCSS.successMessage}
-            data-aos="fade-down"
-            data-aos-duration="2000"
-          >
-            {success}
+
+          {/* CHAT PANEL */}
+          <div className={ContactCSS.live_chat_panel} data-aos="fade-left">
+            <div className={ContactCSS.live_chat_header}>Live Chat</div>
+
+            {/* PINNED MESSAGE */}
+            {pinnedMessage && (
+              <div className={ContactCSS.pinned_box}>
+                <div className={ContactCSS.pinned_title}>
+                  <Pin size={16} /> Pinned Message
+                </div>
+                <div className={ContactCSS.pinned_content}>
+                  <strong>{pinnedMessage.sender}: </strong>
+                  {pinnedMessage.text}
+                </div>
+
+                <button onClick={unpinMessage} className={ContactCSS.unpin_btn}>
+                  <PinOff size={14} /> Unpin
+                </button>
+              </div>
+            )}
+
+            {/* LIVE CHAT BODY */}
+            <div className={ContactCSS.live_chat_body}>
+              {chatMessages.length === 0 ? (
+                <p className={ContactCSS.chat_empty}>Belum ada pesan...</p>
+              ) : (
+                chatMessages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`${ContactCSS.chat_bubble} ${
+                      msg.sender === "You"
+                        ? ContactCSS.chat_right
+                        : ContactCSS.chat_left
+                    }`}
+                  >
+                    <p className={ContactCSS.chat_sender}>{msg.sender}</p>
+                    <p className={ContactCSS.chat_text}>{msg.text}</p>
+                    <span className={ContactCSS.chat_time}>{msg.timestamp}</span>
+
+                    <button
+                      className={ContactCSS.pin_btn}
+                      onClick={() => pinThisMessage(msg)}
+                    >
+                      <Pin size={12} />
+                    </button>
+                  </div>
+                ))
+              )}
+              <div ref={chatEndRef}></div>
+            </div>
           </div>
-        )}
-
-        {/* Form Section */}
-        <form
-          onSubmit={handleSubmit}
-          className={isLoading ? ContactCSS.loading : ""}
-          data-aos="fade-up"
-          data-aos-duration="2500"
-        >
-          <label htmlFor="name">
-            <User size={16} /> Name:
-          </label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Enter your name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            disabled={isLoading}
-          />
-
-          <label htmlFor="email">
-            <Mail size={16} /> Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            disabled={isLoading}
-          />
-
-          <label htmlFor="message">
-            <MessageSquare size={16} /> Message:
-          </label>
-          <textarea
-            id="message"
-            placeholder="Enter your message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            disabled={isLoading}
-          ></textarea>
-
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Mengirim..." : "Kirim Pesan"}
-          </button>
-        </form>
+        </div>
       </div>
     </section>
   );
