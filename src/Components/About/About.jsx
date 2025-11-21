@@ -30,15 +30,15 @@ function About() {
           <p data-aos="fade-up" data-aos-delay="350">
             Saya adalah Natravell Sitra, seorang siswa yang menekuni bidang
             Teknik Komputer dan Jaringan dengan fokus pada pengembangan
-            Front-End dan Design Web. Saya memiliki tekad yang kuat untuk terus
+            Front-End dan Dunia IT. Saya memiliki tekad yang kuat untuk terus
             belajar dan mengasah keterampilan saya demi mencapai kesempurnaan.
             Selalu berusaha untuk menemukan solusi terbaik dalam setiap proyek
             yang saya kerjakan dan memiliki minat besar di bidang Front-End dan
-            Design Web.
+            Dunia IT.
           </p>
           <a
             data-aos="fade-up" data-aos-delay="400"
-            href="/Natravell_Sitra_CV.pdf"
+            href="https://drive.google.com/file/d/1h4gvGk4K1DUWssGxt0JMGxii0ZVNd73x/view?usp=drive_link"
             target="_blank"
             rel="noopener noreferrer"
           >

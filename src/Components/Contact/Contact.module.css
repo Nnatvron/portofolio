@@ -258,54 +258,6 @@ button:disabled {
   text-shadow: 0 0 10px rgba(255, 49, 49, 0.4);
 }
 
-.pinned_box {
-  background: #252525;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  border-left: 4px solid #FF0000;
-}
-
-.pinned_title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.pinned_content {
-  font-size: 0.9rem;
-  color: #d5d5d5;
-}
-
-.unpin_btn {
-  margin-top: 6px;
-  background: transparent;
-  border: none;
-  color: #ff6b6b;
-  cursor: pointer;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.pin_btn {
-  position: absolute;
-  top: 5px;
-  right: -20px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #FF0000;
-}
-
-.pin_btn:hover {
-  color: #fff;
-}
-
-
 /* ===============================
    LIVE CHAT (FIXED & ALIGNED)
 ================================= */
@@ -378,6 +330,47 @@ button:disabled {
 .live_chat_body::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 10px;
+}
+
+.stickyPinned {
+  background: rgba(255, 214, 98, 0.2);
+  border-left: 4px solid #fbbf24;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  backdrop-filter: blur(3px);
+}
+
+.stickyPinnedFixed {
+  background: #020101; 
+  padding: 10px;
+  font-size: 14px;
+  border-left: 4px solid #FF0000  ;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  position: sticky;
+  top: 38px; /* tepat di bawah header */
+  z-index: 9;
+}
+
+.stickyPinnedContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+}
+
+.pinIcon {
+  color: #f59e0b;
 }
 
 /* RESPONSIVE */

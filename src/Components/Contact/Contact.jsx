@@ -3,6 +3,16 @@ import React, { useState, useEffect, useRef } from "react";
 import ContactCSS from "./../Contact/Contact.module.css";
 import axios from "axios";
 import { User, MessageSquare, Pin, PinOff } from "lucide-react";
+import { db } from "/src/firebaseConfig.js";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -10,42 +20,33 @@ function Contact() {
     message: "",
   });
 
-  const [chatMessages, setChatMessages] = useState(() => {
-    try {
-      const saved = localStorage.getItem("chatMessages");
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  const [pinnedMessage, setPinnedMessage] = useState(() => {
-    try {
-      const saved = localStorage.getItem("pinnedMessage");
-      return saved ? JSON.parse(saved) : null;
-    } catch {
-      return null;
-    }
-  });
-
+  const [chatMessages, setChatMessages] = useState([]);
+  const [pinnedMessage, setPinnedMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const chatEndRef = useRef(null);
 
-  // save chat
+  // ======== LOAD MESSAGE REALTIME ========
   useEffect(() => {
-    localStorage.setItem("chatMessages", JSON.stringify(chatMessages));
-  }, [chatMessages]);
+    const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
 
-  // save pin
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setChatMessages(
+        snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      );
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // ======== LOAD PINNED MESSAGE REALTIME ========
   useEffect(() => {
-    if (pinnedMessage) {
-      localStorage.setItem("pinnedMessage", JSON.stringify(pinnedMessage));
-    } else {
-      localStorage.removeItem("pinnedMessage");
-    }
-  }, [pinnedMessage]);
+    const pinnedRef = doc(db, "system", "pinned");
 
+    onSnapshot(pinnedRef, (snap) => {
+      setPinnedMessage(snap.exists() ? snap.data() : null);
+    });
+  }, []);
 
   useEffect(() => {
     if (success) {
@@ -63,46 +64,48 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess("");
-
-    const newMessage = {
-      sender: formData.name || "You",
-      text: formData.message,
-      timestamp: new Date().toLocaleTimeString(),
-      id: Date.now(),
-    };
-
-    setChatMessages((prev) => [...prev, newMessage]);
     setIsLoading(true);
 
+    const newMessage = {
+      sender: formData.name || "Guest",
+      text: formData.message,
+      timestamp: Date.now(),
+    };
+
     try {
+      await addDoc(collection(db, "messages"), newMessage);
+
+      // kirim email tetap berjalan
       await axios.post("http://localhost:5000/send-email", formData);
+
       setSuccess("Pesan berhasil dikirim!");
       setFormData({ name: "", message: "" });
     } catch (error) {
-      console.error("Error sending:", error);
-      setSuccess("Pesan berhasil dikirim!");
-      setFormData({ name: "", message: "" });
+      console.error("Error:", error);
+      setSuccess("Pesan terkirim (tanpa email)");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const pinThisMessage = (msg) => setPinnedMessage(msg);
-  const unpinMessage = () => setPinnedMessage(null);
+
+
+  const unpinMessage = async () => {
+    await setDoc(doc(db, "system", "pinned"), {});
+    setPinnedMessage(null);
+  };
 
   return (
     <section id="contact" className={ContactCSS.contact}>
       <div className={ContactCSS.contact_container} data-aos="fade-right">
 
-        {/* TITLE SECTION */}
         <div className={ContactCSS.live_chat_section} data-aos="fade-down">
           <h2>Contact Me</h2>
         </div>
 
-        {/* WRAPPER UTAMA */}
         <div className={ContactCSS.live_chat_wrapper}>
 
-          {/* FORM PANEL */}
+          {/* FORM */}
           <div className={ContactCSS.form_section}>
             {success && <div className={ContactCSS.successMessage}>{success}</div>}
 
@@ -138,57 +141,56 @@ function Contact() {
             </form>
           </div>
 
-          {/* CHAT PANEL */}
-          <div className={ContactCSS.live_chat_panel} data-aos="fade-left">
-            <div className={ContactCSS.live_chat_header}>Live Chat</div>
+{/* CHAT */}
+<div className={ContactCSS.live_chat_panel} data-aos="fade-left">
+  <div className={ContactCSS.live_chat_header}>Live Chat</div>
 
-            {/* PINNED MESSAGE */}
-            {pinnedMessage && (
-              <div className={ContactCSS.pinned_box}>
-                <div className={ContactCSS.pinned_title}>
-                  <Pin size={16} /> Pinned Message
-                </div>
-                <div className={ContactCSS.pinned_content}>
-                  <strong>{pinnedMessage.sender}: </strong>
-                  {pinnedMessage.text}
-                </div>
+  {/* ===== STATIC PINNED MESSAGE (TIDAK BISA DI UNPIN) ===== */}
+  <div className={ContactCSS.stickyPinnedFixed}>
+    <div className={ContactCSS.stickyPinnedContent}>
+      <Pin size={14} className={ContactCSS.pinIcon} />
+      <strong>Natravell Sitra:</strong> Selamat datang!👋 Thanks yang udah mampir!!
+    </div>
+  </div>
 
-                <button onClick={unpinMessage} className={ContactCSS.unpin_btn}>
-                  <PinOff size={14} /> Unpin
-                </button>
-              </div>
-            )}
+  {/* ===== FIREBASE PINNED MESSAGE (BISA DI PIN/UNPIN) ===== */}
+  {pinnedMessage && pinnedMessage.text && (
+    <div className={ContactCSS.stickyPinned}>
+      <div className={ContactCSS.stickyPinnedContent}>
+        <Pin size={14} className={ContactCSS.pinIcon} />
+        <strong>{pinnedMessage.sender}: </strong> {pinnedMessage.text}
+      </div>
+      <button onClick={unpinMessage} className={ContactCSS.unpinTiny}>
+        <PinOff size={14} />
+      </button>
+    </div>
+  )}
 
-            {/* LIVE CHAT BODY */}
-            <div className={ContactCSS.live_chat_body}>
-              {chatMessages.length === 0 ? (
-                <p className={ContactCSS.chat_empty}>Belum ada pesan...</p>
-              ) : (
-                chatMessages.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`${ContactCSS.chat_bubble} ${
-                      msg.sender === "You"
-                        ? ContactCSS.chat_right
-                        : ContactCSS.chat_left
-                    }`}
-                  >
-                    <p className={ContactCSS.chat_sender}>{msg.sender}</p>
-                    <p className={ContactCSS.chat_text}>{msg.text}</p>
-                    <span className={ContactCSS.chat_time}>{msg.timestamp}</span>
+  {/* ===== CHAT LIST ===== */}
+  <div className={ContactCSS.live_chat_body}>
+    {chatMessages.length === 0 ? (
+      <p className={ContactCSS.chat_empty}>Belum ada pesan...</p>
+    ) : (
+      chatMessages.map((msg) => (
+        <div
+          key={msg.id}
+          className={`${ContactCSS.chat_bubble} ${
+            msg.sender === formData.name ? ContactCSS.chat_right : ContactCSS.chat_left
+          }`}
+        >
+          <p className={ContactCSS.chat_sender}>{msg.sender}</p>
+          <p className={ContactCSS.chat_text}>{msg.text}</p>
+          <span className={ContactCSS.chat_time}>
+            {new Date(msg.timestamp).toLocaleTimeString()}
+          </span>
 
-                    <button
-                      className={ContactCSS.pin_btn}
-                      onClick={() => pinThisMessage(msg)}
-                    >
-                      <Pin size={12} />
-                    </button>
-                  </div>
-                ))
-              )}
-              <div ref={chatEndRef}></div>
-            </div>
-          </div>
+
+        </div>
+      ))
+    )}
+    <div ref={chatEndRef}></div>
+  </div>
+</div>
         </div>
       </div>
     </section>
