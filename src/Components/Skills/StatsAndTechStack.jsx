@@ -4,6 +4,10 @@ import "./../Skills/StatsAndTechStack.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// IMPORT FIX — pastikan path ini benar
+import LogoLoop from "../LogoLoop/LogoLoop";
+
+// ================= STAT CARD =====================
 const StatCard = ({ number, label, icon, delay }) => (
   <div
     className="stat-card"
@@ -17,67 +21,46 @@ const StatCard = ({ number, label, icon, delay }) => (
   </div>
 );
 
-const TechBadge = ({ name, color, level, delay }) => (
-  <div
-    className="tech-badge"
-    style={{
-      backgroundColor: "rgba(255,255,255,0.05)",
-      borderColor: color,
-      animationDelay: `${delay}s`,
-    }}
-    data-aos="fade-up"
-    data-aos-delay={delay * 1000}
-  >
-    <div className="tech-name">{name}</div>
-    <div className="tech-level">
-      {[...Array(5)].map((_, i) => (
-        <div key={i} className={`level-bar ${i < level ? "filled" : ""}`} />
-      ))}
-    </div>
-  </div>
-);
-
+// ================= MAIN COMPONENT =================
 function StatsAndTechStack() {
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
   }, []);
 
   const stats = [
-    { number: "12+", label: "CERTIFICATES", icon: "🏆" },
-    { number: "4+", label: "PROJECTS", icon: "💼" },
-    { number: "1+", label: "YEARS EXP", icon: "⚡" },
-    { number: "1+", label: "CLIENTS", icon: "👥" },
+    { number: "13+", label: "CERTIFICATES", icon: "🏆" },
+    { number: "5+", label: "PROJECTS", icon: "💼" },
+    { number: "2+", label: "YEARS EXP", icon: "⚡" },
+    { number: "2+", label: "CLIENTS", icon: "👥" },
   ];
 
-  const techStack = [
-    { name: "HTML", color: "#E34F26", level: 5 },
-    { name: "CSS", color: "#1572B6", level: 5 },
-    { name: "JavaScript", color: "#F7DF1E", level: 4 },
-    { name: "React.js", color: "#61DAFB", level: 4 },
-    { name: "Node.js", color: "#339933", level: 4 },
-    { name: "Python", color: "#3776AB", level: 4 },
-    { name: "Tailwind CSS", color: "#06B6D4", level: 4 },
-    { name: "Material UI", color: "#007FFF", level: 4 },
-    { name: "Vite", color: "#646CFF", level: 4 },
-    { name: "Git", color: "#F05032", level: 4 },
-    { name: "GitHub", color: "#181717", level: 5 },
-    { name: "Vercel", color: "#000000", level: 5 },
-    { name: "Firebase", color: "#FFCA28", level: 3 },
-    { name: "MongoDB", color: "#47A248", level: 2 },
+  // ================= TECH LOGOS ====================
+  const techLogos = [
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", alt: "HTML" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", alt: "CSS" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", alt: "JavaScript" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", alt: "React" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", alt: "Tailwind" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", alt: "Node.js" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", alt: "GitHub" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", alt: "Vercel" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", alt: "Firebase" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg", alt: "Vite" },
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", alt: "VS Code" },
+    {src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",alt: "Vercel"},
   ];
-
-  const techGroup1 = techStack.slice(0, 9);
-  const techGroup2 = techStack.slice(9, 16);
 
   return (
     <div className="fullscreen-container" id="skills">
       <div className="enhanced-wrapper">
+        
         {/* Section Header */}
         <section className="section-header">
-          <h1 className="section-title" data-aos="fade-down" data-aos-delay="200">My Journey In Numbers</h1>
+          <h1 className="section-title" data-aos="fade-down" data-aos-delay="200">
+            My Journey In Numbers
+          </h1>
           <p className="section-subtitle" data-aos="fade-down" data-aos-delay="250">
-            Passionate developer with growing expertise in modern web
-            technologies.
+            Passionate developer with growing expertise in modern web technologies.
           </p>
         </section>
 
@@ -98,29 +81,24 @@ function StatsAndTechStack() {
 
         {/* Technical Skills Title */}
         <section className="technical-skill-section">
-          <h3 className="technical-skill-title" data-aos="fade-down" data-aos-delay="300">Technical Skills</h3>
-          <p className="tech-subtitle" data-aos="fade-down" data-aos-delay="350">Technologies I work with</p>
+          <h3 className="technical-skill-title" data-aos="fade-down" data-aos-delay="300">
+            My Tech Stack
+          </h3>
+          <p className="tech-subtitle" data-aos="fade-down" data-aos-delay="350">
+            Tools & technologies I use
+          </p>
         </section>
 
-        {/* Tech Slider */}
+        {/* TECH LOGO LOOP */}
         <section className="tech-section">
-          <div className="tech-slider-container">
-            <div className="tech-slider">
-              {[techGroup1, techGroup2, techGroup1].map((group, idx) => (
-                <div key={idx} className="tech-slide">
-                  <div className="tech-grid">
-                    {group.map((tech, index) => (
-                      <TechBadge
-                        key={tech.name + index}
-                        {...tech}
-                        delay={index * 0.1}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <LogoLoop
+            logos={techLogos}
+            speed={25}
+            height={40}
+            gap={45}
+            pauseOnHover={true}
+            className="tech-logo-loop"
+          />
         </section>
 
         {/* Floating Background Elements */}

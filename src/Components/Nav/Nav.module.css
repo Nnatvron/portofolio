@@ -1,230 +1,159 @@
-/* ===============================
-   NAVIGATION BAR (Modern Glass Style)
-================================= */
 :root {
-  --main-color: #ff3131;
-  --text-color: #fff;
-  --bg-blur: rgba(255, 255, 255, 0.08);
-  --border-color: rgba(255, 255, 255, 0.15);
-  --shadow-light: rgba(255, 255, 255, 0.1);
-  --shadow-dark: rgba(0, 0, 0, 0.4);
-  --transition-speed: 0.4s;
-  --border-radius: 10px;
-  --font-family: "Poppins", sans-serif;
-
-  --nav-shift: -150px;        /* Geser menu navbar (positif = kanan, negatif = kiri) */
-  --burger-shift: -60px;     /* Geser hamburger (positif = kanan, negatif = kiri) */
+  --pill-bg: rgba(0,0,0,0.6);
+  --pill-text: #fff;
+  --pill-hover-bg: #ff3131;
+  --pill-hover-text: #fff;
+  --pill-radius: 50px;
+  --transition-speed: 0.3s;
+  --pill-glow: rgba(255, 49, 49, 0.6);
 }
 
-/* Prevent overflow and maintain smooth look */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  font-family: var(--font-family);
-  scroll-behavior: smooth;
-}
-
-/* Header wrapper (sticky navbar) */
+/* ================= Header sticky + slide down ================= */
 .header {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 8%;
   position: fixed;
-  z-index: 999;
   top: 0;
   left: 0;
-  background: rgba(10, 10, 10, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: all var(--transition-speed) ease;
-  animation: slideDown 0.6s ease-out;
-}
-
-/* Scroll shadow effect */
-.header.scrolled {
-  background: rgba(10, 10, 10, 0.85);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-}
-
-/* Logo */
-.logo h2 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: -0.5px;
-  text-shadow: 0 0 10px rgba(255, 49, 49, 0.5);
-}
-
-.logo span {
-  color: var(--main-color);
-}
-
-/* Navigation menu */
-.nav {
   display: flex;
-  gap: 25px;
+  justify-content: center;
+  z-index: 999;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 1.2s ease, opacity 1.2s ease;
+}
+
+.header.slideDown {
+  transform: translateY(20px); /* sedikit offset dari top */
+  opacity: 1;
+}
+
+/* ================= Pill nav container ================= */
+.pillNav {
+  display: flex;
+  gap: 15px;
+  background: var(--pill-bg);
+  padding: 24px 30px;
+  border-radius: var(--pill-radius);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: all var(--transition-speed) ease;
   align-items: center;
-  list-style: none;
-  transition: all var(--transition-speed) ease;
-  transform: translateX(var(--nav-shift)); /* SHIFT MENU */
 }
 
-.nav a {
-  color: var(--text-color);
+/* Title left of Home */
+.navTitle {
+  color: var(--pill-text);
+  font-weight: 600;
+  margin-right: 8px;
+  text-shadow: 0 0 8px var(--pill-glow);
+  font-size: 18px;
+}
+
+/* ================= Pill link ================= */
+.pill {
+  color: var(--pill-text);
   text-decoration: none;
-  font-size: 16px;
+  padding: 8px 20px;
+  border-radius: var(--pill-radius);
   font-weight: 500;
-  position: relative;
-  padding: 10px 30px;
-  border-radius: var(--border-radius);
   transition: all var(--transition-speed) ease;
-  border: 1px solid transparent;
+  position: relative;
 }
 
-.nav a:hover {
-  color: #fff;
-  background: var(--main-color);
-  border-color: var(--main-color);
-  box-shadow: 0 0 15px rgba(255, 49, 49, 0.5);
-  transform: translateY(-3px);
+.pill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: var(--pill-glow);
+  border-radius: var(--pill-radius);
+  opacity: 0.2;
+  transition: width 0.3s ease;
+  z-index: -1;
 }
 
-/* Hamburger button */
+.pill:hover::after,
+.active::after {
+  width: 100%;
+}
+
+.pill:hover,
+.active {
+  background: var(--pill-hover-bg);
+  color: var(--pill-hover-text);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--pill-glow);
+}
+
+/* ================= Hamburger for mobile ================= */
 .bars {
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 49, 49, 0.1);
-  border: 1px solid rgba(255, 49, 49, 0.25);
-  border-radius: var(--border-radius);
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  margin-left: 10px;
   cursor: pointer;
-  transition: all var(--transition-speed) ease;
-
-  transform: translateX(var(--burger-shift)); /* SHIFT BURGER */
-}
-
-.bars:hover {
-  background: var(--main-color);
-  box-shadow: 0 0 15px rgba(255, 49, 49, 0.5);
-  transform: translateX(var(--burger-shift)) translateY(-2px);
 }
 
 .bars span {
   width: 22px;
-  height: 2.5px;
+  height: 3px;
+  background: var(--pill-text);
   border-radius: 2px;
-  background-color: #fff;
   transition: all var(--transition-speed) ease;
 }
 
-/* Animation when menu active */
 .bars.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 6px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 .bars.active span:nth-child(2) {
   opacity: 0;
-  transform: scale(0);
 }
 .bars.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -6px);
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-  .header {
-  --nav-shift: -150px;        /* Geser menu navbar (positif = kanan, negatif = kiri) */
-  --burger-shift: -60px; 
-  }
+/* ================= Mobile menu ================= */
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
 }
 
+/* ================= Responsive ================= */
+/* Tablet (max-width: 900px) */
 @media (max-width: 900px) {
-  .header {
-    padding: 14px 5%;
-    
-  --nav-shift: -0px;        /* Geser menu navbar (positif = kanan, negatif = kiri) */
-  --burger-shift: -30px;     /* Geser hamburger (positif = kanan, negatif = kiri) */
+  .pillNav {
+    gap: 12px;
+    padding: 14px 20px;
   }
-
-  .bars {
-    display: flex;
+  .pill {
+    padding: 6px 16px;
+    font-size: 14px;
   }
-
-  .nav {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    flex-direction: column;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(25px);
-    border-top: 1px solid var(--border-color);
-    padding: 0;
-    height: 0;
-    opacity: 0;
-    visibility: hidden;
-    overflow: hidden;
-  }
-
-  .nav.navOpen {
-    height: auto;
-    padding: 25px 0;
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .nav a {
-    width: 80%;
-    text-align: center;
-    padding: 14px 10;
-    border: 1px solid rgba(255, 49, 49, 0.25);
-    background: rgba(255, 255, 255, 0.05);
-    margin: 3px 0;
+  .navTitle {
+    font-size: 14px;
   }
 }
 
-@media (max-width: 480px) {
-  .header {
-    padding: 12px 4%;
+/* Small mobile <426px */
+@media (max-width: 425px) {
+  .pillNav {
+    gap: 8px;
+    padding: 8px 14px;
   }
-
-  .logo h2 {
-    font-size: 22px;
+  .pill {
+    padding: 6px 14px;
+    font-size: 12px;
   }
-
-  .bars {
-    width: 36px;
-    height: 36px;
-  }
-
-  .bars span {
-    width: 20px;
-  }
-
-  .nav a {
-    font-size: 16px;
-    padding: 12px 0;
-  }
-}
-
-/* Animation */
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+  .navTitle {
+    display: none; /* hide title di mobile kecil */
   }
 }

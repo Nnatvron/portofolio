@@ -1,52 +1,114 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
-import NavCSS from "./../Nav/Nav.module.css";
+import React, { useState, useEffect } from "react";
+import styles from "./Nav.module.css";
 
-function Nav() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+export default function Nav() {
+  const [active, setActive] = useState("#home");
+  const [isOpen, setIsOpen] = useState(false);
+  const [visible, setVisible] = useState(false); // untuk animasi masuk
 
-  const toggleNav = () => {
-    setIsNavOpen((prevState) => !prevState);
-  };
+  const navItems = [
+    { label: "Home", href: "#home" },
+    { label: "Skills", href: "#skills" },
+    { label: "About", href: "#about" },
+    { label: "Project", href: "#service" },
+    { label: "Contact", href: "#contact" },
+  ];
 
-  const closeNav = () => {
-    setIsNavOpen(false);
+  useEffect(() => {
+    // tampilkan navbar dengan animasi
+    setVisible(true);
+
+    // selalu mulai dari top/home saat refresh
+    window.scrollTo(0, 0);
+    setActive("#home");
+
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 100;
+      for (const item of navItems) {
+        const section = document.querySelector(item.href);
+        if (section) {
+          const top = section.offsetTop;
+          const bottom = top + section.offsetHeight;
+          if (scrollPos >= top && scrollPos < bottom) {
+            setActive(item.href);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const closeNav = () => setIsOpen(false);
+
+  const handleScrollTo = (e, href) => {
+    e.preventDefault();
+    const el = document.querySelector(href);
+    if (!el) return;
+    window.scrollTo({
+      top: el.offsetTop - 80,
+      behavior: "smooth",
+    });
+    setActive(href);
+    closeNav();
   };
 
   return (
-    <header className={NavCSS.header}>
-      {/* Logo */}
-      <div className={NavCSS.logo}>
-        <h2>
-          Natrxx<span>.</span>
-        </h2>
-      </div>
+    <header className={`${styles.header} ${visible ? styles.slideDown : ""}`}>
+      <nav className={styles.pillNav}>
+        {/* Title */}
+        <span className={styles.navTitle}>Natrxx.</span>
 
-      {/* Navigation Menu */}
-      <nav
-        className={`${NavCSS.nav} ${isNavOpen ? NavCSS.navOpen : ""}`}
-      >
-        <a href="#home" onClick={closeNav}>Home</a>
-        <a href="#skills" onClick={closeNav}>Skills</a>
-        <a href="#about" onClick={closeNav}>About</a>
-        <a href="#service" onClick={closeNav}>Project</a>
-        <a href="#contact" onClick={closeNav}>Contact</a>
+        {/* Desktop Links */}
+        <div className={styles.navLinks}>
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`${styles.pill} ${active === item.href ? styles.active : ""}`}
+              onClick={(e) => handleScrollTo(e, item.href)}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Hamburger Mobile */}
+        <div
+          className={`${styles.bars} ${isOpen ? styles.active : ""}`}
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div
+            className={styles.mobileMenu}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+              marginTop: "10px",
+            }}
+          >
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`${styles.pill} ${active === item.href ? styles.active : ""}`}
+                onClick={(e) => handleScrollTo(e, item.href)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        )}
       </nav>
-
-      {/* Hamburger Button */}
-      <div
-        className={`${NavCSS.bars} ${isNavOpen ? NavCSS.active : ""}`}
-        onClick={toggleNav}
-        aria-label="Toggle navigation"
-        role="button"
-        tabIndex={0}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
     </header>
   );
 }
-
-export default Nav;

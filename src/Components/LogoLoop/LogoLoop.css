@@ -1,0 +1,38 @@
+.logo-loop-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+}
+
+.logo-loop-track {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  animation: scrollLoop var(--speed) linear infinite;
+}
+
+.logo-loop-img {
+  object-fit: contain;
+  filter: grayscale(20%);
+  opacity: 0.9;
+  transition: 0.3s ease;
+}
+
+.logo-loop-img:hover {
+  filter: none;
+  opacity: 1;
+}
+
+.pause-on-hover:hover .logo-loop-track {
+  animation-play-state: paused;
+}
+
+@keyframes scrollLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

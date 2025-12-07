@@ -120,7 +120,7 @@
 .social_icons {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 35px;
   margin: 35px 0;
   flex-wrap: wrap;
 }
@@ -128,14 +128,14 @@
 .social_icons i {
   height: 48px;
   width: 48px;
-  font-size: 20px;
+  font-size: 25px;
   border-radius: 50%;
   border: 1px solid var(--main-color);
   color: var(--main-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 49, 49, 0.05);
+  background-color: #DC143C;
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -154,27 +154,30 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px;
 }
 
+/* ===============================
+   HERO BUTTONS - ANIMASI LANCAR SEPERTI SOCIAL ICONS
+================================= */
 .hero_btns button {
   font-size: 15px;
-  padding: 12px 26px;
+  padding: 15px 30px;
   border: 1px solid var(--main-color);
   border-radius: 8px;
-  background-color: rgba(255, 49, 49, 0.08);
+  background-color: #000000;
   color: var(--main-color);
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   letter-spacing: 0.3px;
 }
 
 .hero_btns button:hover {
   background-color: var(--main-color);
   color: #fff;
-  box-shadow: 0 8px 20px rgba(255, 49, 49, 0.3);
-  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 49, 49, 0.5);
+  transform: translateY(-5px) scale(1.05);
 }
 
 /* ===============================
@@ -207,6 +210,7 @@
   box-shadow: 0 0 80px rgba(255, 49, 49, 0.6);
   transform: translateY(-10px) scale(1.05);
 }
+
 
 /* ===============================
    RESPONSIVE
