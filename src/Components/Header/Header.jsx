@@ -1,19 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import HeaderCSS from "./../Header/Header.module.css";
 import HeroImg from "./../../../public/hero2.jpg";
-import { FaPlay, FaPause, FaForward, FaBackward, FaSpotify } from "react-icons/fa";
 
 function Header() {
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  // Mock song info
-  const [song] = useState({
-    name: "Blinding Lights",
-    artist: "The Weeknd",
-  });
 
   useEffect(() => {
     AOS.init({
@@ -31,50 +23,6 @@ function Header() {
         {/* Info Section */}
         <div className={HeaderCSS.hero_info}>
           
-          {/* ===== Music Player ===== */}
-          <div className={HeaderCSS.musicPlayer}>
-            <div
-              className={HeaderCSS.playerHeader}
-              onClick={() => setIsPlaying(!isPlaying)}
-            >
-              <FaSpotify color="#1DB954" size={28} />
-              <span className={HeaderCSS.vibingText}>Lets Vibing</span>
-              <button className={HeaderCSS.playBtn}>
-                {isPlaying ? <FaPause /> : <FaPlay />}
-              </button>
-            </div>
-
-            {isPlaying && (
-              <div className={HeaderCSS.expandedPlayer}>
-                <div className={HeaderCSS.songInfo}>
-                  <span className={HeaderCSS.songName}>{song.name}</span>
-                  <span className={HeaderCSS.artist}>{song.artist}</span>
-                </div>
-
-                <div className={HeaderCSS.controls}>
-                  <button>
-                    <FaBackward />
-                  </button>
-                  <button>
-                    {isPlaying ? <FaPause /> : <FaPlay />}
-                  </button>
-                  <button>
-                    <FaForward />
-                  </button>
-                </div>
-
-                {/* Wave animation */}
-                <div className={HeaderCSS.waveContainer}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-              </div>
-            )}
-          </div>
-
           {/* ===== Hero Text ===== */}
           <h1 data-aos="fade-down" data-aos-delay="550" data-aos-offset="0">
             Hi, I am <span>Natravell Sitra</span>
