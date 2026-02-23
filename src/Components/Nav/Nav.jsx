@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Nav.module.css";
+import { FaSpotify, FaPlay, FaPause, FaForward, FaBackward } from "react-icons/fa";
 
 export default function Nav() {
   const [active, setActive] = useState("#home");
   const [isOpen, setIsOpen] = useState(false);
-  const [visible, setVisible] = useState(false); // untuk animasi masuk
+  const [visible, setVisible] = useState(false);
+  const [musicOpen, setMusicOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const navItems = [
     { label: "Home", href: "#home" },
@@ -15,10 +18,7 @@ export default function Nav() {
   ];
 
   useEffect(() => {
-    // tampilkan navbar dengan animasi
     setVisible(true);
-
-    // selalu mulai dari top/home saat refresh
     window.scrollTo(0, 0);
     setActive("#home");
 
@@ -58,8 +58,44 @@ export default function Nav() {
   return (
     <header className={`${styles.header} ${visible ? styles.slideDown : ""}`}>
       <nav className={styles.pillNav}>
-        {/* Title */}
-        <span className={styles.navTitle}>Natrxx.</span>
+        
+        {/* LEFT SIDE */}
+        <div className={styles.leftSection}>
+          <span className={styles.navTitle}>Natrxx.</span>
+
+          <div className={styles.spotifyWrapper}>
+            <div
+              className={styles.spotifyIcon}
+              onClick={() => setMusicOpen(!musicOpen)}
+            >
+              <FaSpotify />
+            </div>
+
+            {musicOpen && (
+              <div className={styles.musicPlayer}>
+                <div className={styles.songInfo}>
+                  <span>Blinding Lights</span>
+                  <small>The Weeknd</small>
+                </div>
+
+                <div className={styles.controls}>
+                  <FaBackward />
+                  <span onClick={() => setIsPlaying(!isPlaying)}>
+                    {isPlaying ? <FaPause /> : <FaPlay />}
+                  </span>
+                  <FaForward />
+                </div>
+
+                <div className={styles.wave}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* Desktop Links */}
         <div className={styles.navLinks}>
@@ -75,7 +111,7 @@ export default function Nav() {
           ))}
         </div>
 
-        {/* Hamburger Mobile */}
+        {/* Hamburger */}
         <div
           className={`${styles.bars} ${isOpen ? styles.active : ""}`}
           onClick={() => setIsOpen((prev) => !prev)}
@@ -85,17 +121,8 @@ export default function Nav() {
           <span></span>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
-          <div
-            className={styles.mobileMenu}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "8px",
-              marginTop: "10px",
-            }}
-          >
+          <div className={styles.mobileMenu}>
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -112,3 +139,4 @@ export default function Nav() {
     </header>
   );
 }
+  
