@@ -1,13 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  FaSpotify,
+  FaPlay,
+  FaPause,
+  FaStepForward,
+  FaStepBackward,
+} from "react-icons/fa";
 import styles from "./Nav.module.css";
-import { FaSpotify, FaPlay, FaPause, FaForward, FaBackward } from "react-icons/fa";
 
 export default function Nav() {
   const [active, setActive] = useState("#home");
   const [isOpen, setIsOpen] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [musicOpen, setMusicOpen] = useState(false);
+  const [spotifyOpen, setSpotifyOpen] = useState(false);
+
+  const [currentTrack, setCurrentTrack] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const audioRef = useRef(null);
+
+  const tracks = [
+    { title: "Dave - Raindance (feat. Tems)", src: "/music/Dave - Raindance (feat. Tems).mp3" },
+  ];
 
   const navItems = [
     { label: "Home", href: "#home" },
@@ -21,122 +35,103 @@ export default function Nav() {
     setVisible(true);
     window.scrollTo(0, 0);
     setActive("#home");
-
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 100;
-      for (const item of navItems) {
-        const section = document.querySelector(item.href);
-        if (section) {
-          const top = section.offsetTop;
-          const bottom = top + section.offsetHeight;
-          if (scrollPos >= top && scrollPos < bottom) {
-            setActive(item.href);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const closeNav = () => setIsOpen(false);
+  useEffect(() => {
+    if (!audioRef.current) return;
 
-  const handleScrollTo = (e, href) => {
-    e.preventDefault();
-    const el = document.querySelector(href);
-    if (!el) return;
-    window.scrollTo({
-      top: el.offsetTop - 80,
-      behavior: "smooth",
-    });
-    setActive(href);
-    closeNav();
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying, currentTrack]);
+
+  const togglePlay = (e) => {
+    e.stopPropagation(); // ⛔ cegah nutup
+    setIsPlaying((prev) => !prev);
+  };
+
+  const nextTrack = (e) => {
+    e.stopPropagation();
+    setCurrentTrack((prev) => (prev + 1) % tracks.length);
+    setIsPlaying(true);
+  };
+
+  const prevTrack = (e) => {
+    e.stopPropagation();
+    setCurrentTrack((prev) =>
+      prev === 0 ? tracks.length - 1 : prev - 1
+    );
+    setIsPlaying(true);
+  };
+
+  const toggleSpotify = () => {
+    setSpotifyOpen((prev) => !prev);
   };
 
   return (
     <header className={`${styles.header} ${visible ? styles.slideDown : ""}`}>
-      <nav className={styles.pillNav}>
+      <div className={styles.navWrapper}>
         
-        {/* LEFT SIDE */}
-        <div className={styles.leftSection}>
-          <span className={styles.navTitle}>Natrxx.</span>
+        {/* Spotify Expand Circle */}
+        <div
+          className={`${styles.leftCircle} ${
+            spotifyOpen ? styles.expanded : ""
+          }`}
+          onClick={toggleSpotify}
+        >
+          <FaSpotify className={styles.spotifyIcon} />
 
-          <div className={styles.spotifyWrapper}>
+          {/* Mini Player */}
+          {spotifyOpen && (
             <div
-              className={styles.spotifyIcon}
-              onClick={() => setMusicOpen(!musicOpen)}
+              className={styles.player}
+              onClick={(e) => e.stopPropagation()} // ⛔ cegah semua klik dalam player
             >
-              <FaSpotify />
-            </div>
-
-            {musicOpen && (
-              <div className={styles.musicPlayer}>
-                <div className={styles.songInfo}>
-                  <span>Blinding Lights</span>
-                  <small>The Weeknd</small>
-                </div>
-
-                <div className={styles.controls}>
-                  <FaBackward />
-                  <span onClick={() => setIsPlaying(!isPlaying)}>
-                    {isPlaying ? <FaPause /> : <FaPlay />}
-                  </span>
-                  <FaForward />
-                </div>
-
-                <div className={styles.wave}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
+              <div className={styles.trackTitle}>
+                {tracks[currentTrack].title}
               </div>
-            )}
-          </div>
+
+              <div className={styles.controls}>
+                <FaStepBackward onClick={prevTrack} />
+
+                {isPlaying ? (
+                  <FaPause onClick={togglePlay} />
+                ) : (
+                  <FaPlay onClick={togglePlay} />
+                )}
+
+                <FaStepForward onClick={nextTrack} />
+              </div>
+
+              <audio
+                ref={audioRef}
+                src={tracks[currentTrack].src}
+                onEnded={() =>
+                  setCurrentTrack((prev) => (prev + 1) % tracks.length)
+                }
+              />
+            </div>
+          )}
         </div>
 
-        {/* Desktop Links */}
-        <div className={styles.navLinks}>
+        <nav className={styles.pillNav}>
+          <span className={styles.navTitle}>Natrxx.</span>
+
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`${styles.pill} ${active === item.href ? styles.active : ""}`}
-              onClick={(e) => handleScrollTo(e, item.href)}
+              className={`${styles.pill} ${
+                active === item.href ? styles.active : ""
+              }`}
             >
               {item.label}
             </a>
           ))}
-        </div>
-
-        {/* Hamburger */}
-        <div
-          className={`${styles.bars} ${isOpen ? styles.active : ""}`}
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
-        {isOpen && (
-          <div className={styles.mobileMenu}>
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={`${styles.pill} ${active === item.href ? styles.active : ""}`}
-                onClick={(e) => handleScrollTo(e, item.href)}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        )}
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }
-  
