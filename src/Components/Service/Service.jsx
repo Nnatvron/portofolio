@@ -85,7 +85,7 @@ function Service() {
       title: "innovating with AI",
       org: "Plan Internasional Indonesia",
       year: "23 December 2025",
-      image: "/public/ai.jpg",
+      image: "/ai.jpg",
     },
     {
       id: "datascience",

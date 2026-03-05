@@ -31,7 +31,7 @@ export default function Nav() {
     { label: "Contact", href: "#contact" },
   ];
 
-  useEffect(() => {
+  useEffect(() => { 
     setVisible(true);
     window.scrollTo(0, 0);
     setActive("#home");
