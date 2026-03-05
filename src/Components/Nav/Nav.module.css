@@ -7,10 +7,9 @@
   --transition-speed: 0.3s;
   --pill-glow: rgba(255, 49, 49, 0.6);
 
-  /* === CIRCLE CONTROL === */
   --circle-size: 72px;
-  --expand-width: 250px; /* panjang border ke kiri */
-  --expand-offset: 33px; /* geser ke kanan */
+  --expand-width: 250px;
+  --expand-offset: 33px;
 }
 
 /* ================= Header ================= */
@@ -37,10 +36,10 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: 60px; /* <--- geser semua ke kanan */
 }
 
 /* ================= Spotify Circle ================= */
-
 .leftCircle {
   height: var(--circle-size);
   width: var(--circle-size);
@@ -50,17 +49,14 @@
   border-radius: 50%;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   cursor: pointer;
   position: relative;
   overflow: visible;
 }
 
-/* Border extension ke kiri */
 .leftCircle::before {
   content: "";
   position: absolute;
@@ -77,18 +73,16 @@
   z-index: -1;
 }
 
-/* Saat expand */
 .expanded::before {
   width: var(--expand-width);
 }
 
-/* Spotify icon */
 .spotifyIcon {
   color: #1DB954;
   font-size: 48px;
 }
 
-/* ================= Pill nav ================= */
+/* ================= Pill Nav ================= */
 .pillNav {
   display: flex;
   gap: 15px;
@@ -102,7 +96,6 @@
   align-items: center;
 }
 
-/* Title */
 .navTitle {
   color: var(--pill-text);
   font-weight: 600;
@@ -111,7 +104,6 @@
   font-size: 18px;
 }
 
-/* Pill */
 .pill {
   color: var(--pill-text);
   text-decoration: none;
@@ -149,65 +141,7 @@
   box-shadow: 0 0 15px var(--pill-glow);
 }
 
-/* ================= Hamburger ================= */
-.bars {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  width: 36px;
-  height: 36px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-.bars span {
-  width: 22px;
-  height: 3px;
-  background: var(--pill-text);
-  border-radius: 2px;
-  transition: all var(--transition-speed) ease;
-}
-
-/* ================= Responsive ================= */
-
-@media (max-width: 900px) {
-
-  :root {
-    --circle-size: 56px;
-    --expand-width: 120px;
-    --expand-offset: 12px;
-  }
-
-  .pillNav {
-    padding: 14px 20px;
-  }
-
-  .spotifyIcon {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 425px) {
-
-  :root {
-    --circle-size: 44px;
-    --expand-width: 90px;
-    --expand-offset: 10px;
-  }
-
-  .spotifyIcon {
-    font-size: 28px;
-  }
-
-  .navTitle {
-    display: none;
-  }
-}
-
 /* ================= PLAYER ================= */
-
 .player {
   position: absolute;
   left: -230px;
@@ -216,33 +150,31 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* 🔥 center horizontal */
-  padding-left: 35px;  /* 🔥 geser isi sedikit ke kanan */
+  align-items: center;
+  padding-left: 35px;
   gap: 8px;
   color: white;
   opacity: 0;
-  transform: translateX(30px); /* 🔥 mulai dari kanan */
+  transform: translateX(30px);
   animation: slideFadeIn 1.35s ease forwards;
 }
 
-/* Judul lagu geser kanan */
 .trackTitle {
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  align-self: flex-start;   /* biar bisa geser manual */
-  margin-left: 1px;        /* 🔥 geser ke kanan */
+  align-self: flex-start;
+  margin-left: 1px;
 }
 
-/* Controls benar-benar center */
 .controls {
   display: flex;
   gap: 16px;
   font-size: 18px;
   align-items: center;
-  justify-content: center;  /* 🔥 center horizontal */
+  justify-content: center;
   width: 100%;
 }
 
@@ -256,11 +188,10 @@
   transform: scale(1.2);
 }
 
-/* 🔥 Animasi fade dari kanan */
 @keyframes slideFadeIn {
   from {
     opacity: 0;
-    transform: translateX(30px); /* dari kanan */
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
@@ -268,8 +199,109 @@
   }
 }
 
-/* ================= HIDE SPOTIFY ON MOBILE ================= */
+/* ================= CLOCK BOX ================= */
+.clockWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--pill-bg);
+  padding: 8px 16px;
+  border-radius: var(--pill-radius);
+  color: var(--pill-text);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
 
+.clockItem {
+  display: flex;
+  gap: 2px;
+}
+
+.separator {
+  font-weight: 600;
+}
+
+.dateText {
+  font-size: 12px;
+}
+
+/* ================= ROLLING ANIMATION DIGIT ================= */
+.roll {
+  display: inline-block;
+  animation: rollDown 0.4s ease forwards;
+}
+
+@keyframes rollDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(10%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 900px) {
+  .clockWrapper {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .dateText {
+    font-size: 11px;
+  }
+
+  .spotifyIcon {
+    font-size: 36px;
+  }
+
+  .pillNav {
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 425px) {
+  .clockWrapper {
+    font-size: 11px;
+    padding: 4px 8px;
+    gap: 6px;
+  }
+
+  .dateText {
+    display: none;
+  }
+
+  .spotifyIcon {
+    font-size: 28px;
+  }
+
+  .navTitle {
+    display: none;
+  }
+
+  .pillNav {
+    padding: 10px 16px;
+    gap: 8px;
+  }
+
+  .pill {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+}
+
+/* Hide Spotify on small mobile */
 @media (max-width: 768px) {
   .leftCircle {
     display: none;
@@ -277,28 +309,32 @@
 }
 
 @media (max-width: 425px) {
-
-  :root {
-    --circle-size: 40px;
-    --expand-width: 80px;
-    --expand-offset: 8px;
+  .clockWrapper {
+    display: none; /* hilangkan jam di handphone */
+    font-size: 11px;
+    padding: 4px 8px;
+    gap: 6px;
   }
 
-  .pillNav {
-    padding: 10px 16px; /* 🔥 kecilin padding */
-    gap: 8px;           /* 🔥 kecilin jarak */
+  .dateText {
+    display: none;
+  }
+
+  .spotifyIcon {
+    font-size: 28px;
   }
 
   .navTitle {
     display: none;
   }
 
-  .pill {
-    padding: 6px 14px;  /* 🔥 kecilin tombol */
-    font-size: 13px;    /* 🔥 kecilin font */
+  .pillNav {
+    padding: 10px 16px;
+    gap: 8px;
   }
 
-  .spotifyIcon {
-    font-size: 24px;
+  .pill {
+    padding: 6px 14px;
+    font-size: 13px;
   }
 }

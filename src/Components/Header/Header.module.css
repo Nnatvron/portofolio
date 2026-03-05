@@ -15,7 +15,6 @@
   position: relative;
   overflow: hidden;
 
-  /* 🌌 Prismatic Aurora Burst gradient base */
   background:
     radial-gradient(ellipse 120% 80% at 70% 20%, rgba(255, 20, 1, 0.15), transparent 85%),
     radial-gradient(ellipse 100% 60% at 30% 10%, rgba(255, 60, 60, 0.35), transparent 85%),
@@ -29,14 +28,12 @@
   animation: moveInferno 22s ease-in-out infinite alternate;
 }
 
-/* 🌈 Animasi background bergerak kanan-kiri */
 @keyframes moveInferno {
   0% { background-position: 0% 50%; filter: brightness(1); }
   50% { background-position: 100% 50%; filter: brightness(1.1); }
   100% { background-position: 0% 50%; filter: brightness(1); }
 }
 
-/* 🌐 Grid pattern overlay di atas */
 .hero::before {
   content: "";
   position: absolute;
@@ -108,7 +105,7 @@
 }
 
 /* ===============================
-   SOCIAL ICONS
+   SOCIAL ICONS (LIQUID GLASS)
 ================================= */
 .social_icons a,
 .social_icons i {
@@ -126,29 +123,63 @@
 }
 
 .social_icons i {
+  position: relative;
   height: 48px;
   width: 48px;
   font-size: 25px;
   border-radius: 50%;
-  border: 1px solid var(--main-color);
-  color: var(--main-color);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #DC143C;
-  transition: all 0.3s ease;
+
+  color: #fff;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  transition: all 0.35s ease;
   cursor: pointer;
+  overflow: hidden;
 }
 
-.social_icons i:hover {
-  background-color: var(--main-color);
-  color: #fff;
-  box-shadow: 0 0 20px rgba(255, 49, 49, 0.5);
+.social_icons i::after{
+  content:"";
+  position:absolute;
+  top:-120%;
+  left:-40%;
+  width:60%;
+  height:260%;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.7),
+    transparent
+  );
+
+  transform:rotate(25deg);
+  transition:0.6s;
+}
+
+.social_icons i:hover::after{
+  left:120%;
+}
+
+.social_icons i:hover{
   transform: translateY(-5px) scale(1.05);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.4),
+    0 0 20px rgba(255,49,49,0.35);
+
+  background: rgba(255,255,255,0.18);
 }
 
 /* ===============================
-   BUTTONS
+   BUTTONS (LIQUID GLASS)
 ================================= */
 .hero_btns {
   display: flex;
@@ -158,23 +189,73 @@
 }
 
 .hero_btns button {
+  position: relative;
   font-size: 15px;
-  padding: 15px 30px;
-  border: 1px solid var(--main-color);
-  border-radius: 8px;
-  background-color: #000000;
-  color: var(--main-color);
-  cursor: pointer;
+  padding: 15px 32px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  color: #fff;
   font-weight: 500;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  transition: all 0.35s ease;
 }
 
-.hero_btns button:hover {
-  background-color: var(--main-color);
-  color: #fff;
-  box-shadow: 0 0 20px rgba(255, 49, 49, 0.5);
-  transform: translateY(-5px) scale(1.05);
+.hero_btns button::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,0.45),
+    rgba(255,255,255,0.05)
+  );
+
+  opacity:0.35;
+  mix-blend-mode:overlay;
+}
+
+.hero_btns button::after{
+  content:"";
+  position:absolute;
+  top:-150%;
+  left:-50%;
+  width:60%;
+  height:300%;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.7),
+    transparent
+  );
+
+  transform:rotate(25deg);
+  transition:0.7s;
+}
+
+.hero_btns button:hover::after{
+  left:130%;
+}
+
+.hero_btns button:hover{
+  transform:translateY(-4px) scale(1.04);
+
+  background:rgba(255,255,255,0.16);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.4),
+    0 0 25px rgba(255,49,49,0.35);
 }
 
 /* ===============================
@@ -209,129 +290,6 @@
 }
 
 /* ===============================
-   MUSIC PLAYER MINI (BAR ABOVE NAME)
-================================= */
-.musicPlayer {
-  width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.playerHeader {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.vibingText {
-  font-weight: 500;
-  color: #1DB954; /* Spotify green */
-  font-size: 16px;
-}
-
-.playBtn {
-  border: none;
-  background: transparent;
-  color: #1DB954;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease;
-}
-
-.playBtn:hover {
-  transform: scale(1.2);
-}
-
-.expandedPlayer {
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(29, 185, 84, 0.5);
-  border-radius: 12px;
-  padding: 12px 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  animation: fadeIn 0.4s ease forwards;
-}
-
-.songInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.songName {
-  font-weight: 600;
-  color: #fff;
-}
-
-.artist {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-}
-
-.controls button {
-  border: none;
-  background: transparent;
-  color: #1DB954;
-  font-size: 18px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.controls button:hover {
-  transform: scale(1.2);
-}
-
-/* Wave animation */
-.waveContainer {
-  display: flex;
-  align-items: flex-end;
-  gap: 5px;
-  height: 16px;
-}
-
-.waveContainer span {
-  width: 3px;
-  height: 100%;
-  background-color: #1DB954;
-  display: inline-block;
-  animation: wave 1s infinite ease-in-out;
-  border-radius: 2px;
-}
-
-.waveContainer span:nth-child(1) { animation-delay: 0s; }
-.waveContainer span:nth-child(2) { animation-delay: 0.1s; }
-.waveContainer span:nth-child(3) { animation-delay: 0.2s; }
-.waveContainer span:nth-child(4) { animation-delay: 0.3s; }
-.waveContainer span:nth-child(5) { animation-delay: 0.4s; }
-
-@keyframes wave {
-  0%, 100% { transform: scaleY(0.3); }
-  50% { transform: scaleY(1); }
-}
-
-/* Fade in animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===============================
    RESPONSIVE
 ================================= */
 @media (max-width: 950px) {
@@ -347,14 +305,6 @@
 
   .hero_info h1 {
     font-size: 2.5rem;
-  }
-
-  .hero_info h2 {
-    font-size: 20px;
-  }
-
-  .hero_info p {
-    max-width: 100%;
   }
 
   .hero_img {
@@ -381,14 +331,6 @@
     font-size: 2rem;
   }
 
-  .hero_info h2 {
-    font-size: 18px;
-  }
-
-  .hero_info p {
-    font-size: 14px;
-  }
-
   .hero_img img {
     width: 240px;
     height: 240px;
@@ -403,28 +345,5 @@
     width: 42px;
     height: 42px;
     font-size: 18px;
-  }
-
-  /* ===============================
-     MOBILE MUSIC PLAYER CLEAN MODE
-  =============================== */
-
-  /* Hilangin icon spotify */
-  .playerHeader svg {
-    display: none;
-  }
-
-  /* Hilangin text Let's Vibing */
-  .vibingText {
-    display: none;
-  }
-
-  /* Center tombol play */
-  .playerHeader {
-    justify-content: center;
-  }
-
-  .playBtn {
-    font-size: 22px;
   }
 }

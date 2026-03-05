@@ -104,7 +104,7 @@ function Contact() {
       <div className={ContactCSS.contact_container} data-aos="fade-right">
 
         <div className={ContactCSS.live_chat_section} data-aos="fade-down">
-          <h2>Contact Me</h2>
+          <h2>Live Chat</h2>
         </div>
 
         <div className={ContactCSS.live_chat_wrapper}>

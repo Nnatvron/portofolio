@@ -14,15 +14,15 @@
 
   /* 🔥 Grid putih tipis + background radial merah → hitam */
   background:
-    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px), /* grid vertikal */
-    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),       /* grid horizontal */
-    radial-gradient(125% 125% at 50% 120%, #ff0000 1%, #000000 70%),   /* radial merah → hitam */
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    radial-gradient(125% 125% at 50% 120%, #ff0000 1%, #000000 70%),
     #000;
 
   background-size:
-    40px 40px,  /* grid vertical */
-    40px 40px,  /* grid horizontal */
-    100% 100%,  /* radial gradient */
+    40px 40px,
+    40px 40px,
+    100% 100%,
     cover;
 
   background-repeat: repeat;
@@ -37,14 +37,14 @@
   width: 100%;
   display: flex;
   align-items: center;
-  flex-direction: row; /* desktop side by side */
+  flex-direction: row;
   justify-content: space-between;
   gap: 60px;
   padding: 0 8%;
   font-family: "Poppins", sans-serif;
   color: #fff;
   box-sizing: border-box;
-  flex-wrap: wrap; /* supaya responsive */
+  flex-wrap: wrap;
 }
 
 /* ==============================
@@ -107,40 +107,73 @@
 }
 
 /* ==============================
-   BUTTON
+   LIQUID GLASS BUTTON (HEADER STYLE)
    ============================== */
 .about_info button {
-  background: var(--main-color);
-  color: #fff;
-  padding: 14px 26px;
+  position: relative;
+  padding: 14px 28px;
   font-size: 15px;
-  border: none;
-  border-radius: 8px;
+  border-radius: 50px;
+
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
   cursor: pointer;
   font-weight: 500;
   letter-spacing: 0.5px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  position: relative;
+
   overflow: hidden;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.4),
+    inset 0 -1px 0 rgba(255,255,255,0.1),
+    0 10px 25px rgba(0,0,0,0.4);
+
+  transition: 
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
 }
 
-.about_info button:hover {
-  background: #ff0000; /* merah saat hover */
-  transform: translateY(-4px) scale(1.06); /* maju dikit + zoom */
-  box-shadow: 0 0 25px rgba(255, 76, 76, 0.5);
-}
-
-/* Optional: Animasi tipis highlight saat hover */
-.about_info button::after {
+/* Liquid highlight */
+.about_info button::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0);
-  transition: background 0.3s ease;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+
+  transform: rotate(25deg);
+  transition: 0.6s;
 }
 
-.about_info button:hover::after {
-  background: rgba(255, 255, 255, 0.05);
+/* Hover effect */
+.about_info button:hover::before {
+  left: 120%;
+}
+
+/* Hover animation */
+.about_info button:hover {
+  transform: translateY(-4px) scale(1.05);
+  background: rgba(255,255,255,0.15);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    inset 0 -1px 0 rgba(255,255,255,0.2),
+    0 15px 35px rgba(255,0,0,0.25);
 }
 
 /* ==============================
