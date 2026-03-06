@@ -33,7 +33,7 @@ export default function Nav() {
     { label: "Skills", href: "#skills" },
     { label: "About", href: "#about" },
     { label: "Project", href: "#service" },
-    { label: "Contact", href: "#contact" },
+    { label: "Live Chat", href: "#contact" },
   ];
 
   useEffect(() => {
@@ -42,6 +42,31 @@ export default function Nav() {
     setActive("#home");
   }, []);
 
+  /* ================= SCROLL ACTIVE SECTION ================= */
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 150;
+
+      navItems.forEach((item) => {
+        const section = document.querySelector(item.href);
+        if (!section) return;
+
+        const offsetTop = section.offsetTop;
+        const height = section.offsetHeight;
+
+        if (scrollPos >= offsetTop && scrollPos < offsetTop + height) {
+          setActive(item.href);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ================= AUDIO ================= */
   useEffect(() => {
     if (!audioRef.current) return;
 
@@ -49,7 +74,7 @@ export default function Nav() {
     else audioRef.current.pause();
   }, [isPlaying, currentTrack]);
 
-  // Update clock every second
+  /* ================= CLOCK ================= */
   useEffect(() => {
     const interval = setInterval(() => {
       setPrevTime(time);
@@ -60,7 +85,6 @@ export default function Nav() {
 
   const formatTwoDigits = (num) => num.toString().padStart(2, "0");
 
-  // Extract digits
   const hours = formatTwoDigits(time.getHours());
   const minutes = formatTwoDigits(time.getMinutes());
   const seconds = formatTwoDigits(time.getSeconds());
@@ -72,75 +96,138 @@ export default function Nav() {
     e.stopPropagation();
     setIsPlaying((prev) => !prev);
   };
+
   const nextTrack = (e) => {
     e.stopPropagation();
     setCurrentTrack((prev) => (prev + 1) % tracks.length);
     setIsPlaying(true);
   };
+
   const prevTrack = (e) => {
     e.stopPropagation();
     setCurrentTrack((prev) => (prev === 0 ? tracks.length - 1 : prev - 1));
     setIsPlaying(true);
   };
+
   const toggleSpotify = () => setSpotifyOpen((prev) => !prev);
+
+  /* ================= SMOOTH SCROLL ================= */
+  const handleClick = (e, href) => {
+    e.preventDefault();
+    const section = document.querySelector(href);
+
+    if (!section) return;
+
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   return (
     <header className={`${styles.header} ${visible ? styles.slideDown : ""}`}>
       <div className={styles.navWrapper}>
 
         {/* Spotify Circle */}
-        <div className={`${styles.leftCircle} ${spotifyOpen ? styles.expanded : ""}`} onClick={toggleSpotify}>
+        <div
+          className={`${styles.leftCircle} ${spotifyOpen ? styles.expanded : ""}`}
+          onClick={toggleSpotify}
+        >
           <FaSpotify className={styles.spotifyIcon} />
+
           {spotifyOpen && (
             <div className={styles.player} onClick={(e) => e.stopPropagation()}>
-              <div className={styles.trackTitle}>{tracks[currentTrack].title}</div>
+              <div className={styles.trackTitle}>
+                {tracks[currentTrack].title}
+              </div>
+
               <div className={styles.controls}>
                 <FaStepBackward onClick={prevTrack} />
-                {isPlaying ? <FaPause onClick={togglePlay} /> : <FaPlay onClick={togglePlay} />}
+                {isPlaying ? (
+                  <FaPause onClick={togglePlay} />
+                ) : (
+                  <FaPlay onClick={togglePlay} />
+                )}
                 <FaStepForward onClick={nextTrack} />
               </div>
+
               <audio
                 ref={audioRef}
                 src={tracks[currentTrack].src}
-                onEnded={() => setCurrentTrack((prev) => (prev + 1) % tracks.length)}
+                onEnded={() =>
+                  setCurrentTrack((prev) => (prev + 1) % tracks.length)
+                }
               />
             </div>
           )}
         </div>
 
-        {/* Pill Nav */}
+        {/* Navbar */}
         <nav className={styles.pillNav}>
           <span className={styles.navTitle}>Natrxx.</span>
+
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className={`${styles.pill} ${active === item.href ? styles.active : ""}`}
+              onClick={(e) => handleClick(e, item.href)}
+              className={`${styles.pill} ${
+                active === item.href ? styles.active : ""
+              }`}
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        {/* Clock Horizontal */}
+        {/* Clock */}
         <div className={styles.clockWrapper}>
           <div className={styles.clockItem}>
-            <span className={`${hours[0] !== prevHours[0] ? styles.roll : ""}`}>{hours[0]}</span>
-            <span className={`${hours[1] !== prevHours[1] ? styles.roll : ""}`}>{hours[1]}</span>
+            <span className={`${hours[0] !== prevHours[0] ? styles.roll : ""}`}>
+              {hours[0]}
+            </span>
+            <span className={`${hours[1] !== prevHours[1] ? styles.roll : ""}`}>
+              {hours[1]}
+            </span>
           </div>
+
           <span className={styles.separator}>:</span>
+
           <div className={styles.clockItem}>
-            <span className={`${minutes[0] !== prevMinutes[0] ? styles.roll : ""}`}>{minutes[0]}</span>
-            <span className={`${minutes[1] !== prevMinutes[1] ? styles.roll : ""}`}>{minutes[1]}</span>
+            <span
+              className={`${minutes[0] !== prevMinutes[0] ? styles.roll : ""}`}
+            >
+              {minutes[0]}
+            </span>
+            <span
+              className={`${minutes[1] !== prevMinutes[1] ? styles.roll : ""}`}
+            >
+              {minutes[1]}
+            </span>
           </div>
+
           <span className={styles.separator}>:</span>
+
           <div className={styles.clockItem}>
-            <span className={`${seconds[0] !== prevSeconds[0] ? styles.roll : ""}`}>{seconds[0]}</span>
-            <span className={`${seconds[1] !== prevSeconds[1] ? styles.roll : ""}`}>{seconds[1]}</span>
+            <span
+              className={`${seconds[0] !== prevSeconds[0] ? styles.roll : ""}`}
+            >
+              {seconds[0]}
+            </span>
+            <span
+              className={`${seconds[1] !== prevSeconds[1] ? styles.roll : ""}`}
+            >
+              {seconds[1]}
+            </span>
           </div>
 
           <div className={styles.dateText}>
-            {time.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
+            {time.toLocaleDateString([], {
+              weekday: "short",
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
           </div>
         </div>
 

@@ -18,27 +18,14 @@
     radial-gradient(ellipse 140% 50% at 30% 85%, rgba(180, 0, 0, 0.25), transparent 60%),
     #020101;
 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   position: relative;
   overflow: hidden;
-}
-
-.chat_left {
-  align-self: flex-start;
-  background: #eaeaea;
-}
-
-.chat_right {
-  align-self: flex-end;
-  background: #4a8bff;
-  color: white;
 }
 
 /* ===============================
    CONTAINER
 ================================= */
+
 .contact_container {
   width: 100%;
   max-width: 1200px;
@@ -54,6 +41,7 @@
 /* ===============================
    HEADING
 ================================= */
+
 .contact h2 {
   font-size: 42px;
   font-weight: 600;
@@ -67,10 +55,11 @@
 }
 
 /* ===============================
-   MESSAGES
+   SUCCESS / ERROR MESSAGE
 ================================= */
-.errorMessage,
-.successMessage {
+
+.successMessage,
+.errorMessage {
   width: 100%;
   max-width: 500px;
   text-align: center;
@@ -82,16 +71,16 @@
   backdrop-filter: blur(12px);
 }
 
-.errorMessage {
-  color: #ff6b6b;
-  background-color: rgba(255, 0, 0, 0.1);
-  border: 1px solid rgba(255, 0, 0, 0.3);
-}
-
 .successMessage {
   color: #28a745;
   background-color: rgba(40, 167, 69, 0.1);
   border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.errorMessage {
+  color: #ff6b6b;
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
 }
 
 @keyframes fadeSlide {
@@ -106,395 +95,500 @@
 }
 
 /* ===============================
-   FORM STYLING
+   FORM GLASS
 ================================= */
+
 form {
   width: 100%;
-  max-width: 550px;
+  max-width: 520px;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 45px 35px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(15px);
-  transition: all 0.3s ease;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  border-radius: 20px;
+  padding: 40px 30px;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,0.45),
+  inset 0 1px 0 rgba(255,255,255,0.1);
+
+  transition: all .35s ease;
 }
 
 form.loading {
   pointer-events: none;
-  opacity: 0.6;
+  opacity: .6;
 }
 
 form label {
-  font-weight: 500;
   font-size: 14px;
-  color: #ddd;
   display: flex;
   align-items: center;
   gap: 6px;
+  color: #ddd;
 }
 
 form input,
 form textarea {
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #fff;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+
   border-radius: 10px;
   padding: 12px 14px;
+
+  color: white;
   font-size: 15px;
-  font-family: inherit;
-  transition: all 0.3s ease;
+
+  transition: all .3s ease;
 }
 
 form textarea {
-  resize: vertical;
   min-height: 110px;
-}
-
-form input::placeholder,
-form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  resize: vertical;
 }
 
 form input:focus,
 form textarea:focus {
+
   border-color: var(--main-color);
-  box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
-  background-color: rgba(255, 255, 255, 0.15);
+
+  box-shadow:
+  0 0 10px rgba(255,49,49,.5);
+
+  background: rgba(255,255,255,0.14);
+
   transform: translateY(-2px);
 }
 
 /* ===============================
-   BUTTON STYLING
+   BUTTON (Liquid Glass)
 ================================= */
+
 button {
-  margin-top: 15px;
-  padding: 12px 24px;
-  background-color: var(--main-color);
-  color: #fff;
-  font-size: 14px;
+
+  position: relative;
+  overflow: hidden;
+
+  margin-top: 10px;
+  padding: 13px 24px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,.25);
+
   font-weight: 600;
-  border: none;
-  border-radius: 10px;
+  letter-spacing: .5px;
+
+  color: white;
+
   cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
+
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+  inset 0 1px 0 rgba(255,255,255,.25),
+  0 8px 24px rgba(0,0,0,.35);
+
+  transition: all .35s ease;
 }
 
+/* liquid shine */
+button::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: -50%;
+  left: -50%;
+
+  width: 200%;
+  height: 200%;
+
+  background:
+  radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 50%),
+  radial-gradient(circle at 70% 70%, rgba(255,60,60,.35), transparent 60%);
+
+  opacity: .35;
+
+  transition: all .5s ease;
+
+}
+
+/* hover effect */
 button:hover:not(:disabled) {
-  transform: translateY(-3px);
-  background-color: #ff4b4b;
-  box-shadow: 0 6px 15px rgba(255, 49, 49, 0.3);
+
+  transform: translateY(-4px) scale(1.02);
+
+  background:
+  linear-gradient(
+  135deg,
+  rgba(255,49,49,.85),
+  rgba(255,80,80,.65)
+  );
+
+  box-shadow:
+  0 10px 30px rgba(255,49,49,.45),
+  inset 0 1px 0 rgba(255,255,255,.4);
+
+}
+
+button:hover::before {
+
+  transform: rotate(20deg) scale(1.2);
+  opacity: .6;
+
+}
+
+button:active {
+
+  transform: scale(.96);
+
 }
 
 button:disabled {
-  opacity: 0.5;
+
+  opacity: .45;
   cursor: not-allowed;
+
+}
+/* ===============================
+   LIVE CHAT SECTION
+================================= */
+
+.live_chat_section {
+
+  width: 100%;
+  max-width: 1200px;
+
+  text-align: center;
+}
+
+.live_chat_section h2 {
+
+  font-size: 36px;
+  color: var(--main-color);
+
+  text-shadow: 0 0 10px rgba(255,49,49,.4);
+}
+
+/* ===============================
+   WRAPPER
+================================= */
+
+.live_chat_wrapper {
+
+  width: 100%;
+  max-width: 1000px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 70px;
+}
+
+/* ===============================
+   CHAT PANEL GLASS
+================================= */
+
+.live_chat_panel {
+
+  width: 100%;
+  max-width: 460px;
+  height: 420px;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 22px;
+
+  background:
+  rgba(255,255,255,0.05);
+
+  border:
+  1px solid rgba(255,255,255,0.14);
+
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+
+  box-shadow:
+  0 20px 60px rgba(0,0,0,.6),
+  inset 0 1px 0 rgba(255,255,255,.1);
+
+  overflow: hidden;
+}
+
+/* ===============================
+   CHAT HEADER
+================================= */
+
+.live_chat_header {
+
+  padding: 14px 18px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  border-bottom:
+  1px solid rgba(255,255,255,.08);
+
+  color: var(--main-color);
+}
+
+/* ===============================
+   CHAT BODY
+================================= */
+
+.live_chat_body {
+
+  flex: 1;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  padding: 16px;
+}
+
+/* ===============================
+   CHAT ROW
+================================= */
+
+.chat_row {
+
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+
+  animation: fadeSlide .35s ease;
+}
+
+.chat_left {
+  justify-content: flex-start;
+}
+
+.chat_right {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+/* ===============================
+   AVATAR
+================================= */
+
+.chat_avatar {
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  border:
+  1px solid rgba(255,255,255,.25);
+
+  backdrop-filter: blur(10px);
+}
+
+/* ===============================
+   CHAT BUBBLE (iMessage style)
+================================= */
+
+.chat_bubble {
+
+  max-width: 75%;
+
+  padding: 10px 14px;
+
+  border-radius: 14px;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  backdrop-filter: blur(15px);
+
+  border:
+  1px solid rgba(255,255,255,.18);
+
+  background:
+  rgba(255,255,255,.12);
+
+  box-shadow:
+  0 6px 20px rgba(0,0,0,.35);
+
+}
+
+.chat_right .chat_bubble {
+
+  background:
+  linear-gradient(
+  135deg,
+  rgba(255,49,49,.85),
+  rgba(255,90,90,.65)
+  );
+
+  border:
+  1px solid rgba(255,255,255,.25);
+}
+
+.chat_sender {
+
+  font-size: 12px;
+  opacity: .7;
+  margin-bottom: 3px;
+}
+
+.chat_text {
+  font-size: 14px;
+}
+
+/* ===============================
+   PINNED MESSAGE
+================================= */
+
+.stickyPinnedFixed {
+
+  padding: 10px 14px;
+
+  background:
+  rgba(255,49,49,.15);
+
+  border-left:
+  3px solid var(--main-color);
+
+  font-size: 13px;
+
+  backdrop-filter: blur(12px);
+}
+
+.stickyPinned {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 14px;
+
+  background:
+  rgba(255,255,255,.06);
+
+  border-left:
+  3px solid #fbbf24;
+
+  backdrop-filter: blur(10px);
+}
+
+.stickyPinnedContent {
+
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
+  font-size: 13px;
+}
+
+/* ===============================
+   TYPING INDICATOR
+================================= */
+
+.typing_indicator {
+
+  display: flex;
+  gap: 4px;
+
+  padding: 10px 12px;
+
+  background:
+  rgba(255,255,255,.12);
+
+  border-radius: 14px;
+
+  border:
+  1px solid rgba(255,255,255,.18);
+}
+
+.typing_indicator span {
+
+  width: 6px;
+  height: 6px;
+
+  background: white;
+
+  border-radius: 50%;
+
+  animation: typing 1.4s infinite;
+}
+
+.typing_indicator span:nth-child(2) {
+  animation-delay: .2s;
+}
+
+.typing_indicator span:nth-child(3) {
+  animation-delay: .4s;
+}
+
+@keyframes typing {
+
+  0% {opacity:.2; transform:translateY(0)}
+  50% {opacity:1; transform:translateY(-4px)}
+  100% {opacity:.2; transform:translateY(0)}
+
+}
+
+/* ===============================
+   SCROLLBAR
+================================= */
+
+.live_chat_body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.live_chat_body::-webkit-scrollbar-thumb {
+
+  background:
+  rgba(255,255,255,.25);
+
+  border-radius: 20px;
 }
 
 /* ===============================
    RESPONSIVE
 ================================= */
-@media (max-width: 950px) {
-  .contact {
-    padding: 80px 6%;
-  }
 
-  .contact h2 {
-    font-size: 34px;
-  }
+@media (max-width:950px){
 
-  form {
-    padding: 35px 25px;
-  }
+.live_chat_wrapper{
+flex-direction:column;
+align-items:center;
 }
 
-@media (max-width: 600px) {
-  .contact {
-    padding: 60px 5%;
-  }
-
-  .contact h2 {
-    font-size: 28px;
-  }
-
-  form {
-    padding: 25px 18px;
-    gap: 14px;
-  }
-
-  form input,
-  form textarea {
-    font-size: 13px;
-  }
-
-  button {
-    font-size: 13px;
-    padding: 10px 18px;
-  }
+.live_chat_panel{
+max-width:550px;
 }
 
-/* ===============================
-   LIVE CHAT SECTION (HEADING)
-================================= */
-
-.live_chat_section {
-  width: 100%;
-  max-width: 1200px;
-  margin: 100px auto 0 auto;
-  text-align: center;        /* ✨ Biar h2 center */
 }
 
-.live_chat_section h2 {
-  font-size: 38px;
-  font-weight: 600;
-  color: var(--main-color);
-  margin-bottom: 30px;       /* ✨ Jarak judul ke kotak */
-  border-bottom: none;       /* FIX: Biar ga ikut style h2 contact */
-  text-shadow: 0 0 10px rgba(255, 49, 49, 0.4);
+@media (max-width:600px){
+
+.live_chat_panel{
+height:70vh;
 }
 
-/* ===============================
-   LIVE CHAT (FIXED & ALIGNED)
-================================= */
-
-.live_chat_wrapper {
-  width: 100%;
-  max-width: 1000px;
-  display: flex;
-  justify-content: center;   /* <<< FIX SEJAJAR KIRI-KANAN */
-  align-items: center;          /* <<< RATA ATAS */
-  gap: 80px;                        /* <<< NORMAL, BUKAN 300PX */
-  margin-top: 60px;
+.chat_bubble{
+max-width:85%;
+font-size:13px;
 }
 
-/* Panel Chat */
-.live_chat_panel {
-  width: 100%;
-  max-width: 450px;
-  height: 400px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  border-radius: 18px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-}
-
-/* Header Chat */
-.live_chat_header {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--main-color);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  padding-bottom: 8px;
-}
-
-/* Body Chat */
-.live_chat_body {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Bubble User */
-.chat_bubble {
-  max-width: 85%;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  font-size: 14px;
-  line-height: 1.4;
-  color: #fff;
-  backdrop-filter: blur(5px);
-  animation: fadeSlide 0.4s ease-out;
-  align-self: flex-end;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-/* Scrollbar */
-.live_chat_body::-webkit-scrollbar {
-  width: 6px;
-}
-.live_chat_body::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 10px;
-}
-
-.stickyPinned {
-  background: rgba(255, 214, 98, 0.2);
-  border-left: 4px solid #fbbf24;
-  padding: 12px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  position: sticky;
-  top: 0;
-  z-index: 99;
-  backdrop-filter: blur(3px);
-}
-
-.stickyPinnedFixed {
-  background: #020101; 
-  padding: 10px;
-  font-size: 14px;
-  border-left: 4px solid #FF0000  ;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  position: sticky;
-  top: 38px; /* tepat di bawah header */
-  z-index: 9;
-}
-
-.stickyPinnedContent {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13.5px;
-}
-
-.pinIcon {
-  color: #f59e0b;
-}
-
-/* RESPONSIVE */
-@media (max-width: 950px) {
-  .live_chat_wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .live_chat_panel {
-    width: 100%;
-    max-width: 550px;
-    height: 420px;
-  }
-
-    .form_section form {
-    width: 100%;
-    max-width: 550px; /* sama kek panel chat */
-  }
-
-  .live_chat_panel {
-    width: 100%;
-    max-width: 550px;
-    height: 420px;
-  }
-}
-
-@media (max-width: 600px) {
-  .live_chat_panel {
-    height: 380px;
-  }
-
-    .form_section form {
-    width: 100%;
-    max-width: 100%;
-    padding: 18px 15px;
-    border-radius: 14px; /* sama seperti live_chat_panel */
-  }
-
-  .live_chat_panel {
-    width: 100%;
-    max-width: 100%;
-    height: 72vh;
-    padding: 15px;
-    border-radius: 14px;
-  }
-}
-
-/* ===============================
-   LIVE CHAT – MOBILE RESPONSIVE FIX
-================================= */
-
-@media (max-width: 600px) {
-
-  /* SECTION TITLE */
-  .live_chat_section {
-    margin-top: 60px;
-    padding: 0 6%;
-  }
-
-  .live_chat_section h2 {
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
-
-  /* WRAPPER */
-  .live_chat_wrapper {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  /* PANEL CHAT */
-  .live_chat_panel {
-    width: 100%;
-    max-width: 100%;
-    height: 72vh;        /* lebih tinggi, nyaman dipake */
-    padding: 15px;
-    border-radius: 14px;
-  }
-
-  /* HEADER */
-  .live_chat_header {
-    font-size: 16px;
-    padding-bottom: 6px;
-    margin-bottom: 10px;
-  }
-
-  /* BODY */
-  .live_chat_body {
-    padding-right: 2px;
-    gap: 10px;
-  }
-
-  /* CHAT BUBBLE */
-  .chat_bubble {
-    max-width: 90%;
-    padding: 8px 11px;
-    font-size: 13px;
-    border-radius: 10px;
-  }
-
-  /* INPUT AREA */
-  .live_chat_input_box {
-    width: 100%;
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-
-  .live_chat_input_box input {
-    flex: 1;
-    padding: 10px 12px;
-    font-size: 14px;
-    border-radius: 8px;
-  }
-
-  .live_chat_input_box button {
-    padding: 10px 14px;
-    font-size: 14px;
-    border-radius: 8px;
-    white-space: nowrap;
-  }
 }

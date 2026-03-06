@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: 60px; /* <--- geser semua ke kanan */
+  margin-left: 60px;
 }
 
 /* ================= Spotify Circle ================= */
@@ -112,6 +112,7 @@
   font-weight: 500;
   transition: all var(--transition-speed) ease;
   position: relative;
+  white-space: nowrap;
 }
 
 .pill::after {
@@ -253,6 +254,7 @@
 
 /* ================= Responsive ================= */
 @media (max-width: 900px) {
+
   .clockWrapper {
     font-size: 13px;
     padding: 6px 12px;
@@ -269,21 +271,19 @@
   .pillNav {
     padding: 14px 20px;
   }
+
 }
 
+/* ================= MOBILE ================= */
 @media (max-width: 425px) {
+
+  /* 🔥 geser navbar sedikit ke kiri */
+  .navWrapper{
+    margin-left: 10px;
+  }
+
   .clockWrapper {
-    font-size: 11px;
-    padding: 4px 8px;
-    gap: 6px;
-  }
-
-  .dateText {
     display: none;
-  }
-
-  .spotifyIcon {
-    font-size: 28px;
   }
 
   .navTitle {
@@ -291,50 +291,24 @@
   }
 
   .pillNav {
-    padding: 10px 16px;
-    gap: 8px;
+    padding: 10px 14px;
+    gap: 6px;
   }
 
   .pill {
-    padding: 6px 14px;
-    font-size: 13px;
+    padding: 6px 12px;
+    font-size: 12px;
   }
+
+  .spotifyIcon {
+    font-size: 28px;
+  }
+
 }
 
 /* Hide Spotify on small mobile */
 @media (max-width: 768px) {
   .leftCircle {
     display: none;
-  }
-}
-
-@media (max-width: 425px) {
-  .clockWrapper {
-    display: none; /* hilangkan jam di handphone */
-    font-size: 11px;
-    padding: 4px 8px;
-    gap: 6px;
-  }
-
-  .dateText {
-    display: none;
-  }
-
-  .spotifyIcon {
-    font-size: 28px;
-  }
-
-  .navTitle {
-    display: none;
-  }
-
-  .pillNav {
-    padding: 10px 16px;
-    gap: 8px;
-  }
-
-  .pill {
-    padding: 6px 14px;
-    font-size: 13px;
   }
 }

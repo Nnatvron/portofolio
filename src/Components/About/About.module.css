@@ -12,7 +12,6 @@
   position: relative;
   z-index: 1;
 
-  /* 🔥 Grid putih tipis + background radial merah → hitam */
   background:
     linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
     linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
@@ -107,7 +106,7 @@
 }
 
 /* ==============================
-   LIQUID GLASS BUTTON (HEADER STYLE)
+   LIQUID GLASS BUTTON
    ============================== */
 .about_info button {
   position: relative;
@@ -188,6 +187,9 @@
 
   .about_info {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 🔥 ini bikin button center */
   }
 
   .about_img {
@@ -197,6 +199,14 @@
 
   .about_info p {
     text-align: center;
+  }
+
+  .about_info h3 {
+    text-align: center;
+  }
+
+  .about_info button {
+    margin: 0 auto; /* tambahan supaya benar-benar center */
   }
 }
 

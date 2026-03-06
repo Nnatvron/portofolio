@@ -10,11 +10,15 @@ import LogoLoop from "../LogoLoop/LogoLoop";
 // ================= STAT CARD =====================
 const StatCard = ({ number, label, icon, delay }) => (
   <div
-    className="stat-card"
+    className="stat-card glass-card"
     style={{ animationDelay: `${delay}s` }}
     data-aos="zoom-in-up"
     data-aos-delay={delay * 1000}
   >
+    {/* liquid glass highlight */}
+    <span className="glass-highlight"></span>
+    <span className="glass-border"></span>
+
     <div className="stat-icon">{icon}</div>
     <div className="stat-number">{number}</div>
     <div className="stat-label">{label}</div>
@@ -47,7 +51,7 @@ function StatsAndTechStack() {
     { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", alt: "Firebase" },
     { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg", alt: "Vite" },
     { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", alt: "VS Code" },
-    {src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",alt: "Vercel"},
+    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", alt: "Vercel" },
   ];
 
   return (
@@ -107,6 +111,7 @@ function StatsAndTechStack() {
           <div className="floating-element element-2" />
           <div className="floating-element element-3" />
         </div>
+
       </div>
     </div>
   );
