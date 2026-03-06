@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import ContactCSS from "./../Contact/Contact.module.css";
 import axios from "axios";
 import { User, MessageSquare, Pin, PinOff } from "lucide-react";
@@ -27,20 +27,6 @@ function Contact() {
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [typing, setTyping] = useState(false);
-
-  const chatEndRef = useRef(null);
-
-  // ===== AUTO SCROLL =====
-  const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "end"
-    });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [chatMessages]);
 
   // ===== REALTIME MESSAGE =====
   useEffect(() => {
@@ -112,14 +98,13 @@ function Contact() {
     const newMessage = {
       sender: formData.name || "Guest",
       text: formData.message,
-      timestamp: new Date(), // FIX realtime
+      timestamp: new Date(),
     };
 
     try {
 
       await addDoc(collection(db, "messages"), newMessage);
 
-      // email optional
       try {
         await axios.post(
           "http://localhost:5000/send-email",
@@ -313,7 +298,6 @@ function Contact() {
 
               )}
 
-              {/* TYPING */}
               {typing && (
 
                 <div className={ContactCSS.chat_row}>
@@ -321,6 +305,7 @@ function Contact() {
                   <img
                     src={getAvatar("typing")}
                     className={ContactCSS.chat_avatar}
+                    alt="typing"
                   />
 
                   <div className={ContactCSS.typing_indicator}>
@@ -332,8 +317,6 @@ function Contact() {
                 </div>
 
               )}
-
-              <div ref={chatEndRef}></div>
 
             </div>
 

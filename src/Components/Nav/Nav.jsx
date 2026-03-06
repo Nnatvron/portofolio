@@ -36,18 +36,44 @@ export default function Nav() {
     { label: "Live Chat", href: "#contact" },
   ];
 
+  /* ================= INITIAL LOAD ================= */
   useEffect(() => {
+
     setVisible(true);
-    window.scrollTo(0, 0);
+
+    /* disable browser scroll restore */
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    /* hapus hash supaya tidak lompat section */
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+
+    /* force scroll ke home */
+    const home = document.querySelector("#home");
+
+    if (home) {
+      home.scrollIntoView({
+        behavior: "instant",
+        block: "start",
+      });
+    }
+
     setActive("#home");
+
   }, []);
 
   /* ================= SCROLL ACTIVE SECTION ================= */
   useEffect(() => {
+
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 150;
+
+      const scrollPos = window.scrollY + 160;
 
       navItems.forEach((item) => {
+
         const section = document.querySelector(item.href);
         if (!section) return;
 
@@ -57,30 +83,41 @@ export default function Nav() {
         if (scrollPos >= offsetTop && scrollPos < offsetTop + height) {
           setActive(item.href);
         }
+
       });
+
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll();
+
+    setTimeout(() => {
+      handleScroll();
+    }, 200);
 
     return () => window.removeEventListener("scroll", handleScroll);
+
   }, []);
 
   /* ================= AUDIO ================= */
   useEffect(() => {
+
     if (!audioRef.current) return;
 
     if (isPlaying) audioRef.current.play();
     else audioRef.current.pause();
+
   }, [isPlaying, currentTrack]);
 
   /* ================= CLOCK ================= */
   useEffect(() => {
+
     const interval = setInterval(() => {
       setPrevTime(time);
       setTime(new Date());
     }, 1000);
+
     return () => clearInterval(interval);
+
   }, [time]);
 
   const formatTwoDigits = (num) => num.toString().padStart(2, "0");
@@ -88,6 +125,7 @@ export default function Nav() {
   const hours = formatTwoDigits(time.getHours());
   const minutes = formatTwoDigits(time.getMinutes());
   const seconds = formatTwoDigits(time.getSeconds());
+
   const prevHours = formatTwoDigits(prevTime.getHours());
   const prevMinutes = formatTwoDigits(prevTime.getMinutes());
   const prevSeconds = formatTwoDigits(prevTime.getSeconds());
@@ -113,15 +151,22 @@ export default function Nav() {
 
   /* ================= SMOOTH SCROLL ================= */
   const handleClick = (e, href) => {
-    e.preventDefault();
-    const section = document.querySelector(href);
 
+    e.preventDefault();
+
+    const section = document.querySelector(href);
     if (!section) return;
 
     section.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
+
+    /* update URL hash */
+    window.history.pushState(null, "", href);
+
+    setActive(href);
+
   };
 
   return (
@@ -137,17 +182,20 @@ export default function Nav() {
 
           {spotifyOpen && (
             <div className={styles.player} onClick={(e) => e.stopPropagation()}>
+
               <div className={styles.trackTitle}>
                 {tracks[currentTrack].title}
               </div>
 
               <div className={styles.controls}>
                 <FaStepBackward onClick={prevTrack} />
+
                 {isPlaying ? (
                   <FaPause onClick={togglePlay} />
                 ) : (
                   <FaPlay onClick={togglePlay} />
                 )}
+
                 <FaStepForward onClick={nextTrack} />
               </div>
 
@@ -158,6 +206,7 @@ export default function Nav() {
                   setCurrentTrack((prev) => (prev + 1) % tracks.length)
                 }
               />
+
             </div>
           )}
         </div>
@@ -178,10 +227,12 @@ export default function Nav() {
               {item.label}
             </a>
           ))}
+
         </nav>
 
         {/* Clock */}
         <div className={styles.clockWrapper}>
+
           <div className={styles.clockItem}>
             <span className={`${hours[0] !== prevHours[0] ? styles.roll : ""}`}>
               {hours[0]}
@@ -194,14 +245,10 @@ export default function Nav() {
           <span className={styles.separator}>:</span>
 
           <div className={styles.clockItem}>
-            <span
-              className={`${minutes[0] !== prevMinutes[0] ? styles.roll : ""}`}
-            >
+            <span className={`${minutes[0] !== prevMinutes[0] ? styles.roll : ""}`}>
               {minutes[0]}
             </span>
-            <span
-              className={`${minutes[1] !== prevMinutes[1] ? styles.roll : ""}`}
-            >
+            <span className={`${minutes[1] !== prevMinutes[1] ? styles.roll : ""}`}>
               {minutes[1]}
             </span>
           </div>
@@ -209,14 +256,10 @@ export default function Nav() {
           <span className={styles.separator}>:</span>
 
           <div className={styles.clockItem}>
-            <span
-              className={`${seconds[0] !== prevSeconds[0] ? styles.roll : ""}`}
-            >
+            <span className={`${seconds[0] !== prevSeconds[0] ? styles.roll : ""}`}>
               {seconds[0]}
             </span>
-            <span
-              className={`${seconds[1] !== prevSeconds[1] ? styles.roll : ""}`}
-            >
+            <span className={`${seconds[1] !== prevSeconds[1] ? styles.roll : ""}`}>
               {seconds[1]}
             </span>
           </div>
@@ -229,6 +272,7 @@ export default function Nav() {
               year: "numeric",
             })}
           </div>
+
         </div>
 
       </div>
