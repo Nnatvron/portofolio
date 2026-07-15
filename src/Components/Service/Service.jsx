@@ -77,6 +77,18 @@ function Service() {
       desc: "Platform layanan akademik terpusat untuk mahasiswa UBSI.",
       link: "https://ubsioneplus.vercel.app/",
     },
+    {
+    icon: "fa-brands fa-instagram",
+    title: "UNFOLLOW TRACKER INSTAGRAM",
+    desc: "Website untuk mengecek akun Instagram yang tidak follow back dan memantau daftar unfollowers.",
+    link: "https://unfollowtrackersinstagram.vercel.app/",
+    },
+    {
+    icon: "fa-solid fa-book-open",
+    title: "SMART STUDY HUB",
+    desc: "Smart Study Hub adalah platform belajar berbasis AI yang mengintegrasikan ringkasan materi, presentasi otomatis, latihan soal, flashcard, dan alat produktivitas untuk membantu proses belajar menjadi lebih cepat dan terorganisir.",
+    link: "https://smartsstudyhub.vercel.app/",
+    },
   ];
 
   const certificates = [
