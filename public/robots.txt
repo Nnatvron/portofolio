@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://natravellsitra.vercel.app/sitemap.xml
