@@ -9,19 +9,25 @@
   display: flex;
   align-items: center;
   gap: var(--gap);
+  width: max-content;
   animation: scrollLoop var(--speed) linear infinite;
+  will-change: transform;
 }
 
 .logo-loop-img {
+  flex-shrink: 0;
   object-fit: contain;
   filter: grayscale(20%);
   opacity: 0.9;
-  transition: 0.3s ease;
+  transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .logo-loop-img:hover {
   filter: none;
   opacity: 1;
+  transform: scale(1.05);
 }
 
 .pause-on-hover:hover .logo-loop-track {
@@ -32,7 +38,54 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px) {
+  .logo-loop-container {
+    padding: 16px 0;
+  }
+
+  .logo-loop-track {
+    gap: var(--gap);
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .logo-loop-container {
+    padding: 14px 0;
+  }
+
+  .logo-loop-track {
+    gap: var(--gap);
+  }
+
+  .logo-loop-img:hover {
+    transform: none;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-loop-track {
+    animation-play-state: paused;
+  }
+
+  .logo-loop-img {
+    transition: none;
   }
 }

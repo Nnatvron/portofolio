@@ -1,74 +1,184 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect } from "react";
+
 import "./../Skills/StatsAndTechStack.css";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// IMPORT FIX — pastikan path ini benar
 import LogoLoop from "../LogoLoop/LogoLoop";
 
-// ================= STAT CARD =====================
-const StatCard = ({ number, label, icon, delay }) => (
-  <div
-    className="stat-card glass-card"
-    style={{ animationDelay: `${delay}s` }}
-    data-aos="zoom-in-up"
-    data-aos-delay={delay * 1000}
-  >
-    {/* liquid glass highlight */}
-    <span className="glass-highlight"></span>
-    <span className="glass-border"></span>
+/* ================================
+   STAT CARD
+================================= */
 
-    <div className="stat-icon">{icon}</div>
-    <div className="stat-number">{number}</div>
-    <div className="stat-label">{label}</div>
-  </div>
-);
+const StatCard = ({
+  number,
+  label,
+  icon,
+  delay,
+}) => {
+  return (
+    <div
+      className="stat-card glass-card"
+      style={{
+        animationDelay: `${delay}s`,
+      }}
+      data-aos="zoom-in-up"
+      data-aos-delay={delay * 1000}
+    >
+      <span
+        className="glass-highlight"
+        aria-hidden="true"
+      />
 
-// ================= MAIN COMPONENT =================
+      <span
+        className="glass-border"
+        aria-hidden="true"
+      />
+
+      <div className="stat-icon">{icon}</div>
+
+      <div className="stat-number">{number}</div>
+
+      <div className="stat-label">{label}</div>
+    </div>
+  );
+};
+
+/* ================================
+   MAIN COMPONENT
+================================= */
+
 function StatsAndTechStack() {
+  /* ================================
+     AOS
+  ================================= */
+
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    AOS.init({
+      duration: 1500,
+      easing: "ease-out-cubic",
+      once: false,
+      mirror: true,
+      offset: 150,
+      anchorPlacement: "top-bottom",
+    });
+
+    AOS.refresh();
   }, []);
 
+  /* ================================
+     STATS DATA
+  ================================= */
+
   const stats = [
-    { number: "13+", label: "CERTIFICATES", icon: "🏆" },
-    { number: "5+", label: "PROJECTS", icon: "💼" },
-    { number: "2+", label: "YEARS EXP", icon: "⚡" },
-    { number: "2+", label: "CLIENTS", icon: "👥" },
+    {
+      number: "13+",
+      label: "CERTIFICATES",
+      icon: "🏆",
+    },
+    {
+      number: "5+",
+      label: "PROJECTS",
+      icon: "💼",
+    },
+    {
+      number: "2+",
+      label: "YEARS EXP",
+      icon: "⚡",
+    },
+    {
+      number: "2+",
+      label: "CLIENTS",
+      icon: "👥",
+    },
   ];
 
-  // ================= TECH LOGOS ====================
+  /* ================================
+     TECH STACK
+  ================================= */
+
   const techLogos = [
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", alt: "HTML" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", alt: "CSS" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", alt: "JavaScript" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", alt: "React" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", alt: "Tailwind" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", alt: "Node.js" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", alt: "GitHub" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", alt: "Vercel" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", alt: "Firebase" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg", alt: "Vite" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", alt: "VS Code" },
-    { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg", alt: "Vercel" },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      alt: "HTML",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      alt: "CSS",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      alt: "JavaScript",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      alt: "React",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      alt: "Tailwind CSS",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      alt: "Node.js",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      alt: "GitHub",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
+      alt: "Vercel",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+      alt: "Firebase",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg",
+      alt: "Vite",
+    },
+    {
+      src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+      alt: "VS Code",
+    },
   ];
+
+  /* ================================
+     RENDER
+  ================================= */
 
   return (
-    <div className="fullscreen-container" id="skills">
+    <div
+      className="fullscreen-container"
+      id="skills"
+    >
       <div className="enhanced-wrapper">
-        
-        {/* Section Header */}
+
+        {/* ================= HEADER ================= */}
+
         <section className="section-header">
-          <h1 className="section-title" data-aos="fade-down" data-aos-delay="200">
+          <h1
+            className="section-title"
+            data-aos="fade-down"
+            data-aos-delay="200"
+          >
             My Journey In Numbers
           </h1>
-          <p className="section-subtitle" data-aos="fade-down" data-aos-delay="250">
-            Passionate developer with growing expertise in modern web technologies.
+
+          <p
+            className="section-subtitle"
+            data-aos="fade-down"
+            data-aos-delay="250"
+          >
+            Passionate developer with growing expertise
+            in modern web technologies.
           </p>
         </section>
 
-        {/* Stats Section */}
+        {/* ================= STATS ================= */}
+
         <section className="stats-section">
           <div className="stats-container">
             {stats.map((stat, index) => (
@@ -83,17 +193,28 @@ function StatsAndTechStack() {
           </div>
         </section>
 
-        {/* Technical Skills Title */}
+        {/* ================= TECH STACK TITLE ================= */}
+
         <section className="technical-skill-section">
-          <h3 className="technical-skill-title" data-aos="fade-down" data-aos-delay="300">
+          <h3
+            className="technical-skill-title"
+            data-aos="fade-down"
+            data-aos-delay="300"
+          >
             My Tech Stack
           </h3>
-          <p className="tech-subtitle" data-aos="fade-down" data-aos-delay="350">
+
+          <p
+            className="tech-subtitle"
+            data-aos="fade-down"
+            data-aos-delay="350"
+          >
             Tools & technologies I use
           </p>
         </section>
 
-        {/* TECH LOGO LOOP */}
+        {/* ================= TECH LOGO LOOP ================= */}
+
         <section className="tech-section">
           <LogoLoop
             logos={techLogos}
@@ -105,8 +226,12 @@ function StatsAndTechStack() {
           />
         </section>
 
-        {/* Floating Background Elements */}
-        <div className="background-elements" aria-hidden="true">
+        {/* ================= FLOATING BACKGROUND ================= */}
+
+        <div
+          className="background-elements"
+          aria-hidden="true"
+        >
           <div className="floating-element element-1" />
           <div className="floating-element element-2" />
           <div className="floating-element element-3" />

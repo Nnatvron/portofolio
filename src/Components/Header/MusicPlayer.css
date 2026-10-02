@@ -1,90 +1,279 @@
+/* ===============================
+   MUSIC PLAYER
+================================= */
+
 .musicPlayer {
   width: 100%;
   margin-bottom: 20px;
   font-family: "Poppins", sans-serif;
 }
 
+/* ===============================
+   PLAYER HEADER
+================================= */
+
 .playerHeader {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(0,0,0,0.4);
-  padding: 8px 14px;
-  border-radius: 12px;
+
   width: fit-content;
-  transition: all 0.3s ease;
+
+  padding: 8px 14px;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  border-radius: 12px;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+
   cursor: pointer;
 }
 
 .playerHeader:hover {
-  background: rgba(29,185,84,0.2);
+  background: rgba(29, 185, 84, 0.2);
 }
 
-.vibingText { color: #fff; font-weight: 500; }
-.playBtn { background: transparent; border: none; color: #fff; cursor: pointer; font-size: 16px; }
+/* ===============================
+   VIBING TEXT
+================================= */
+
+.vibingText {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ===============================
+   PLAY BUTTON
+================================= */
+
+.playBtn {
+  background: transparent;
+  border: none;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===============================
+   EXPANDED PLAYER
+================================= */
 
 .expandedPlayer {
   margin-top: 12px;
-  background: rgba(0,0,0,0.6);
+
+  background: rgba(0, 0, 0, 0.6);
+
   padding: 12px;
+
   border-radius: 12px;
 }
+
+/* ===============================
+   SONG INFO
+================================= */
 
 .songInfo {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  margin-bottom: 10px;
   align-items: center;
+
+  gap: 2px;
+
+  margin-bottom: 10px;
 }
 
-.songName { font-weight: 600; color: #fff; }
-.artist { font-size: 0.85rem; color: #ddd; }
-.albumArt { width: 80px; height: 80px; border-radius: 6px; margin-top: 6px; }
+.songName {
+  font-weight: 600;
+  color: #fff;
+}
+
+.artist {
+  font-size: 0.85rem;
+  color: #ddd;
+}
+
+/* ===============================
+   ALBUM ART
+================================= */
+
+.albumArt {
+  width: 80px;
+  height: 80px;
+
+  margin-top: 6px;
+
+  border-radius: 6px;
+
+  object-fit: cover;
+}
+
+/* ===============================
+   PLAYER CONTROLS
+================================= */
 
 .controls {
   display: flex;
   justify-content: center;
+  align-items: center;
+
   gap: 15px;
+
   margin-bottom: 10px;
 }
 
 .controls button {
-  background: rgba(29,185,84,0.8);
+  background: rgba(29, 185, 84, 0.8);
+
   border: none;
+
   padding: 6px 10px;
+
   border-radius: 6px;
+
   color: #fff;
+
   cursor: pointer;
-  transition: 0.2s;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
-.controls button:hover { background: #1DB954; }
+.controls button:hover {
+  background: #1db954;
+  transform: translateY(-1px);
+}
+
+/* ===============================
+   AUDIO WAVE
+================================= */
 
 .waveContainer {
   display: flex;
   align-items: flex-end;
+
   gap: 4px;
+
   height: 20px;
 }
 
 .waveContainer span {
   display: block;
+
   width: 4px;
   height: 100%;
-  background: #1DB954;
+
+  background: #1db954;
+
   border-radius: 2px;
+
   transform: scaleY(0.3);
   transform-origin: bottom;
+
   transition: transform 0.1s ease;
 }
 
-/* Mobile */
+/* ===============================
+   MOBILE
+================================= */
+
 @media (max-width: 600px) {
-  .playerHeader { padding: 6px 10px; gap: 8px; }
-  .playBtn { font-size: 14px; }
-  .expandedPlayer { padding: 10px; }
-  .controls button { padding: 5px 8px; }
-  .waveContainer span { width: 3px; }
-  .albumArt { width: 60px; height: 60px; }
+  .playerHeader {
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .playBtn {
+    font-size: 14px;
+  }
+
+  .expandedPlayer {
+    padding: 10px;
+  }
+
+  .controls {
+    gap: 12px;
+  }
+
+  .controls button {
+    padding: 5px 8px;
+  }
+
+  .waveContainer {
+    gap: 3px;
+  }
+
+  .waveContainer span {
+    width: 3px;
+  }
+
+  .albumArt {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ===============================
+   EXTRA SMALL MOBILE
+================================= */
+
+@media (max-width: 360px) {
+  .playerHeader {
+    padding: 6px 9px;
+    gap: 7px;
+  }
+
+  .vibingText {
+    font-size: 13px;
+  }
+
+  .expandedPlayer {
+    padding: 9px;
+  }
+
+  .songName {
+    font-size: 14px;
+  }
+
+  .artist {
+    font-size: 12px;
+  }
+
+  .albumArt {
+    width: 55px;
+    height: 55px;
+  }
+
+  .controls {
+    gap: 9px;
+  }
+
+  .controls button {
+    padding: 5px 7px;
+    font-size: 12px;
+  }
+}
+
+/* ===============================
+   REDUCED MOTION
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .playerHeader,
+  .controls button,
+  .waveContainer span {
+    transition: none;
+  }
 }

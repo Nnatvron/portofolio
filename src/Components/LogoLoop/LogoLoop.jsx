@@ -1,4 +1,3 @@
-// LogoLoop.jsx
 import React from "react";
 import "./LogoLoop.css";
 
@@ -10,19 +9,28 @@ export default function LogoLoop({
   pauseOnHover = true,
   className = "",
 }) {
+  const loopLogos = [...logos, ...logos];
+
   return (
     <div
-      className={`logo-loop-container ${pauseOnHover ? "pause-on-hover" : ""} ${className}`}
-      style={{ "--speed": `${speed}s`, "--gap": `${gap}px` }}
+      className={`logo-loop-container ${
+        pauseOnHover ? "pause-on-hover" : ""
+      } ${className}`.trim()}
+      style={{
+        "--speed": `${speed}s`,
+        "--gap": `${gap}px`,
+      }}
     >
       <div className="logo-loop-track">
-        {logos.concat(logos).map((logo, index) => (
+        {loopLogos.map((logo, index) => (
           <img
-            key={index}
+            key={`${logo.src}-${index}`}
             src={logo.src}
-            alt={logo.alt}
+            alt={logo.alt || "Technology logo"}
             className="logo-loop-img"
             style={{ height: `${height}px` }}
+            loading="lazy"
+            decoding="async"
           />
         ))}
       </div>

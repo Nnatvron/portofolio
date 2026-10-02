@@ -1,10 +1,14 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from "react";
-import ContactCSS from "./../Contact/Contact.module.css";
+
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { User, MessageSquare, Pin, PinOff } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
+import ContactCSS from "./../Contact/Contact.module.css";
 import { db } from "/src/firebaseConfig.js";
+
 import {
   collection,
   addDoc,
@@ -12,11 +16,10 @@ import {
   orderBy,
   onSnapshot,
   doc,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 
 function Contact() {
-
   const [formData, setFormData] = useState({
     name: "",
     message: "",
@@ -28,67 +31,75 @@ function Contact() {
   const [success, setSuccess] = useState("");
   const [typing, setTyping] = useState(false);
 
+  // ===== AOS =====
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      easing: "ease-out-cubic",
+      once: false,
+      mirror: true,
+      offset: 150,
+      anchorPlacement: "top-bottom",
+    });
+  }, []);
+
   // ===== REALTIME MESSAGE =====
   useEffect(() => {
-
-    const q = query(
+    const messagesQuery = query(
       collection(db, "messages"),
       orderBy("timestamp", "asc")
     );
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-
-      const msgs = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
+    const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
+      const messages = snapshot.docs.map((messageDoc) => ({
+        id: messageDoc.id,
+        ...messageDoc.data(),
       }));
 
-      setChatMessages(msgs);
-
+      setChatMessages(messages);
     });
 
     return () => unsubscribe();
-
   }, []);
 
   // ===== REALTIME PINNED =====
   useEffect(() => {
-
     const pinnedRef = doc(db, "system", "pinned");
 
-    return onSnapshot(pinnedRef, (snap) => {
-      setPinnedMessage(snap.exists() ? snap.data() : null);
+    const unsubscribe = onSnapshot(pinnedRef, (snapshot) => {
+      setPinnedMessage(snapshot.exists() ? snapshot.data() : null);
     });
 
+    return () => unsubscribe();
   }, []);
 
   // ===== AUTO REMOVE SUCCESS =====
   useEffect(() => {
+    if (!success) return;
 
-    if (success) {
-      const timer = setTimeout(() => setSuccess(""), 4000);
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      setSuccess("");
+    }, 4000);
 
+    return () => clearTimeout(timer);
   }, [success]);
 
   // ===== INPUT CHANGE =====
   const handleChange = (e) => {
-
     const { id, value } = e.target;
 
-    setFormData({
-      ...formData,
-      [id]: value
-    });
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
 
-    if (success) setSuccess("");
-
+    if (success) {
+      setSuccess("");
+    }
   };
 
   // ===== SEND MESSAGE =====
   const handleSubmit = async (e) => {
-
     e.preventDefault();
 
     setSuccess("");
@@ -102,49 +113,47 @@ function Contact() {
     };
 
     try {
-
+      // Firebase realtime message
       await addDoc(collection(db, "messages"), newMessage);
 
+      // Email service
       try {
         await axios.post(
           "http://localhost:5000/send-email",
           formData
         );
       } catch {
-        console.warn("Email service offline — hanya Firebase");
+        console.warn(
+          "Email service offline — hanya Firebase"
+        );
       }
 
       setSuccess("Pesan berhasil dikirim!");
 
       setFormData({
         name: "",
-        message: ""
+        message: "",
       });
-
     } catch (error) {
-
       console.error("Firebase Error:", error);
-
       setSuccess("Terjadi kesalahan.");
-
     } finally {
-
       setIsLoading(false);
 
       setTimeout(() => {
         setTyping(false);
       }, 1000);
-
     }
-
   };
 
   // ===== UNPIN =====
   const unpinMessage = async () => {
-
-    await setDoc(doc(db, "system", "pinned"), {});
-    setPinnedMessage(null);
-
+    try {
+      await setDoc(doc(db, "system", "pinned"), {});
+      setPinnedMessage(null);
+    } catch (error) {
+      console.error("Unpin Error:", error);
+    }
   };
 
   // ===== AVATAR =====
@@ -153,20 +162,27 @@ function Contact() {
   };
 
   return (
-
     <section id="contact" className={ContactCSS.contact}>
-
-      <div className={ContactCSS.contact_container} data-aos="fade-right">
-
-        <div className={ContactCSS.live_chat_section} data-aos="fade-down">
+      <div
+        className={ContactCSS.contact_container}
+        data-aos="fade-right"
+      >
+        {/* ===== SECTION TITLE ===== */}
+        <div
+          className={ContactCSS.live_chat_section}
+          data-aos="fade-down"
+          data-aos-delay="150"
+        >
           <h2>Live Chat</h2>
         </div>
 
         <div className={ContactCSS.live_chat_wrapper}>
-
-          {/* FORM */}
-          <div className={ContactCSS.form_section}>
-
+          {/* ===== FORM ===== */}
+          <div
+            className={ContactCSS.form_section}
+            data-aos="fade-right"
+            data-aos-delay="250"
+          >
             {success && (
               <div className={ContactCSS.successMessage}>
                 {success}
@@ -177,9 +193,9 @@ function Contact() {
               onSubmit={handleSubmit}
               className={isLoading ? ContactCSS.loading : ""}
             >
-
               <label htmlFor="name">
-                <User size={16}/> Name
+                <User size={16} />
+                Name
               </label>
 
               <input
@@ -191,7 +207,8 @@ function Contact() {
               />
 
               <label htmlFor="message">
-                <MessageSquare size={16}/> Message
+                <MessageSquare size={16} />
+                Message
               </label>
 
               <textarea
@@ -208,80 +225,76 @@ function Contact() {
               >
                 {isLoading ? "Mengirim..." : "Kirim Pesan"}
               </button>
-
             </form>
-
           </div>
 
-          {/* CHAT PANEL */}
-          <div className={ContactCSS.live_chat_panel} data-aos="fade-left">
-
+          {/* ===== CHAT PANEL ===== */}
+          <div
+            className={ContactCSS.live_chat_panel}
+            data-aos="fade-left"
+            data-aos-delay="350"
+          >
             <div className={ContactCSS.live_chat_header}>
               Live Chat
             </div>
 
-            {/* STATIC PIN */}
+            {/* ===== STATIC PIN ===== */}
             <div className={ContactCSS.stickyPinnedFixed}>
               <div className={ContactCSS.stickyPinnedContent}>
-                <Pin size={14}/>
+                <Pin size={14} />
+
                 <strong>Natravell Sitra:</strong>
+
                 Selamat datang! 👋 Thanks yang udah mampir!!
               </div>
             </div>
 
-            {/* FIREBASE PIN */}
+            {/* ===== FIREBASE PIN ===== */}
             {pinnedMessage?.text && (
-
               <div className={ContactCSS.stickyPinned}>
-
                 <div className={ContactCSS.stickyPinnedContent}>
-                  <Pin size={14}/>
-                  <strong>{pinnedMessage.sender}:</strong>
+                  <Pin size={14} />
+
+                  <strong>
+                    {pinnedMessage.sender}:
+                  </strong>
+
                   {pinnedMessage.text}
                 </div>
 
                 <button
                   onClick={unpinMessage}
                   className={ContactCSS.unpinTiny}
+                  type="button"
                 >
-                  <PinOff size={14}/>
+                  <PinOff size={14} />
                 </button>
-
               </div>
-
             )}
 
-            {/* CHAT BODY */}
+            {/* ===== CHAT BODY ===== */}
             <div className={ContactCSS.live_chat_body}>
-
               {chatMessages.length === 0 ? (
-
                 <p className={ContactCSS.chat_empty}>
                   Belum ada pesan...
                 </p>
-
               ) : (
-
                 chatMessages.map((msg) => (
-
                   <div
                     key={msg.id}
-                    className={`${ContactCSS.chat_row}
-                    ${
+                    className={`${ContactCSS.chat_row} ${
                       msg.sender === formData.name
                         ? ContactCSS.chat_right
                         : ContactCSS.chat_left
                     }`}
                   >
-
                     <img
                       src={getAvatar(msg.sender)}
-                      alt="avatar"
+                      alt={`${msg.sender} avatar`}
                       className={ContactCSS.chat_avatar}
                     />
 
                     <div className={ContactCSS.chat_bubble}>
-
                       <p className={ContactCSS.chat_sender}>
                         {msg.sender}
                       </p>
@@ -289,23 +302,18 @@ function Contact() {
                       <p className={ContactCSS.chat_text}>
                         {msg.text}
                       </p>
-
                     </div>
-
                   </div>
-
                 ))
-
               )}
 
+              {/* ===== TYPING INDICATOR ===== */}
               {typing && (
-
                 <div className={ContactCSS.chat_row}>
-
                   <img
                     src={getAvatar("typing")}
                     className={ContactCSS.chat_avatar}
-                    alt="typing"
+                    alt="Typing indicator"
                   />
 
                   <div className={ContactCSS.typing_indicator}>
@@ -313,21 +321,13 @@ function Contact() {
                     <span></span>
                     <span></span>
                   </div>
-
                 </div>
-
               )}
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
-
   );
 }
 

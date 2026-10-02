@@ -1,322 +1,468 @@
-/* ================================
-   GLOBAL THEME (YOUR ORIGINAL THEME)
-================================ */
+/* =========================================================
+GLOBAL THEME (YOUR ORIGINAL THEME)
+========================================================= */
+
 :root {
-  width: 100%;
-  -webkit-backdrop-filter: blur(20px);
-  --glass-bg: rgba(255, 255, 255, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.8);
-  --text-muted: rgba(255, 255, 255, 0.9);
-  --border-radius: 8px;
-  --transition-speed: 0.4s;
-  --font-family: 'Poppins', sans-serif;
-  --primary-bg: radial-gradient(
-      ellipse 60% 50% at 50% 50%,
-      #390000 0%,
-      #020101 80%
-    );
-}
+width: 100%;
+-webkit-backdrop-filter: blur(20px);
 
-/* ================================
-   BACKGROUND
-================================ */
-.fullscreen-container {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background: var(--primary-bg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 100px 0;
-  overflow-x: hidden;
-}
+--glass-bg: rgba(255, 255, 255, 0.12);
+--glass-border: rgba(255, 255, 255, 0.2);
 
-/* ================================
-   WRAPPER
-================================ */
-.enhanced-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  padding: 60px 30px;
-  margin: 0 auto;
-  border-radius: 20px;
-  font-family: var(--font-family);
-  color: var(--text-primary);
-  backdrop-filter: blur(10px);
-  box-sizing: border-box;
-}
+--text-primary: #ffffff;
+--text-secondary: rgba(255, 255, 255, 0.8);
+--text-muted: rgba(255, 255, 255, 0.9);
 
-/* ================================
-   SECTION HEADER
-================================ */
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
+--border-radius: 8px;
+--transition-speed: 0.4s;
 
-.section-title {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-  text-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
+--font-family: "Poppins", sans-serif;
 
-.section-subtitle {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* ================================
-   STATS SECTION
-================================ */
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  width: 100%;
-  margin: 0 auto 60px auto;
-}
-
-/* ================================
-   LIQUID GLASS CARD
-================================ */
-
-.stat-card {
-  position: relative;
-  padding: 40px 30px;
-  border-radius: 18px;
-
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-
-  border: 1px solid rgba(255,255,255,0.25);
-
-  text-align: center;
-  overflow: hidden;
-
-  transition: all 0.35s ease;
-}
-
-/* glass highlight layer */
-.stat-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background:linear-gradient(
-    120deg,
-    rgba(255,255,255,0.45),
-    rgba(255,255,255,0.05)
-  );
-
-  opacity:0.35;
-  mix-blend-mode:overlay;
-  pointer-events:none;
-}
-
-/* shine sweep animation */
-.stat-card::after{
-  content:"";
-  position:absolute;
-  top:-150%;
-  left:-50%;
-  width:60%;
-  height:300%;
-
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.7),
-    transparent
-  );
-
-  transform:rotate(25deg);
-  transition:0.7s;
-}
-
-.stat-card:hover::after{
-  left:130%;
-}
-
-.stat-card:hover {
-  transform: translateY(-10px) scale(1.02);
-
-  background: rgba(255,255,255,0.16);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.4),
-    0 0 25px rgba(255,49,49,0.35);
-}
-
-/* reflection layer */
-.glass-highlight{
-  position:absolute;
-  top:-40%;
-  left:-40%;
-  width:180%;
-  height:180%;
-  background:radial-gradient(circle at center,
-  rgba(255,255,255,0.25) 0%,
-  rgba(255,255,255,0.08) 35%,
-  transparent 60%);
-  pointer-events:none;
-  opacity:.7;
-}
-
-/* liquid border */
-.glass-border{
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  padding:1px;
-
-  background:linear-gradient(
-    135deg,
-    rgba(255,255,255,0.5),
-    rgba(255,255,255,0.1),
-    rgba(255,255,255,0.5)
-  );
-
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
-
-  pointer-events:none;
-}
-
-/* hover */
-.stat-card:hover {
-
-  transform:translateY(-10px) scale(1.03);
-
-  background:rgba(255,255,255,0.14);
-
-  box-shadow:
-  0 20px 50px rgba(0,0,0,0.45),
-  inset 0 0 30px rgba(255,255,255,0.08);
-
-}
-
-/* ================================
-   STATS TEXT
-================================ */
-
-.stat-icon {
-  font-size: 3rem;
-  margin-bottom: 15px;
-}
-
-.stat-number {
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.stat-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 1px;
-}
-
-/* ================================
-   TECH STACK SECTION
-================================ */
-.technical-skill-section {
-  text-align: center;
-  margin: 80px 0 50px 0;
-}
-
-.technical-skill-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.tech-subtitle {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  margin-top: 10px;
-}
-
-/* ================================
-   RESPONSIVE
-================================ */
-@media (max-width: 950px) {
-  .section-title { font-size: 2.3rem; }
-  .section-subtitle { font-size: 1rem; }
-  .stat-number { font-size: 2.6rem; }
-}
-
-@media (max-width: 600px) {
-  .fullscreen-container { padding: 60px 0; }
-  .enhanced-wrapper { padding: 40px 15px; }
-  .section-title { font-size: 2rem; }
-  .section-subtitle { font-size: 0.95rem; }
-  .stats-container { grid-template-columns: 1fr; gap: 20px; }
-  .stat-card { padding: 30px 20px; }
-  .stat-icon { font-size: 2.3rem; }
-  .stat-number { font-size: 2.4rem; }
-  .technical-skill-section { margin: 60px 0 30px 0; }
-  .technical-skill-title { font-size: 1.8rem; }
-}
-
-@media (max-width: 380px) {
-  .section-title { font-size: 1.7rem; }
-  .section-subtitle { font-size: 0.85rem; }
-  .stat-number { font-size: 2rem; }
-  .technical-skill-title { font-size: 1.6rem; }
+--primary-bg: radial-gradient(
+ellipse 60% 50% at 50% 50%,
+#390000 0%,
+#020101 80%
+);
 }
 
 /* =========================================================
-   LOGO LOOP (UNCHANGED)
+BACKGROUND
+========================================================= */
+
+.fullscreen-container {
+position: relative;
+width: 100%;
+min-height: 100vh;
+
+background: var(--primary-bg);
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+
+display: flex;
+justify-content: center;
+align-items: flex-start;
+
+padding: 100px 0;
+
+overflow-x: hidden;
+}
+
+/* =========================================================
+WRAPPER
+========================================================= */
+
+.enhanced-wrapper {
+position: relative;
+width: 100%;
+max-width: 1200px;
+
+padding: 60px 30px;
+margin: 0 auto;
+
+border-radius: 20px;
+
+font-family: var(--font-family);
+color: var(--text-primary);
+
+backdrop-filter: blur(10px);
+
+box-sizing: border-box;
+}
+
+/* =========================================================
+SECTION HEADER
+========================================================= */
+
+.section-header {
+text-align: center;
+margin-bottom: 60px;
+}
+
+.section-title {
+font-size: 3rem;
+font-weight: 700;
+
+color: var(--text-primary);
+
+margin-bottom: 16px;
+
+text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.section-subtitle {
+font-size: 1.2rem;
+color: var(--text-secondary);
+
+max-width: 600px;
+margin: 0 auto;
+
+line-height: 1.6;
+}
+
+/* =========================================================
+STATS SECTION
+========================================================= */
+
+.stats-container {
+display: grid;
+
+grid-template-columns: repeat(
+auto-fit,
+minmax(260px, 1fr)
+);
+
+gap: 25px;
+
+width: 100%;
+margin: 0 auto 60px auto;
+}
+
+/* =========================================================
+LIQUID GLASS CARD
+========================================================= */
+
+.stat-card {
+position: relative;
+
+padding: 40px 30px;
+
+border-radius: 18px;
+
+background: rgba(255, 255, 255, 0.08);
+
+backdrop-filter: blur(18px);
+-webkit-backdrop-filter: blur(18px);
+
+border: 1px solid rgba(255, 255, 255, 0.25);
+
+text-align: center;
+
+overflow: hidden;
+
+transition:
+transform 0.35s ease,
+background 0.35s ease,
+box-shadow 0.35s ease;
+}
+
+/* =========================================================
+GLASS HIGHLIGHT LAYER
+========================================================= */
+
+.stat-card::before {
+content: "";
+
+position: absolute;
+inset: 0;
+
+background: linear-gradient(
+120deg,
+rgba(255, 255, 255, 0.45),
+rgba(255, 255, 255, 0.05)
+);
+
+opacity: 0.35;
+
+mix-blend-mode: overlay;
+
+pointer-events: none;
+}
+
+/* =========================================================
+SHINE SWEEP ANIMATION
+========================================================= */
+
+.stat-card::after {
+content: "";
+
+position: absolute;
+
+top: -150%;
+left: -50%;
+
+width: 60%;
+height: 300%;
+
+background: linear-gradient(
+90deg,
+transparent,
+rgba(255, 255, 255, 0.7),
+transparent
+);
+
+transform: rotate(25deg);
+
+transition: 0.7s;
+
+pointer-events: none;
+}
+
+.stat-card:hover::after {
+left: 130%;
+}
+
+/* =========================================================
+CARD HOVER
+========================================================= */
+
+.stat-card:hover {
+transform: translateY(-10px) scale(1.03);
+
+background: rgba(255, 255, 255, 0.14);
+
+box-shadow:
+0 20px 50px rgba(0, 0, 0, 0.45),
+inset 0 0 30px rgba(255, 255, 255, 0.08),
+0 0 25px rgba(255, 49, 49, 0.35);
+}
+
+/* =========================================================
+REFLECTION LAYER
+========================================================= */
+
+.glass-highlight {
+position: absolute;
+
+top: -40%;
+left: -40%;
+
+width: 180%;
+height: 180%;
+
+background: radial-gradient(
+circle at center,
+rgba(255, 255, 255, 0.25) 0%,
+rgba(255, 255, 255, 0.08) 35%,
+transparent 60%
+);
+
+pointer-events: none;
+
+opacity: 0.7;
+}
+
+/* =========================================================
+LIQUID BORDER
+========================================================= */
+
+.glass-border {
+position: absolute;
+
+inset: 0;
+
+border-radius: inherit;
+
+padding: 1px;
+
+background: linear-gradient(
+135deg,
+rgba(255, 255, 255, 0.5),
+rgba(255, 255, 255, 0.1),
+rgba(255, 255, 255, 0.5)
+);
+
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+
+-webkit-mask-composite: xor;
+
+mask-composite: exclude;
+
+pointer-events: none;
+}
+
+/* =========================================================
+STATS TEXT
+========================================================= */
+
+.stat-icon {
+font-size: 3rem;
+
+margin-bottom: 15px;
+}
+
+.stat-number {
+font-size: 3rem;
+font-weight: 800;
+
+color: var(--text-primary);
+}
+
+.stat-label {
+font-size: 1rem;
+font-weight: 600;
+
+color: var(--text-secondary);
+
+letter-spacing: 1px;
+}
+
+/* =========================================================
+TECH STACK SECTION
+========================================================= */
+
+.technical-skill-section {
+text-align: center;
+
+margin: 80px 0 50px 0;
+}
+
+.technical-skill-title {
+font-size: 2.5rem;
+font-weight: 700;
+
+color: var(--text-primary);
+}
+
+.tech-subtitle {
+font-size: 1.1rem;
+
+color: var(--text-secondary);
+
+margin-top: 10px;
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media (max-width: 950px) {
+.section-title {
+font-size: 2.3rem;
+}
+
+.section-subtitle {
+font-size: 1rem;
+}
+
+.stat-number {
+font-size: 2.6rem;
+}
+}
+
+@media (max-width: 600px) {
+.fullscreen-container {
+padding: 60px 0;
+}
+
+.enhanced-wrapper {
+padding: 40px 15px;
+}
+
+.section-title {
+font-size: 2rem;
+}
+
+.section-subtitle {
+font-size: 0.95rem;
+}
+
+.stats-container {
+grid-template-columns: 1fr;
+gap: 20px;
+}
+
+.stat-card {
+padding: 30px 20px;
+}
+
+.stat-icon {
+font-size: 2.3rem;
+}
+
+.stat-number {
+font-size: 2.4rem;
+}
+
+.technical-skill-section {
+margin: 60px 0 30px 0;
+}
+
+.technical-skill-title {
+font-size: 1.8rem;
+}
+}
+
+@media (max-width: 380px) {
+.section-title {
+font-size: 1.7rem;
+}
+
+.section-subtitle {
+font-size: 0.85rem;
+}
+
+.stat-number {
+font-size: 2rem;
+}
+
+.technical-skill-title {
+font-size: 1.6rem;
+}
+}
+
+/* =========================================================
+LOGO LOOP (UNCHANGED)
 ========================================================= */
 
 .logoloop {
-  position: relative;
-  --logoloop-gap: 32px;
-  --logoloop-logoHeight: 28px;
-  --logoloop-fadeColorAuto: var(--primary-bg, #ffffff);
+position: relative;
+
+--logoloop-gap: 32px;
+--logoloop-logoHeight: 28px;
+
+--logoloop-fadeColorAuto: var(--primary-bg, #ffffff);
 }
 
 .logoloop__track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  user-select: none;
+display: flex;
+
+width: max-content;
+
+will-change: transform;
+
+user-select: none;
 }
 
 .logoloop__item {
-  margin-right: var(--logoloop-gap);
+margin-right: var(--logoloop-gap);
 }
 
 .logoloop__item img {
-  height: var(--logoloop-logoHeight);
-  width: auto;
-  object-fit: contain;
-  transition: transform .3s cubic-bezier(.4,0,.2,1);
+height: var(--logoloop-logoHeight);
+
+width: auto;
+
+object-fit: contain;
+
+transition:
+transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.logoloop__item:hover img{
-  transform:scale(1.2);
+.logoloop__item:hover img {
+transform: scale(1.2);
 }
 
-@media (prefers-reduced-motion: reduce){
-  .logoloop__track{
-    transform:none !important;
-  }
+/* =========================================================
+REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+.logoloop__track {
+transform: none !important;
+}
+
+.stat-card {
+transition: none;
+}
+
+.stat-card::after {
+transition: none;
+}
+
+.logoloop__item img {
+transition: none;
+}
 }
